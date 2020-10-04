@@ -4,8 +4,7 @@ This package will let you move, insert, delete, yank, and kill
 elements in column block, and have the other elements automatically
 move aside or fill in gaps as needed.
 ** Definitions
-For example, let's say the a buffer or narrowed region only contains the
-text in Diagram 1:
+For these definitions, let's assume the only text in a buffer or narrowed region looks like this:
 *** Diagram 1
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
@@ -16,13 +15,21 @@ Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
 *** Column elements, columns, and column blocks
-Here, "Lorem ipsum" would be considered the first element in the first
-column block, "Proin quam nisl," would be considered the third element
-in the second column block, etc.
+Diagram 1 shows text that the functions in this package will interpret
+as 4 column blocks.
+
+Each column block is delimited by certain characters that extend from
+the top of the buffer to the bottom.  In our case, these delimiters
+are spaces.  (Which characters are used as delimiters is configurable
+in using the column-elements--column-block-delimiters variable)
 
 Each column block starts and ends at a certain column.  In Diagram 1,
 the first column block starts at column 0, and ends at column 16.
 The second column starts at column 20 and ends at column 38, etc.
+
+Here, "Lorem ipsum" would be considered the first element in the first
+column block, "Proin quam nisl," would be considered the third element
+in the second column block, etc.
 ** Examples
 *** Example 1 - (column-elements--insert 'point)
 Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
