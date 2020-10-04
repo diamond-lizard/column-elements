@@ -67,8 +67,8 @@ adipiscing elit.    tincidunt et,mattis  dis parturient montes,  diam non turpis
 Donec hendrerit     eget,convallis       nascetur ridiculus
 tempor tellus.      nec,purus.           mus.
 #+END_EXAMPLE
-*** Example 5 - (column-elements--wrap)
-If the column-elements-wrap variable contains nil and from
+*** Example 5 - (column-elements--horizontal-wrap)
+If the column-elements-horizontal-wrap variable contains nil and from
 Diagram 4 we call (column-elements--move 'right) twice more, the
 text will change to that in Diagram 5a.  Otherwise, it will change
 to that in Diagram 5b.
