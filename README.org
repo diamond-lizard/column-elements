@@ -155,4 +155,4 @@ baz
 #+END_EXAMPLE
 
 The limits of the two column blocks in the example would be
-'((0 . 5) (8 . 12))
+((0 . 5) (8 . 12))
