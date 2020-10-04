@@ -1,8 +1,8 @@
-* column-elements - Manipulate elements in columns
+* column-elements - Manipulate elements in column blocks
 ** Introduction
 This package will let you move, insert, delete, yank, and kill
-elements in columns, and have the other elements automatically move
-aside or fill in gaps as needed.
+elements in column block, and have the other elements automatically
+move aside or fill in gaps as needed.
 ** Examples
 *** Example 1 - Definitions
 For example, let's say the a buffer or narrowed region only contains the
@@ -17,8 +17,9 @@ Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
 
-Here, "Lorem ipsum" would be considered the first element in column 1,
-"Proin quam nisl," would be considered the third element in column 2, etc.
+Here, "Lorem ipsum" would be considered the first element in the first
+column block, "Proin quam nisl," would be considered the third element
+in the second column block, etc.
 *** Example 2 - (column-elements--insert 'point)
 Now, with point anywhere in "Proin quam nisl," in Diagram 1, calling
 (column-elements--insert 'point) will change the text in
@@ -90,10 +91,10 @@ Likewise, vertical movement with (column-elements--move 'up) or
 (column-elements-move 'down) will wrap or not wrap based on the
 value of the same variable.
 *** Example 6 - (column-elements--move 'left)
-Note that entire columns will be shifted left or right to maintain
-the original inter-column spacing, which in this case is 3 spaces
-between the first two columns, and 2 spaces between each of the
-other columns.
+Note that entire column blocks will be shifted left or right to
+maintain the original inter-column spacing, which in this case is 3
+spaces between the first two column blocks, and 2 spaces between each
+of the other column blocks.
 
 For example, with point anywhere in "tincidunt et,mattis" in
 Diagram 5b, calling (column-elements--move 'left) will result in the
@@ -108,9 +109,9 @@ tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 #+END_EXAMPLE
 *** Example 7 - (column-elements--delete)
-Another feature is by calling (column-elements--delete) we can
-delete column entries and have the rest of the existing entries
-wrap to fill in the space left by the deleted entry.
+Another feature is by calling (column-elements--delete) we can delete
+column block entries and have the rest of the existing entries wrap to
+fill in the space left by the deleted entry.
 
 For example, to delete the blank space in the text in Diagram 6, move point
 anywhere on it and call (column-elements--delete).  The text in
@@ -126,11 +127,14 @@ Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Utility functions
 *** column-elements--column-block-positions
-Returns a list of the position of each column block.  The position of every column block is represented by a cons pair of the start and end column of that column block.
+Returns a list of the position of each column block.  The position of
+every column block is represented by a cons pair of the start and end
+column of that column block.
 **** Example
 #+BEGIN_EXAMPLE
 foobar  hello
 baz
 #+END_EXAMPLE
 
-The positions of the two column blocks in the example would be '((0 . 5) (8 . 12))
+The positions of the two column blocks in the example would be
+'((0 . 5) (8 . 12))
