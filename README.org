@@ -130,6 +130,8 @@ adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Utility functions
+*** column-elements--column-block-position
+Returns a cons pair containing the start and end column of the column block at point.
 *** column-elements--column-block-positions
 Returns a list of the position of each column block.  The position of
 every column block is represented by a cons pair of the start and end
