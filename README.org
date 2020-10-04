@@ -3,11 +3,10 @@
 This package will let you move, insert, delete, yank, and kill
 elements in column block, and have the other elements automatically
 move aside or fill in gaps as needed.
-** Examples
-*** Example 1 - Definitions
+** Definitions
 For example, let's say the a buffer or narrowed region only contains the
 text in Diagram 1:
-**** Diagram 1
+*** Diagram 1
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
 dolor sit           posuere tellus.      penatibus et magnis     Donec vitae dolor
@@ -16,7 +15,7 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-**** Column elements, columns, and column blocks
+*** Column elements, columns, and column blocks
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
 in the second column block, etc.
@@ -24,13 +23,24 @@ in the second column block, etc.
 Each column block starts and ends at a certain column.  In Diagram 1,
 the first column block starts at column 0, and ends at column 16.
 The second column starts at column 20 and ends at column 38, etc.
-*** Example 2 - (column-elements--insert 'point)
-Now, with point anywhere in "Proin quam nisl," in Diagram 1, calling
+** Examples
+*** Example 1 - (column-elements--insert 'point)
+Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
+**** Diagram Ex-1a:
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
+dolor sit           posuere tellus.      penatibus et magnis     Donec vitae dolor
+amet,consectetuer   Proin quam nisl,     dis parturient montes,  Nullam tristique
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis.
+Donec hendrerit     eget,convallis       mus.
+tempor tellus.      nec,purus.
+#+END_EXAMPLE
+Now, with point anywhere in "Proin quam nisl,", calling
 (column-elements--insert 'point) will change the text in
-Diagram 1 to that in Diagram 2, with point moving to where the "P"
+Diagram Ex-1a to that in Diagram Ex-1b, with point moving to where the "P"
 in "Proin quam nisl," used to be (ie. directly below the "p" in
 "posuere tellus.")
-**** Diagram 2:
+**** Diagram Ex-1b:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
 dolor sit           posuere tellus.      Cum sociis natoque      Donec vitae dolor
@@ -39,11 +49,11 @@ adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis
 Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
-*** Example 3 - (column-elements--move 'up)
+*** Example 2 - (column-elements--move 'up)
 Then, calling (column-elements--move 'up) will change the text from
-Diagram 2 to that in Diagram 3, with point moving to where the "p"
+Diagram Ex-1b to that in Diagram Ex-2, with point moving to where the "p"
 in "poseure tellus." used to be:
-**** Diagram 3:
+**** Diagram Ex-2:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
 dolor sit                                Cum sociis natoque      Donec vitae dolor
@@ -53,12 +63,12 @@ Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
 
-From Diagram 3, if we had called (column-elements--move 'down) the
-text and point would change back to that shown in Diagram 2.
-*** Example 4 - (column-elements-move 'right)
-Instead, from Diagram 3 we will call (column-elements--right) and
-get the text in Diagram 4.
-**** Diagram 4:
+From Diagram Ex-2, if we had called (column-elements--move 'down) the
+text and point would change back to that shown in Diagram Ex-1b.
+*** Example 3 - (column-elements-move 'right)
+Instead, from Diagram Ex-2 we will call (column-elements--right) and
+get the text in Diagram Ex-3.
+**** Diagram Ex-3:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
 dolor sit           posuere tellus.                              Donec vitae dolor
@@ -67,12 +77,12 @@ adipiscing elit.    tincidunt et,mattis  dis parturient montes,  diam non turpis
 Donec hendrerit     eget,convallis       nascetur ridiculus
 tempor tellus.      nec,purus.           mus.
 #+END_EXAMPLE
-*** Example 5 - (column-elements--horizontal-wrap)
+*** Example 4 - (column-elements--horizontal-wrap)
 If the column-elements-horizontal-wrap variable contains nil and from
-Diagram 4 we call (column-elements--move 'right) twice more, the
-text will change to that in Diagram 5a.  Otherwise, it will change
-to that in Diagram 5b.
-**** Diagram 5a:
+Diagram Ex-3 we call (column-elements--move 'right) twice more, the
+text will change to that in Diagram Ex-4a.  Otherwise, it will change
+to that in Diagram Ex-4b.
+**** Diagram Ex-4a:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
 dolor sit           posuere tellus.      penatibus et magnis
@@ -81,7 +91,7 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      Nullam tristiqu
 Donec hendrerit     eget,convallis       mus.                    diam non turpis.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-**** Diagram 5b:
+**** Diagram Ex-4b:
 #+BEGIN_EXAMPLE
 Lorem ipsum         tempor tellus.       nec,purus.              Nulla posuere.
                     Donec pretium        Cum sociis natoque      Donec vitae dolor
@@ -94,16 +104,16 @@ Donec hendrerit     eget,convallis       mus.
 Likewise, vertical movement with (column-elements--move 'up) or
 (column-elements-move 'down) will wrap or not wrap based on the
 value of the same variable.
-*** Example 6 - (column-elements--move 'left)
+*** Example 5 - (column-elements--move 'left)
 Note that entire column blocks will be shifted left or right to
 maintain the original inter-column spacing, which in this case is 3
 spaces between the first two column blocks, and 2 spaces between each
 of the other column blocks.
 
 For example, with point anywhere in "tincidunt et,mattis" in
-Diagram 5b, calling (column-elements--move 'left) will result in the
-text in Diagram 6.
-**** Diagram 6:
+Diagram Ex-4b, calling (column-elements--move 'left) will result in the
+text in Diagram Ex-5.
+**** Diagram Ex-5:
 #+BEGIN_EXAMPLE
 Lorem ipsum           Donec hendrerit   nec,purus.              Nulla posuere.
                       tempor tellus.    Cum sociis natoque      Donec vitae dolor
@@ -112,15 +122,15 @@ amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
 tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 #+END_EXAMPLE
-*** Example 7 - (column-elements--delete)
+*** Example 6 - (column-elements--delete)
 Another feature is by calling (column-elements--delete) we can delete
 column block entries and have the rest of the existing entries wrap to
 fill in the space left by the deleted entry.
 
-For example, to delete the blank space in the text in Diagram 6, move point
+For example, to delete the blank space in the text in Diagram Ex-5, move point
 anywhere on it and call (column-elements--delete).  The text in
-Diagram 6 will then change to that in Diagram 7.
-**** Diagram 7:
+Diagram Ex-5 will then change to that in Diagram Ex-6.
+**** Diagram Ex-6:
 #+BEGIN_EXAMPLE
 Lorem ipsum           tempor tellus.    Cum sociis natoque      Donec vitae dolor
 dolor sit             Donec pretium     penatibus et magnis     Nullam tristique
