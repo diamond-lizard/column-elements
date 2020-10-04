@@ -200,6 +200,12 @@ when movement of a column element is attempted to the left of the
 left-most column block or to the right of the right-most column block
 and the value of the column-elements--horizontal-wrap variable is
 **nil**.
+
+If the value of column-elements--horizontal-wrap-error-level is not
+**nil** and the column-elements--horizontal-wrap variable is **nil**,
+and movment of a column element is attempted to the left of the
+left-most column block or to the right of the right-most column block,
+then an error will be displayed.
 ** Utility functions
 *** column-elements--column-block-count
 Returns the number of column blocks that are detected to be in the buffer.
