@@ -5,12 +5,6 @@ BUTTERCUP	:= ~/.emacs.d/dist/emacs-buttercup/bin/buttercup
 BUTTERCUP_DIR	:= ~/.emacs.d/dist/emacs-buttercup
 BUTTERCUP_ARGS  := -L . -L $(BUTTERCUP_DIR)
 
-# Tell buttercup not to use color when run from inside emacs
-# This is because emacs' compilation buffer doesn't seem to like ansi color sequences
-ifdef INSIDE_EMACS
-  BUTTERCUP_ARGS  += --no-color
-endif
-
 # Make sure that $(BUTTERCUP) exists
 ifneq ("$(wildcard $(BUTTERCUP))","")
   # $(BUTTERCUP) exists
