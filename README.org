@@ -124,3 +124,13 @@ tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
+** Utility functions
+*** column-elements--column-block-positions
+Returns a list of the position of each column block.  The position of every column block is represented by a cons pair of the start and end column of that column block.
+**** Example
+#+BEGIN_EXAMPLE
+foobar  hello
+baz
+#+END_EXAMPLE
+
+The positions of the two column blocks in the example would be '((0 . 5) (8 . 12))
