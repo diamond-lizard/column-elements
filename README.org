@@ -130,6 +130,16 @@ adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Utility functions
+*** column-elements--column-block-count
+Returns the number of column blocks that are detected to be in the buffer.
+**** Example
+#+BEGIN_EXAMPLE
+foobar  hello
+baz     there
+#+END_EXAMPLE
+
+With the buffer containing only the text in the example above, this
+function will return 2.
 *** column-elements--column-block-limit
 Returns a cons pair containing the start and end column of the column block at point.
 **** Example
