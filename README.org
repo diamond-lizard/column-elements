@@ -16,10 +16,14 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-
+**** Columns vs column blocks
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
 in the second column block, etc.
+
+Each column block starts and ends at a certain column.  In Diagram 1,
+the first column block starts at column 0, and ends at column 16.
+The second column starts at column 20 and ends at column 38, etc.
 *** Example 2 - (column-elements--insert 'point)
 Now, with point anywhere in "Proin quam nisl," in Diagram 1, calling
 (column-elements--insert 'point) will change the text in
