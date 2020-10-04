@@ -217,7 +217,7 @@ baz     there
 
 With the buffer containing only the text in the example above, this
 function will return 2.
-*** column-elements--column-block-limit
+*** column-elements--column-block-limit-at-point
 Returns a cons pair containing the start and end column of the column block at point.
 **** Example
 #+BEGIN_EXAMPLE
