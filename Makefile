@@ -7,13 +7,14 @@ BUTTERCUP_DIR	:= ~/.emacs.d/dist/emacs-buttercup
 # Make sure that $(BUTTERCUP) exists
 ifneq ("$(wildcard $(BUTTERCUP))","")
   # $(BUTTERCUP) exists
+  all: test
 else
-  $(error Error: Could not find buttercup at '$(BUTTERCUP)')
+  $(warning Warning: Could not find buttercup at '$(BUTTERCUP)')
+  $(warning Warning: Skipping tests...)
+  all: compile
 endif
 
 .PHONY: test
-
-all: test
 
 compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 
