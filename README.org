@@ -132,6 +132,18 @@ Donec hendrerit       nec,purus.        Nulla posuere.
 ** Utility functions
 *** column-elements--column-block-limit
 Returns a cons pair containing the start and end column of the column block at point.
+**** Example
+#+BEGIN_EXAMPLE
+foobar  hello
+baz     there
+#+END_EXAMPLE
+
+With point anywhere on "foobar", "baz", or the spaces directly under "bar",
+this function will return (0 . 5)
+
+With point anywhere on "hello" or "there", this function will return (8 . 12)
+
+With point anywhere else in the example buffer, this function will return nil.
 *** column-elements--column-block-limits
 Returns a list of the limits of each column block.  The limit of
 each column block is represented by a cons pair of the start and end
