@@ -129,6 +129,77 @@ tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
+** Variables
+*** column-elements--horizontal-wrap
+This variable controls what happens when a column-elements-move
+command tries to move a column element to the right of the right-most
+column block, or to the left of the left-most column block.
+
+Valid values of this variable are:
+**** nil
+Do not allow movement of column elements to the left of the left-most
+column block or to the right of the right-most column block.
+
+Whether an error is displayed when such forbidden movement is
+attempted is controlled by the
+column-elements--horizontal-wrap-error-level variable.
+***** Example - (setq column-elements--horizontal-wrap nil)
+#+BEGIN_EXAMPLE
+foobar  hello
+baz     there
+#+END_EXAMPLE
+Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
+**** 'same-row
+Movement of a column element to the left of the left-most column block moves the element to the same row of the right-most column block.
+
+Movement of a column element to the right of the right-most column block moves the element to the same row of the left-most column block.
+***** Example - (setq column-elements--horizontal-wrap 'same-row)
+#+BEGIN_EXAMPLE
+foobar  hello
+baz     there
+#+END_EXAMPLE
+
+Moving "foobar" left will change the buffer to:
+
+#+BEGIN_EXAMPLE
+baz    foobar
+hello  there
+#+END_EXAMPLE
+**** 'previous-next-row
+If the column element to be moved left is at the top-left of the left-most column block, it will be moved to the bottom-right of the right-most column block.
+
+If the column element to be moved right is at the bottom-right of the right-most column block, it will be moved to the top-left of the left-most column block.
+
+Otherwise:
+
+Movement of a column element to the left of the left-most column block moves the element to the previous row of the right-most column block.
+
+Movement of a column element to the right of the right-most column block moves the element to the next row of the left-most column block.
+***** Examples - (setq column-elements--horizontal-wrap 'previous-next-row)
+#+BEGIN_EXAMPLE
+foobar  hello
+baz     there
+#+END_EXAMPLE
+
+Moving "foobar" left will result in:
+
+#+BEGIN_EXAMPLE
+baz    there
+hello  foobar
+#+END_EXAMPLE
+
+From here, moving "there" to the right will result in:
+
+#+BEGIN_EXAMPLE
+baz    hello
+there  foobar
+#+END_EXAMPLE
+*** column-elements--horizontal-wrap-error-level
+If the value of this variable is **nil** then no errors are displayed
+when movement of a column element is attempted to the left of the
+left-most column block or to the right of the right-most column block
+and the value of the column-elements--horizontal-wrap variable is
+**nil**.
 ** Utility functions
 *** column-elements--column-block-count
 Returns the number of column blocks that are detected to be in the buffer.
