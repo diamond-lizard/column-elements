@@ -145,8 +145,8 @@ attempted is controlled by the
 column-elements--horizontal-wrap-error-level variable.
 ***** Example - (setq column-elements--horizontal-wrap nil)
 #+BEGIN_EXAMPLE
-foobar  hello
-baz     there
+foobar  one  hello
+baz     two  there
 #+END_EXAMPLE
 Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
 **** 'same-row
@@ -155,15 +155,15 @@ Movement of a column element to the left of the left-most column block moves the
 Movement of a column element to the right of the right-most column block moves the element to the same row of the left-most column block.
 ***** Example - (setq column-elements--horizontal-wrap 'same-row)
 #+BEGIN_EXAMPLE
-foobar  hello
-baz     there
+foobar  one  hello
+baz     two  there
 #+END_EXAMPLE
 
 Moving "foobar" left will change the buffer to:
 
 #+BEGIN_EXAMPLE
-baz    foobar
-hello  there
+baz  two    foobar
+one  hello  there
 #+END_EXAMPLE
 **** 'previous-next-row
 If the column element to be moved left is at the top-left of the left-most column block, it will be moved to the bottom-right of the right-most column block.
@@ -177,22 +177,22 @@ Movement of a column element to the left of the left-most column block moves the
 Movement of a column element to the right of the right-most column block moves the element to the next row of the left-most column block.
 ***** Examples - (setq column-elements--horizontal-wrap 'previous-next-row)
 #+BEGIN_EXAMPLE
-foobar  hello
-baz     there
+foobar  one  hello
+baz     two  there
 #+END_EXAMPLE
 
 Moving "foobar" left will result in:
 
 #+BEGIN_EXAMPLE
-baz    there
-hello  foobar
+baz  two    there
+one  hello  foobar
 #+END_EXAMPLE
 
 From here, moving "there" to the right will result in:
 
 #+BEGIN_EXAMPLE
-baz    hello
-there  foobar
+baz    one  hello
+there  two  foobar
 #+END_EXAMPLE
 *** column-elements--horizontal-wrap-error-level
 If the value of this variable is **nil** then no errors are displayed
