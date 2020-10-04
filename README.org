@@ -16,7 +16,7 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-**** Columns vs column blocks
+**** Column elements, columns, and column blocks
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
 in the second column block, etc.
