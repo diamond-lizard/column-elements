@@ -2,6 +2,7 @@ EMACS := emacs
 ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
 
 BUTTERCUP	:= ~/.emacs.d/dist/emacs-buttercup/bin/buttercup
+BUTTERCUP_DIR	:= ~/.emacs.d/dist/emacs-buttercup
 
 # Make sure that $(BUTTERCUP) exists
 ifneq ("$(wildcard $(BUTTERCUP))","")
@@ -22,7 +23,7 @@ compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 test: test-column-elements
 
 test-column-elements: compile
-	$(BUTTERCUP) -L . -L ~/.emacs.d/dist/emacs-buttercup tests
+	$(BUTTERCUP) -L . -L $(BUTTERCUP_DIR) tests
 
 clean:
 	rm -f *.elc tests/*.elc
