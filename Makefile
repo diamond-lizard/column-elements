@@ -3,6 +3,13 @@ ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
 
 BUTTERCUP	:= ~/.emacs.d/dist/emacs-buttercup/bin/buttercup
 
+# Make sure that $(BUTTERCUP) exists
+ifneq ("$(wildcard $(BUTTERCUP))","")
+  # $(BUTTERCUP) exists
+else
+  $(error Error: Could not find buttercup at '$(BUTTERCUP)')
+endif
+
 .PHONY: test
 
 all: test
