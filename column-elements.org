@@ -1,0 +1,126 @@
+* column-elements - Manipulate elements in columns
+** Introduction
+This package will let you move, insert, delete, yank, and kill
+elements in columns, and have the other elements automatically move
+aside or fill in gaps as needed.
+** Examples
+*** Example 1 - Definitions
+For example, let's say the a buffer or narrowed region only contains the
+text in Diagram 1:
+**** Diagram 1
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
+dolor sit           posuere tellus.      penatibus et magnis     Donec vitae dolor
+amet,consectetuer   Proin quam nisl,     dis parturient montes,  Nullam tristique
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis.
+Donec hendrerit     eget,convallis       mus.
+tempor tellus.      nec,purus.
+#+END_EXAMPLE
+
+Here, "Lorem ipsum" would be considered the first element in column 1,
+"Proin quam nisl," would be considered the third element in column 2, etc.
+*** Example 2 - (column-elements--insert 'point)
+Now, with point anywhere in "Proin quam nisl," in Diagram 1, calling
+(column-elements--insert 'point) will change the text in
+Diagram 1 to that in Diagram 2, with point moving to where the "P"
+in "Proin quam nisl," used to be (ie. directly below the "p" in
+"posuere tellus.")
+**** Diagram 2:
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
+dolor sit           posuere tellus.      Cum sociis natoque      Donec vitae dolor
+amet,consectetuer                        penatibus et magnis     Nullam tristique
+adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis.
+Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
+tempor tellus.      eget,convallis       mus.
+#+END_EXAMPLE
+*** Example 3 - (column-elements--move 'up)
+Then, calling (column-elements--move 'up) will change the text from
+Diagram 2 to that in Diagram 3, with point moving to where the "p"
+in "poseure tellus." used to be:
+**** Diagram 3:
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
+dolor sit                                Cum sociis natoque      Donec vitae dolor
+amet,consectetuer   posuere tellus.      penatibus et magnis     Nullam tristique
+adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis.
+Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
+tempor tellus.      eget,convallis       mus.
+#+END_EXAMPLE
+
+From Diagram 3, if we had called (column-elements--move 'down) the
+text and point would change back to that shown in Diagram 2.
+*** Example 4 - (column-elements-move 'right)
+Instead, from Diagram 3 we will call (column-elements--right) and
+get the text in Diagram 4.
+**** Diagram 4:
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
+dolor sit           posuere tellus.                              Donec vitae dolor
+amet,consectetuer   Proin quam nisl,     penatibus et magnis     Nullam tristique
+adipiscing elit.    tincidunt et,mattis  dis parturient montes,  diam non turpis.
+Donec hendrerit     eget,convallis       nascetur ridiculus
+tempor tellus.      nec,purus.           mus.
+#+END_EXAMPLE
+*** Example 5 - (column-elements--wrap)
+If the column-elements-wrap variable contains nil and from
+Diagram 4 we call (column-elements--move 'right) twice more, the
+text will change to that in Diagram 5a.  Otherwise, it will change
+to that in Diagram 5b.
+**** Diagram 5a:
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
+dolor sit           posuere tellus.      penatibus et magnis
+amet,consectetuer   Proin quam nisl,     dis parturient montes,  Donec vitae dolor
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      Nullam tristique
+Donec hendrerit     eget,convallis       mus.                    diam non turpis.
+tempor tellus.      nec,purus.
+#+END_EXAMPLE
+**** Diagram 5b:
+#+BEGIN_EXAMPLE
+Lorem ipsum         tempor tellus.       nec,purus.              Nulla posuere.
+                    Donec pretium        Cum sociis natoque      Donec vitae dolor
+dolor sit           posuere tellus.      penatibus et magnis     Nullam tristique
+amet,consectetuer   Proin quam nisl,     dis parturient montes,  diam non turpis.
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
+Donec hendrerit     eget,convallis       mus.
+#+END_EXAMPLE
+
+Likewise, vertical movement with (column-elements--move 'up) or
+(column-elements-move 'down) will wrap or not wrap based on the
+value of the same variable.
+*** Example 6 - (column-elements--move 'left)
+Note that entire columns will be shifted left or right to maintain
+the original inter-column spacing, which in this case is 3 spaces
+between the first two columns, and 2 spaces between each of the
+other columns.
+
+For example, with point anywhere in "tincidunt et,mattis" in
+Diagram 5b, calling (column-elements--move 'left) will result in the
+text in Diagram 6.
+**** Diagram 6:
+#+BEGIN_EXAMPLE
+Lorem ipsum           Donec hendrerit   nec,purus.              Nulla posuere.
+                      tempor tellus.    Cum sociis natoque      Donec vitae dolor
+dolor sit             Donec pretium     penatibus et magnis     Nullam tristique
+amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
+tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
+adipiscing elit.      eget,convallis    mus.
+#+END_EXAMPLE
+*** Example 7 - (column-elements--delete)
+Another feature is by calling (column-elements--delete) we can
+delete column entries and have the rest of the existing entries
+wrap to fill in the space left by the deleted entry.
+
+For example, to delete the blank space in the text in Diagram 6, move point
+anywhere on it and call (column-elements--delete).  The text in
+Diagram 6 will then change to that in Diagram 7.
+**** Diagram 7:
+#+BEGIN_EXAMPLE
+Lorem ipsum           tempor tellus.    Cum sociis natoque      Donec vitae dolor
+dolor sit             Donec pretium     penatibus et magnis     Nullam tristique
+amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
+tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
+adipiscing elit.      eget,convallis    mus.
+Donec hendrerit       nec,purus.        Nulla posuere.
+#+END_EXAMPLE
