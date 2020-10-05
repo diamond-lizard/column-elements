@@ -2,7 +2,12 @@
   :var (example-buffer-1)
   (before-each
     (setq example-buffer-1
-          (generate-new-buffer (generate-new-buffer-name "example-1"))))
+          (generate-new-buffer (generate-new-buffer-name "example-1")))
+    (switch-to-buffer example-buffer-1)
+    (insert
+     (concat
+      "foobar  hello\n"
+      "baz     there")))
   (it "Finds the left limit of column block 1 in example 1 with point at 0"
     (expect
      (with-current-buffer example-buffer-1
