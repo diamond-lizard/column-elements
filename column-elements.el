@@ -34,11 +34,11 @@ otherwise returns nil."
 otherwise returns nil."
   (interactive)
   (let* ((column
-          (if (boundp column)
-              column
-            (current-column)))
+          (if (equal column nil)
+              (current-column)
+            column))
          (current-column-is-a-delimiter-column
-          (column-elements--delimiter-column-p-aux (current-column))))
+          (column-elements--delimiter-column-p-aux column)))
     (progn
       (message
        (format "%s" current-column-is-a-delimiter-column))
