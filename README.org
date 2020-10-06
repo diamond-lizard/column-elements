@@ -284,3 +284,5 @@ baz
 
 The limits of the two column blocks in the example would be
 ((0 . 5) (8 . 12))
+** Notes
+*** All column blocks are assumed to be left-justified
