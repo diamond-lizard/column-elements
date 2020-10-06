@@ -27,10 +27,7 @@ otherwise returns nil."
            (concat
             "column-elements--delimiter-column-p-aux: "
             "Error: COLUMN must be < %s")
-           last-column)))))
-  (save-excursion
-    (save-restriction
-      (goto-char (point-min))
+           last-column)))
       (not
        (condition-case nil
            (re-search-forward
