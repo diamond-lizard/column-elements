@@ -15,6 +15,19 @@
 (defun column-elements--delimiter-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
 otherwise returns nil."
+  (when (< column 0)
+    (error
+     "column-elements--delimiter-column-p-aux: Error: COLUMN must be > 0"))
+  (save-excursion
+    (save-restriction
+      (goto-char (point-min))
+      (let ((last-column (- (line-end-position) 1)))
+        (when (> column last-column)
+          (error
+           (concat
+            "column-elements--delimiter-column-p-aux: "
+            "Error: COLUMN must be < %s")
+           last-column)))))
   (save-excursion
     (save-restriction
       (goto-char (point-min))
