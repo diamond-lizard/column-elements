@@ -42,6 +42,10 @@
      (with-current-buffer test-buffer-data-001
        (column-elements--delimiter-column-p-aux 12))
      :to-be nil))
+  (it "checking to see if column -1 in data/001 is a delimiter column errors out"
+    (should-error
+     (with-current-buffer test-buffer-data-001
+       (column-elements--delimiter-column-p-aux -1))))
   )
 
 (provide 'column-elements--delimiter-column-p-aux)
