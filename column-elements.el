@@ -10,7 +10,7 @@
 ;; See column-elements.org for details.
 
 ;; What to use as a delimiter to determine column block boundaries.
-(setq column-elements--delimiter " ")
+(defvar column-elements--delimiter " ")
 
 (defun column-elements--delimiter-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
