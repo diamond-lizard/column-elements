@@ -49,10 +49,10 @@ otherwise returns nil."
             column))
          (current-column-is-a-delimiter-column
           (column-elements--delimiter-column-p-aux column)))
-    (progn
+    (when (called-interactively-p 'interactive)
       (message
-       (format "%s" current-column-is-a-delimiter-column))
-      current-column-is-a-delimiter-column)))
+       (format "%s" current-column-is-a-delimiter-column)))
+    current-column-is-a-delimiter-column))
 
 ;;
 ;;------------------------------------------------------------------------
