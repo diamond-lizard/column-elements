@@ -154,14 +154,14 @@ A vertical column of least one delimiter must extend from the top of the buffer 
 
 If this variable is set to *nil*, then each column is considered to be a column block.
 
-The default column block delimiter is a space character.
+The default column block delimiter is " " (a space).
 **** Example 1
 #+BEGIN_EXAMPLE
 one   two foo
 three four
 #+END_EXAMPLE
 
-With this variable set to a space character, the above buffer would be considered to have two column blocks.  The first column block would contain the elements "one" and "three", while the second would contain the elements "two foo" and "four".
+With this variable set to " " (a space), the above buffer would be considered to have two column blocks.  The first column block would contain the elements "one" and "three", while the second would contain the elements "two foo" and "four".
 
 If this variable was set to *nil* then each column would be considered to be its own column block, so there would be 13 column blocks in this example.
 **** Example 2
@@ -170,7 +170,7 @@ one+++++two  foo
 three+++four bar
 #+END_EXAMPLE
 
-With this variable set to + (a single plus), the above buffer would be considered to have two column blocks.  The first column block would consist of two elements: "one++" and "three".  The second column block would also have two elements: "two  foo" and "four bar".
+With this variable set to "+" (a plus sign), the above buffer would be considered to have two column blocks.  The first column block would consist of two elements: "one++" and "three".  The second column block would also have two elements: "two  foo" and "four bar".
 *** column-elements--horizontal-wrap
 This variable controls what happens when a column-elements-move
 command tries to move a column element to the right of the right-most
