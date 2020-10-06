@@ -3,7 +3,7 @@
         (original-buffer-data-001)
         (test-buffer-data-001))
   (before-all
-    (setq filename-data-001 "tests/data/001")
+    (setq filename-data-001 "tests/data/column-elements-test-001")
     (setq original-buffer-data-001
           (find-file-read-only filename-data-001)))
   (before-each
