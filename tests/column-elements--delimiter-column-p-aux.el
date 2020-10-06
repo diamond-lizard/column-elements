@@ -46,6 +46,10 @@
     (should-error
      (with-current-buffer test-buffer-data-001
        (column-elements--delimiter-column-p-aux -1))))
+  (it "checking to see if column 13 in data/001 is a delimiter column errors out"
+    (should-error
+     (with-current-buffer test-buffer-data-001
+       (column-elements--delimiter-column-p-aux 13))))
   )
 
 (provide 'column-elements--delimiter-column-p-aux)
