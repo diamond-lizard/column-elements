@@ -8,7 +8,7 @@
      (concat
       "foobar  hello\n"
       "baz     there")))
-  (it "Finds the left limit of column block 1 in example 1 with point at 0"
+  (xit "Finds the left limit of column block 1 in example 1 with point at 0"
     (expect
      (with-current-buffer example-buffer-1
        (goto-char 0)
