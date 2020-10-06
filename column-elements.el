@@ -9,6 +9,9 @@
 ;;
 ;; See column-elements.org for details.
 
+;; What to use as a delimiter to determine column block boundaries.
+(setq column-elements--delimiter " ")
+
 ;;
 ;;------------------------------------------------------------------------
 
