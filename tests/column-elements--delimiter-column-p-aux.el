@@ -27,6 +27,11 @@
      (with-current-buffer test-buffer-data-001
        (column-elements--delimiter-column-p-aux 3))
      :to-be nil))
+  (it "column 6 in data/001 is a delimiter column"
+    (expect
+     (with-current-buffer test-buffer-data-001
+       (column-elements--delimiter-column-p-aux 6))
+     :to-be t))
   )
 
 (provide 'column-elements--delimiter-column-p-aux)
