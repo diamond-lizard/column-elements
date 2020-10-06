@@ -147,7 +147,7 @@ adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Variables
-*** column-elements--column-block-delimiter-char
+*** column-elements--delimiter-char
 The character to use as a delimiter of column blocks.
 
 A vertical column of least one delimiter must extend from the top of the buffer to the bottom in order to distinguish one column block from the next.
