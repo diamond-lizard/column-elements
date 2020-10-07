@@ -36,5 +36,11 @@
        (goto-char 9)
        (column-elements--column-block-boundaries-at-point 'left))
     :to-be 8))
+  (it "Finds the left boundaries of column block in data 001 with point at 13"
+    (expect
+     (with-current-buffer test-buffer-data-001
+       (goto-char 13)
+       (column-elements--column-block-boundaries-at-point 'left))
+    :to-be 8))
   )
 (provide 'column-elements--column-block-boundaries-at-point)
