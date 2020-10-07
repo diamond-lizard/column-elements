@@ -25,7 +25,7 @@ otherwise returns nil."
        (point-min)
        (point-max))
       ;; Empty buffer
-      t
+      (error "column-elements--delimiter-column-p-aux: Error: Empty buffer detected.")
     ;; Not empty buffer
     (save-excursion
       (save-restriction
