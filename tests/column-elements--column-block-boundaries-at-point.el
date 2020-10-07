@@ -24,5 +24,11 @@
        (goto-char 7)
        (column-elements--column-block-boundaries-at-point 'left))
     :to-be nil))
+  (it "No column block boundaries in data 001 with point at 8"
+    (expect
+     (with-current-buffer test-buffer-data-001
+       (goto-char 8)
+       (column-elements--column-block-boundaries-at-point 'left))
+    :to-be nil))
   )
 (provide 'column-elements--column-block-boundaries-at-point)
