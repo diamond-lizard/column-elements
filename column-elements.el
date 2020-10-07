@@ -20,26 +20,33 @@ otherwise returns nil."
   (when (< column 0)
     (error
      "column-elements--delimiter-column-p-aux: Error: COLUMN must be > 0"))
-  (save-excursion
-    (save-restriction
-      (goto-char (point-min))
-      (let ((last-column (- (line-end-position) 2)))
-        (when (> column last-column)
-          (error
-           (concat
-            "column-elements--delimiter-column-p-aux: "
-            "Error: COLUMN must be < %s")
-           last-column)))
-      (not
-       (condition-case nil
-           (re-search-forward
-            (rx-to-string
-             `(seq
-               line-start
-               (= ,column anychar)
-               (not
-                (any ,column-elements--delimiter)))))
-         (search-failed nil))))))
+                                        ; Detect empty buffers
+  (if (equal
+       (point-min)
+       (point-max))
+      ;; Empty buffer
+      t
+    ;; Not empty buffer
+    (save-excursion
+      (save-restriction
+        (goto-char (point-min))
+        (let ((last-column (- (line-end-position) 2)))
+          (when (> column last-column)
+            (error
+             (concat
+              "column-elements--delimiter-column-p-aux: "
+              "Error: COLUMN must be < %s")
+             last-column)))
+        (not
+         (condition-case nil
+             (re-search-forward
+              (rx-to-string
+               `(seq
+                 line-start
+                 (= ,column anychar)
+                 (not
+                  (any ,column-elements--delimiter)))))
+           (search-failed nil)))))))
 
 (defun column-elements--delimiter-column-p (&optional column)
   "Returns t if the column at point contains only delimiters,
