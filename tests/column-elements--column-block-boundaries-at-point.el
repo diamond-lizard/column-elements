@@ -4,8 +4,10 @@
         (test-buffer-data-001))
   (before-all
     (setq filename-data-001 "tests/data/column-elements-test-001")
-    (setq original-buffer-data-001
-          (find-file-read-only filename-data-001)))
+    (if (file-exists-p filename-data-001)
+        (setq original-buffer-data-001
+              (find-file-read-only filename-data-001))
+      (error "File '%s' does not exist")))
   (before-each
     (setq test-buffer-data-001
           (generate-new-buffer (generate-new-buffer-name
@@ -50,8 +52,10 @@
         (test-buffer-data-002))
   (before-all
     (setq filename-data-002 "tests/data/column-elements-test-002")
-    (setq original-buffer-data-002
-          (find-file-read-only filename-data-002)))
+    (if (file-exists-p filename-data-002)
+        (setq original-buffer-data-002
+              (find-file-read-only filename-data-002))
+      (error "File '%s' does not exist")))
   (before-each
     (setq test-buffer-data-002
           (generate-new-buffer (generate-new-buffer-name
