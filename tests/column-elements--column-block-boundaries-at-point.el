@@ -12,7 +12,7 @@
                                 "column-elements--test-data-001")))
     (switch-to-buffer test-buffer-data-001)
     (replace-buffer-contents original-buffer-data-001))
-  (it "Finds the left boundaries of column block 1 in example 1 with point at 0"
+  (it "Finds the left boundaries of column block in data 001 with point at 0"
     (expect
      (with-current-buffer test-buffer-data-001
        (goto-char 0)
