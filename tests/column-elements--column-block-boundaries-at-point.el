@@ -1,17 +1,21 @@
-(describe "Tests (column-elements--column-block-limit-at-point)"
-  :var (example-buffer-1)
+(describe "Tests (column-elements--column-block-boundaries-at-point)"
+  :var ((filename-data-001)
+        (original-buffer-data-001)
+        (test-buffer-data-001))
+  (before-all
+    (setq filename-data-001 "tests/data/column-elements-test-001")
+    (setq original-buffer-data-001
+          (find-file-read-only filename-data-001)))
   (before-each
-    (setq example-buffer-1
-          (generate-new-buffer (generate-new-buffer-name "example-1")))
-    (switch-to-buffer example-buffer-1)
-    (insert
-     (concat
-      "foobar  hello\n"
-      "baz     there")))
-  (xit "Finds the left limit of column block 1 in example 1 with point at 0"
+    (setq test-buffer-data-001
+          (generate-new-buffer (generate-new-buffer-name
+                                "column-elements--test-data-001")))
+    (switch-to-buffer test-buffer-data-001)
+    (replace-buffer-contents original-buffer-data-001))
+  (it "Finds the left boundaries of column block 1 in example 1 with point at 0"
     (expect
-     (with-current-buffer example-buffer-1
+     (with-current-buffer test-buffer-data-001
        (goto-char 0)
-       (column-elements--column-block-limit-at-point 'left)))
+       (column-elements--column-block-boundaries-at-point 'left)))
     0))
-(provide 'column-elements--column-block-limit-at-point)
+(provide 'column-elements--column-block-boundaries-at-point)

@@ -12,6 +12,8 @@
 ;; What to use as a delimiter to determine column block boundaries.
 (defvar column-elements--delimiter " ")
 
+(require 'cl-macs)
+
 (defun column-elements--delimiter-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
 otherwise returns nil."
@@ -53,6 +55,45 @@ otherwise returns nil."
       (message
        (format "%s" current-column-is-a-delimiter-column)))
     current-column-is-a-delimiter-column))
+
+(defun column-elements--column-block-boundaries-at-point (&optional side)
+  "Return the 'left, 'right, or 'both boundaries of
+the column block at point."
+  (when (equal side nil)
+    (error
+     (format
+      (concat
+       "column-elements--column-block-boundaries-at-point: "
+       "No arguments given.  "
+       "This function must be called with either: 'left, 'right, or 'both")
+      side)))
+  (if (equal (column-elements--delimiter-column-p) nil)
+      (cond
+       ((equal side 'both)
+        nil)
+       ((equal side 'left)
+        (cl-loop
+         with start-column = (current-column)
+         with left-most-column = 0
+         with left-boundary-of-this-column-block = start-column
+         for this-column from start-column downto left-most-column
+         if (equal
+             (column-elements--delimiter-column-p-aux this-column)
+             nil)
+         do (setq left-boundary-of-this-column-block this-column)
+         else return left-boundary-of-this-column-block
+         finally return left-boundary-of-this-column-block))
+       ((equal side 'right)
+        nil)
+       (t
+        (error
+         (format
+          (concat
+          "column-elements--column-block-boundaries-at-point: "
+          "Invalid argument '%s'.  "
+          "Valid arguments are: 'left, 'right, or 'both")
+          side))))
+    nil))
 
 ;;
 ;;------------------------------------------------------------------------
