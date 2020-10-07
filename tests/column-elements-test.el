@@ -7,4 +7,4 @@
 ;; The actual tests are split out in to the following files:
 (require 'column-elements--delimiter-column-p-aux)
 (require 'column-elements--delimiter-column-p)
-(require 'column-elements--column-block-limit-at-point)
+(require 'column-elements--column-block-boundaries-at-point)
