@@ -1,64 +1,105 @@
 ;;; -*- lexical-binding: t -*-
-(describe "Tests (column-elements--delimiter-column-p-aux)"
-  :var ((filename-data-001)
-        (original-buffer-data-001)
-        (test-buffer-data-001))
-  (after-all
-    (unintern 'filename-data-001)
-    (kill-buffer 'original-buffer-data-001)
-    (unintern 'original-buffer-data-001)
-    (kill-buffer 'test-buffer-data-001)
-    (unintern 'test-buffer-data-001))
-  (before-all
-    (setq filename-data-001 "tests/data/column-elements-test-001")
-    (setq original-buffer-data-001
-          (find-file-read-only filename-data-001)))
-  (before-each
-    (setq test-buffer-data-001
-          (generate-new-buffer (generate-new-buffer-name
-                                "column-elements--test-data-001")))
-    (switch-to-buffer test-buffer-data-001)
-    (replace-buffer-contents original-buffer-data-001))
-  (after-each
-    (kill-buffer test-buffer-data-001))
-  (it "column 0 in data/001 is not a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 0))
-     :to-be nil))
-  (it "column 1 in data/001 is not a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 1))
-     :to-be nil))
-  (it "column 3 in data/001 is not a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 3))
-     :to-be nil))
-  (it "column 6 in data/001 is a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 6))
-     :to-be t))
-  (it "column 8 in data/001 is not a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 8))
-     :to-be nil))
-  (it "column 12 in data/001 is not a delimiter column"
-    (expect
-     (with-current-buffer test-buffer-data-001
-       (column-elements--delimiter-column-p-aux 12))
-     :to-be nil))
-  (it "checking to see if column -1 in data/001 is a delimiter column errors out"
-    (should-error
-     (with-current-buffer test-buffer-data-001
+
+(require 'column-elements)
+
+(ert-deftest column-elements--delimiter-column-p-aux--001 ()
+  "Make sure that column-elements--delimiter-column-p-aux is bound"
+  :tags '(
+          bindings
+          )
+  (should
+   (fboundp 'column-elements--delimiter-column-p-aux)))
+
+(setq column-elements--filename-001 "tests/data/column-elements-test-001")
+
+;; Read in test file 001, if it exists.
+(if (file-exists-p column-elements--filename-001)
+    (setq column-elements--original-data-001
+          (find-file-read-only column-elements--filename-001))
+  (error "File '%s' does not exist" column-elements--filename-001))
+
+(ert-deftest column-elements--delimiter-column-p-aux--002 ()
+  "column 0 in data/001 is not a delimiter column"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 0))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--003 ()
+  "column 1 in data/001 is not a delimiter column"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 1))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--004 ()
+  "column 3 in data/001 is not a delimiter column"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 3))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--005 ()
+  "column 6 in data/001 is a delimiter column"
+  :tags '(
+          is-delimiter-column
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 6))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--006 ()
+  "column 8 in data/001 is not a delimiter column"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 8))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--007 ()
+  "column 12 in data/001 is not a delimiter column"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
+       (column-elements--delimiter-column-p-aux 12))))
+
+(ert-deftest column-elements--delimiter-column-p-aux--008 ()
+  "checking to see if column -1 in data/001 is a delimiter column errors out"
+  :tags '(
+          error
+          out-of-bounds
+          invalid-argument
+          )
+  (should-error
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
        (column-elements--delimiter-column-p-aux -1))))
-  (it "checking to see if column 13 in data/001 is a delimiter column errors out"
-    (should-error
-     (with-current-buffer test-buffer-data-001
+
+(ert-deftest column-elements--delimiter-column-p-aux--009 ()
+  "checking to see if column 13 in data/001 is a delimiter column errors out"
+  :tags '(
+          error
+          out-of-bounds
+          invalid-argument
+          )
+  (should-error
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-001)
        (column-elements--delimiter-column-p-aux 13))))
-  )
 
 (provide 'column-elements--delimiter-column-p-aux)

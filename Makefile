@@ -1,17 +1,30 @@
 EMACS := emacs
 ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
+TEST_DIR := tests
+
+TESTS := column-elements--delimiter-column-p-aux
+TESTS += column-elements--delimiter-column-p
+TESTS += column-elements--column-block-boundaries-at-point
 
 .PHONY: test
+
+all: test
 
 compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 
 %.elc: %.el
 	$(EMACS) -batch -L . -f batch-byte-compile $<
 
-test: test-column-elements
+test: $(TESTS)
 
-test-column-elements: compile
-	echo TODO
+column-elements--column-block-boundaries-at-point: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--column-block-boundaries-at-point.el -f ert-run-tests-batch-and-exit
+
+column-elements--delimiter-column-p: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--delimiter-column-p.el -f ert-run-tests-batch-and-exit
+
+column-elements--delimiter-column-p-aux: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--delimiter-column-p-aux.el -f ert-run-tests-batch-and-exit
 
 clean:
-	rm -f *.elc tests/*.elc
+	rm -f *.elc $(TEST_DIR)/*.elc
