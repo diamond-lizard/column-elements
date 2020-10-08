@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (describe "Tests (column-elements--delimiter-column-p-aux)"
   :var ((filename-data-001)
         (original-buffer-data-001)
