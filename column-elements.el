@@ -28,7 +28,9 @@ the column block at point."
   (if (equal (column-elements--delimiter-column-p) nil)
       (cond
        ((equal side 'both)
-        nil)
+        (cons
+         (column-elements--column-block-boundaries-at-point 'left)
+         (column-elements--column-block-boundaries-at-point 'right)))
        ((equal side 'left)
         (cl-loop
          with start-column = (current-column)
