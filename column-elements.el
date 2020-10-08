@@ -112,18 +112,21 @@ otherwise returns nil."
   (save-excursion
     (save-restriction
       (goto-char (point-min))
-      (cl-loop
-       with buffer-width = (- (line-end-position) (line-beginning-position) 1)
-       do (progn
-            (forward-line)
-            (if (eobp)
-                buffer-width
-              (let ((current-line-width
-                     (- (line-end-position) (line-beginning-position) 1)))
-                (when (> current-line-width buffer-width)
-                  (setq buffer-width current-line-width)))))
-       until (eobp)
-       maximize buffer-width))))
+      (if (eobp)
+          0
+        (cl-loop
+         with buffer-width = (- (line-end-position) (line-beginning-position) 1)
+         do (progn
+              (forward-line)
+              (if (eobp)
+                  buffer-width
+                (let ((current-line-width
+                       (- (line-end-position) (line-beginning-position) 1)))
+                  (when (> current-line-width buffer-width)
+                    (setq buffer-width current-line-width)))))
+         until (eobp)
+         maximize buffer-width)))))
+
 ;;
 ;;------------------------------------------------------------------------
 
