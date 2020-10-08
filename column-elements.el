@@ -117,24 +117,29 @@ or contains only delimiters, otherwise returns nil."
            desired-line)))
     (save-excursion
       (save-restriction
-        ;; We use inhibit-message here to silence goto-line informing
-        ;; us that it set the mark, which is just annoying.
-        (let ((inhibit-message t))
-          (goto-line desired-line))
+        (goto-char (point-min))
+        (forward-line (- desired-line 1))
         (let ((current-line
                (line-number-at-pos)))
           (if (not (equal
                     current-line
                     desired-line))
               (error "column-elements--gap-line-p: Error: line outside of buffer.")
-            (or
-             (equal (line-beginning-position) (line-end-position))
-             (looking-at-p
-              (rx-to-string
-               `(seq
-                 line-start
-                 (one-or-more ,column-elements--delimiter)
-                 line-end))))))))))
+            (cond
+             ;; An empty line:
+             ((equal (line-beginning-position) (line-end-position))
+              t)
+             ;; A line containing just delimiter chars:
+             ((looking-at-p
+               (rx-to-string
+                `(seq
+                  line-start
+                  (one-or-more ,column-elements--delimiter)
+                  line-end)))
+              t)
+             ;; Not an empty line, nor a line containing just delimiter chars:
+             (t
+              nil))))))))
 
 (defun column-elements--get-buffer-width ()
   "Returns the buffer width in columns."
