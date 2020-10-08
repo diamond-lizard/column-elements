@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-(require 'buttercup)
 (require 'column-elements)
 
 ;; Where to find the actual tests
