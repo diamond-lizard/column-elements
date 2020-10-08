@@ -4,6 +4,7 @@ TEST_DIR := tests
 
 TESTS := column-elements--gap-column-p-aux
 TESTS += column-elements--gap-column-p
+TESTS += column-elements--gap-line-p
 TESTS += column-elements--get-buffer-width
 TESTS += column-elements--column-block-boundaries-at-point
 
@@ -29,6 +30,9 @@ column-elements--gap-column-p: compile
 
 column-elements--gap-column-p-aux: compile
 	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--gap-column-p-aux.el -f ert-run-tests-batch-and-exit
+
+column-elements--gap-line-p: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--gap-line-p.el -f ert-run-tests-batch-and-exit
 
 clean:
 	rm -f *.elc $(TEST_DIR)/*.elc
