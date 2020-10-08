@@ -95,6 +95,21 @@ otherwise returns nil."
        (format "%s" current-column-is-a-delimiter-column)))
     current-column-is-a-delimiter-column))
 
+(defun column-elements--get-buffer-width ()
+  "Returns the buffer width in columns."
+  (save-excursion
+    (save-restriction
+      (goto-char (point-min))
+      (cl-loop
+       with buffer-width = (- (line-end-position) (line-beginning-position) 1)
+       do (progn
+            (forward-line)
+            (let ((current-line-width
+                   (- (line-end-position) (line-beginning-position) 1)))
+              (when (> current-line-width buffer-width)
+                (setq buffer-width current-line-width))))
+       until (eobp)
+       maximize buffer-width))))
 ;;
 ;;------------------------------------------------------------------------
 
