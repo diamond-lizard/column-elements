@@ -42,7 +42,17 @@ the column block at point."
          else return left-boundary-of-this-column-block
          finally return left-boundary-of-this-column-block))
        ((equal side 'right)
-        nil)
+        (cl-loop
+         with start-column = (current-column)
+         with right-most-column = (column-elements--get-buffer-width)
+         with right-boundary-of-this-column-block = start-column
+         for this-column from start-column upto right-most-column
+         if (equal
+             (column-elements--delimiter-column-p-aux this-column)
+             nil)
+         do (setq right-boundary-of-this-column-block this-column)
+         else return right-boundary-of-this-column-block
+         finally return right-boundary-of-this-column-block))
        (t
         (error
          (format
