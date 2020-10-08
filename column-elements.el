@@ -113,7 +113,9 @@ otherwise returns nil."
     (save-restriction
       (goto-char (point-min))
       (if (eobp)
+          ;; Empty buffer contains 0 columns
           0
+        ;; Not an empty buffer
         (cl-loop
          with buffer-width = (- (line-end-position) (line-beginning-position) 1)
          do (progn
