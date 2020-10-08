@@ -19,7 +19,7 @@
 otherwise returns nil."
   (when (< column 0)
     (error
-     "column-elements--delimiter-column-p-aux: Error: COLUMN must be > 0"))
+     "column-elements--delimiter-column-p-aux: Error: COLUMN must not be < 0"))
                                         ; Detect empty buffers
   (if (equal
        (point-min)
