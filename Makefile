@@ -2,8 +2,8 @@ EMACS := emacs
 ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
 TEST_DIR := tests
 
-TESTS := column-elements--delimiter-column-p-aux
-TESTS += column-elements--delimiter-column-p
+TESTS := column-elements--gap-column-p-aux
+TESTS += column-elements--gap-column-p
 TESTS += column-elements--get-buffer-width
 TESTS += column-elements--column-block-boundaries-at-point
 
@@ -24,11 +24,11 @@ column-elements--get-buffer-width: compile
 column-elements--column-block-boundaries-at-point: compile
 	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--column-block-boundaries-at-point.el -f ert-run-tests-batch-and-exit
 
-column-elements--delimiter-column-p: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--delimiter-column-p.el -f ert-run-tests-batch-and-exit
+column-elements--gap-column-p: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--gap-column-p.el -f ert-run-tests-batch-and-exit
 
-column-elements--delimiter-column-p-aux: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--delimiter-column-p-aux.el -f ert-run-tests-batch-and-exit
+column-elements--gap-column-p-aux: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/column-elements--gap-column-p-aux.el -f ert-run-tests-batch-and-exit
 
 clean:
 	rm -f *.elc $(TEST_DIR)/*.elc
