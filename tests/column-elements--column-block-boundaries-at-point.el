@@ -16,6 +16,7 @@
 ;;
 ;; Read in test files
 ;;
+
 (setq column-elements--filename-001 "tests/data/column-elements-test-001")
 (setq column-elements--filename-002 "tests/data/column-elements-test-002")
 
@@ -32,6 +33,8 @@
     (setq column-elements--original-data-002
           (find-file-read-only column-elements--filename-002))
   (error "File '%s' does not exist" column-elements--filename-002))
+
+;; END - Read in test files
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -99,6 +102,8 @@
       (goto-char 13)
       (column-elements--column-block-boundaries-at-point 'left))
     8)))
+;;
+;; END - 'left with data 001
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -303,6 +308,8 @@
       (goto-char 403)
       (column-elements--column-block-boundaries-at-point 'left))
     20)))
+
+;; END - 'left with data 002
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
