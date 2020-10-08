@@ -27,10 +27,6 @@ the column block at point."
       side)))
   (if (equal (column-elements--gap-column-p) nil)
       (cond
-       ((equal side 'both)
-        (cons
-         (column-elements--column-block-boundaries-at-point 'left)
-         (column-elements--column-block-boundaries-at-point 'right)))
        ((equal side 'left)
         (cl-loop
          with start-column = (current-column)
@@ -61,7 +57,7 @@ the column block at point."
           (concat
           "column-elements--column-block-boundaries-at-point: "
           "Invalid argument '%s'.  "
-          "Valid arguments are: 'left, 'right, or 'both")
+          "Valid arguments are: 'left, 'right")
           side))))
     nil))
 
