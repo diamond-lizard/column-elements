@@ -90,16 +90,4 @@
      (replace-buffer-contents column-elements--original-data-001)
        (column-elements--delimiter-column-p-aux -1))))
 
-(ert-deftest column-elements--delimiter-column-p-aux--009 ()
-  "checking to see if column 13 in data/001 is a delimiter column errors out"
-  :tags '(
-          error
-          out-of-bounds
-          invalid-argument
-          )
-  (should-error
-   (with-temp-buffer
-     (replace-buffer-contents column-elements--original-data-001)
-       (column-elements--delimiter-column-p-aux 13))))
-
 (provide 'column-elements--delimiter-column-p-aux)

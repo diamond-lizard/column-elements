@@ -30,13 +30,6 @@ otherwise returns nil."
     (save-excursion
       (save-restriction
         (goto-char (point-min))
-        (let ((last-column (- (line-end-position) 2)))
-          (when (> column last-column)
-            (error
-             (concat
-              "column-elements--delimiter-column-p-aux: "
-              "Error: COLUMN must be < %s")
-             last-column)))
         (not
          (condition-case nil
              (re-search-forward
