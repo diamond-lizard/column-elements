@@ -313,4 +313,87 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 'right with data 002
+;;
+(ert-deftest column-elements--column-block-boundaries-at-point--021 ()
+  "Finds the right boundary of column block in data 002 with point at 0"
+  :tags '(
+          right-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-002)
+      (goto-char 0)
+      (column-elements--column-block-boundaries-at-point 'right))
+    16)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--022 ()
+  "No column block boundaries in data 002 with point at 19"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-002)
+     (goto-char 19)
+     (column-elements--column-block-boundaries-at-point 'right))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--023 ()
+  "No column block boundaries in data 002 with point at 265"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-002)
+     (goto-char 265)
+     (column-elements--column-block-boundaries-at-point 'right))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--024 ()
+  "Finds the right boundaries of column block in data 002 with point at 180"
+  :tags '(
+          right-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-002)
+      (goto-char 180)
+      (column-elements--column-block-boundaries-at-point 'right))
+    16)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--025 ()
+  "Finds the right boundaries of column block in data 002 with point at 394"
+  :tags '(
+          right-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-002)
+      (goto-char 394)
+      (column-elements--column-block-boundaries-at-point 'right))
+    38)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--026 ()
+  "Finds the right boundaries of column block in data 002 with point at 403"
+  :tags '(
+          right-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-002)
+      (goto-char 403)
+      (column-elements--column-block-boundaries-at-point 'right))
+    38)))
+
+;;
+;; END - 'right with data 002
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (provide 'column-elements--column-block-boundaries-at-point)
