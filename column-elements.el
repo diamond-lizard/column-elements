@@ -127,7 +127,8 @@ otherwise returns nil."
                   (when (> current-line-width buffer-width)
                     (setq buffer-width current-line-width)))))
          until (eobp)
-         maximize buffer-width)))))
+         maximize buffer-width
+         finally return buffer-width)))))
 
 ;;
 ;;------------------------------------------------------------------------
