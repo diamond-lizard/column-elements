@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (describe "Tests (column-elements--column-block-boundaries-at-point) with data 001"
   :var ((filename-data-001)
         (original-buffer-data-001)
