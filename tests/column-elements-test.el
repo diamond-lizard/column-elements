@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require 'buttercup)
 (require 'column-elements)
 
