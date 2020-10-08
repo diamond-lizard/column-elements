@@ -117,7 +117,7 @@ otherwise returns nil."
        do (progn
             (forward-line)
             (if (eobp)
-                (return buffer-width)
+                buffer-width
               (let ((current-line-width
                      (- (line-end-position) (line-beginning-position) 1)))
                 (when (> current-line-width buffer-width)
