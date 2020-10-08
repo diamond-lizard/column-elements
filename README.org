@@ -23,9 +23,11 @@ the top of the buffer to the bottom.  In our case, these delimiters
 are spaces.  (Which characters are used as delimiters is configurable
 in using the column-elements--column-block-delimiters variable)
 
-Each column block starts and ends at a certain column.  In Diagram 1,
-the first column block starts at column 0, and ends at column 16.
-The second column starts at column 20 and ends at column 38, etc.
+Each column block starts has a left boundary column and a right
+boundary column.  In Diagram 1, the left boundary of the first first
+column block is column 0, and the right boundary is column 16.  The
+second column block's left boundary is 20 and right boundary is 38,
+etc.
 
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
