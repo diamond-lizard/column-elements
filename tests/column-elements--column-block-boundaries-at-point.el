@@ -396,4 +396,27 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Tests to make sure this function errors out when called on an
+;; empty buffer
+;;
+
+(ert-deftest column-elements--column-block-boundaries-at-point--027 ()
+  "'left errors out on an empty buffer"
+  :tags '(
+          error
+          out-of-bounds
+          invalid-argument
+          )
+  (should-error
+   (with-temp-buffer
+     (column-elements--column-block-boundaries-at-point 'right))))
+
+;;
+;; END - Test to make sure this function errors out when called on
+;;       an empty buffer
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (provide 'column-elements--column-block-boundaries-at-point)
