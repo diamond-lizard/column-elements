@@ -3,6 +3,12 @@
   :var ((filename-data-001)
         (original-buffer-data-001)
         (test-buffer-data-001))
+  (after-all
+    (unintern 'filename-data-001)
+    (kill-buffer 'original-buffer-data-001)
+    (unintern 'original-buffer-data-001)
+    (kill-buffer 'test-buffer-data-001)
+    (unintern 'test-buffer-data-001))
   (before-all
     (setq filename-data-001 "tests/data/column-elements-test-001")
     (setq original-buffer-data-001
@@ -13,6 +19,8 @@
                                 "column-elements--test-data-001")))
     (switch-to-buffer test-buffer-data-001)
     (replace-buffer-contents original-buffer-data-001))
+  (after-each
+    (kill-buffer test-buffer-data-001))
   (it "column 0 in data/001 is not a delimiter column"
     (expect
      (with-current-buffer test-buffer-data-001
