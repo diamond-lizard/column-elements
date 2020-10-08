@@ -411,7 +411,29 @@
           )
   (should-error
    (with-temp-buffer
+     (column-elements--column-block-boundaries-at-point 'left))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--028 ()
+  "'right errors out on an empty buffer"
+  :tags '(
+          error
+          out-of-bounds
+          invalid-argument
+          )
+  (should-error
+   (with-temp-buffer
      (column-elements--column-block-boundaries-at-point 'right))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--029 ()
+  "'both errors out on an empty buffer"
+  :tags '(
+          error
+          out-of-bounds
+          invalid-argument
+          )
+  (should-error
+   (with-temp-buffer
+     (column-elements--column-block-boundaries-at-point 'both))))
 
 ;;
 ;; END - Test to make sure this function errors out when called on
