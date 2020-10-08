@@ -2,6 +2,8 @@
 
 (require 'column-elements)
 
+;; Binding test
+;;
 (ert-deftest column-elements--column-block-boundaries-at-point-001 ()
   "Make sure that column-elements--column-block-boundaries-at-point is bound"
   :tags '(
@@ -10,6 +12,10 @@
   (should
    (fboundp 'column-elements--column-block-boundaries-at-point)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Read in test files
+;;
 (setq column-elements--filename-001 "tests/data/column-elements-test-001")
 (setq column-elements--filename-002 "tests/data/column-elements-test-002")
 
@@ -26,7 +32,13 @@
     (setq column-elements--original-data-002
           (find-file-read-only column-elements--filename-002))
   (error "File '%s' does not exist" column-elements--filename-002))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 'left with data 001
+;;
 (ert-deftest column-elements--column-block-boundaries-at-point--002 ()
   "Finds the left boundary of column block in data 001 with point at 0"
   :tags '(
@@ -87,10 +99,13 @@
       (goto-char 13)
       (column-elements--column-block-boundaries-at-point 'left))
     8)))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Test file 002
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 'left with data 002
+;;
 (ert-deftest column-elements--column-block-boundaries-at-point--007 ()
   "Finds the left boundaries of column block in data 002 with point at 0"
   :tags '(
@@ -288,5 +303,7 @@
       (goto-char 403)
       (column-elements--column-block-boundaries-at-point 'left))
     20)))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'column-elements--column-block-boundaries-at-point)
