@@ -23,7 +23,7 @@ the column block at point."
       (concat
        "column-elements--column-block-boundaries-at-point: "
        "No arguments given.  "
-       "This function must be called with either: 'left, 'right, or 'both")
+       "This function must be called with either: 'left or 'right")
       side)))
   (if (equal (column-elements--gap-column-p) nil)
       (cond
