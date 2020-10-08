@@ -116,10 +116,12 @@ otherwise returns nil."
        with buffer-width = (- (line-end-position) (line-beginning-position) 1)
        do (progn
             (forward-line)
-            (let ((current-line-width
-                   (- (line-end-position) (line-beginning-position) 1)))
-              (when (> current-line-width buffer-width)
-                (setq buffer-width current-line-width))))
+            (if (eobp)
+                (return buffer-width)
+              (let ((current-line-width
+                     (- (line-end-position) (line-beginning-position) 1)))
+                (when (> current-line-width buffer-width)
+                  (setq buffer-width current-line-width)))))
        until (eobp)
        maximize buffer-width))))
 ;;
