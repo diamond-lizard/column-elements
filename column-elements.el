@@ -25,7 +25,7 @@ the column block at point."
        "No arguments given.  "
        "This function must be called with either: 'left, 'right, or 'both")
       side)))
-  (if (equal (column-elements--delimiter-column-p) nil)
+  (if (equal (column-elements--gap-column-p) nil)
       (cond
        ((equal side 'both)
         (cons
@@ -38,7 +38,7 @@ the column block at point."
          with left-boundary-of-this-column-block = start-column
          for this-column from start-column downto left-most-column
          if (equal
-             (column-elements--delimiter-column-p-aux this-column)
+             (column-elements--gap-column-p-aux this-column)
              nil)
          do (setq left-boundary-of-this-column-block this-column)
          else return left-boundary-of-this-column-block
@@ -50,7 +50,7 @@ the column block at point."
          with right-boundary-of-this-column-block = start-column
          for this-column from start-column upto right-most-column
          if (equal
-             (column-elements--delimiter-column-p-aux this-column)
+             (column-elements--gap-column-p-aux this-column)
              nil)
          do (setq right-boundary-of-this-column-block this-column)
          else return right-boundary-of-this-column-block
@@ -65,18 +65,18 @@ the column block at point."
           side))))
     nil))
 
-(defun column-elements--delimiter-column-p-aux (column)
+(defun column-elements--gap-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
 otherwise returns nil."
   (when (< column 0)
     (error
-     "column-elements--delimiter-column-p-aux: Error: COLUMN must not be < 0"))
+     "column-elements--gap-column-p-aux: Error: COLUMN must not be < 0"))
                                         ; Detect empty buffers
   (if (equal
        (point-min)
        (point-max))
       ;; Empty buffer
-      (error "column-elements--delimiter-column-p-aux: Error: Empty buffer detected.")
+      (error "column-elements--gap-column-p-aux: Error: Empty buffer detected.")
     ;; Not empty buffer
     (save-excursion
       (save-restriction
@@ -92,7 +92,7 @@ otherwise returns nil."
                   (any ,column-elements--delimiter)))))
            (search-failed nil)))))))
 
-(defun column-elements--delimiter-column-p (&optional column)
+(defun column-elements--gap-column-p (&optional column)
   "Returns t if the column at point contains only delimiters,
 otherwise returns nil."
   (interactive)
@@ -100,12 +100,12 @@ otherwise returns nil."
           (if (equal column nil)
               (current-column)
             column))
-         (current-column-is-a-delimiter-column
-          (column-elements--delimiter-column-p-aux column)))
+         (current-column-is-a-gap-column
+          (column-elements--gap-column-p-aux column)))
     (when (called-interactively-p 'interactive)
       (message
-       (format "%s" current-column-is-a-delimiter-column)))
-    current-column-is-a-delimiter-column))
+       (format "%s" current-column-is-a-gap-column)))
+    current-column-is-a-gap-column))
 
 (defun column-elements--get-buffer-width ()
   "Returns the buffer width in columns."
