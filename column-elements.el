@@ -107,6 +107,35 @@ otherwise returns nil."
        (format "%s" current-column-is-a-gap-column)))
     current-column-is-a-gap-column))
 
+(defun column-elements--gap-line-p (&optional desired-line)
+  "Returns t if the line at point or `desired-line' is empty
+or contains only delimiters, otherwise returns nil."
+  (interactive)
+  (let ((desired-line
+         (if (equal desired-line nil)
+             (line-number-at-pos)
+           desired-line)))
+    (save-excursion
+      (save-restriction
+        ;; We use inhibit-message here to silence goto-line informing
+        ;; us that it set the mark, which is just annoying.
+        (let ((inhibit-message t))
+          (goto-line desired-line))
+        (let ((current-line
+               (line-number-at-pos)))
+          (if (not (equal
+                    current-line
+                    desired-line))
+              (error "column-elements--gap-line-p: Error: line outside of buffer.")
+            (or
+             (equal (line-beginning-position) (line-end-position))
+             (looking-at-p
+              (rx-to-string
+               `(seq
+                 line-start
+                 (one-or-more ,column-elements--delimiter)
+                 line-end))))))))))
+
 (defun column-elements--get-buffer-width ()
   "Returns the buffer width in columns."
   (save-excursion
