@@ -25,16 +25,36 @@ tempor tellus.      nec,purus.
 Diagram 1 shows text that the functions in this package will interpret
 as 4 column blocks.
 
-Each column block is delimited by certain characters that extend from
-the top of the buffer to the bottom.  In our case, these delimiters
-are spaces.  (Which characters are used as delimiters is configurable
-in using the column-elements--column-block-delimiters variable)
+Each column block is delimited by certain characters.  In this
+example, these delimiters are spaces.  (Which characters are used as
+delimiters is configurable in using the
+=column-elements--column-block-delimiters= variable)
 
 Each column block starts has a left boundary column and a right
-boundary column.  In Diagram 1, the left boundary of the first first
-column block is column 0, and the right boundary is column 16.  The
-second column block's left boundary is 20 and right boundary is 38,
-etc.
+boundary column.
+
+The left boundary column is the column containing the left-most
+character in a column block that's adjacent to a column full of
+delimiters (which is known as a *gap column*) or column 0, if the text
+in that column block extends left to include column 0.
+
+The right boundary column is the column containing the right-most
+character in a column block that's adjacent to a *gap column* or the
+right-most column in the buffer, if the text in that column block
+extends right to include the right-most column.
+
+The table below contains the boundaries for each of the column blocks
+in Diagram 1.  The column blocks are numbered left-to-right from 1
+to 4.
+
+|--------------+---------------+----------------|
+| Column block | Left boundary | Right boundary |
+|--------------+---------------+----------------|
+|            1 |             0 |             16 |
+|            2 |            20 |             38 |
+|            3 |            41 |             62 |
+|            4 |            65 |             81 |
+|--------------+---------------+----------------|
 
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
