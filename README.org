@@ -236,9 +236,6 @@ With this variable set to " " (a space), the above buffer would be
 considered to have two blocks.  The first block would contain the
 sub-blocks "one" and "three", while the second would contain the
 sub-blocks "two foo" and "four".
-
-If this variable was set to *nil* then each column would be considered
-to be its own block, so there would be 13 blocks in this example.
 **** Example 2
 #+BEGIN_EXAMPLE
 one+++++two  foo
