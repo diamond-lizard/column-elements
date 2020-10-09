@@ -1,4 +1,4 @@
-* column-elements - Manipulate elements in column blocks
+* emacs-text-block - Manipulate blocks and sub-blocks of text
 NOTE: This package is in PRE-ALPHA
 
 Currently, most of it *does not work*.... yet.
@@ -7,9 +7,9 @@ The documentation here is mostly aspirational.
 
 Hopefully it will be implemented some day.
 ** Introduction
-This package will let you move, insert, delete, yank, and kill
-elements in column block, and have the other elements automatically
-move aside or fill in gaps as needed.
+This package will let you move, insert, delete, yank, and kill blocks
+and sub-blocks of text, and have the other blocks or sub-blocks
+automatically move aside or fill in gaps as needed.
 ** Definitions
 For these definitions, let's assume the only text in a buffer or narrowed region looks like this:
 *** Diagram 1
@@ -21,46 +21,46 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-*** Column elements, columns, column blocks, and column block boundaries
+*** Blocks, sub-blocks, and block boundaries
 Diagram 1 shows text that the functions in this package will interpret
-as 4 column blocks.
+as 4 blocks.
 
-Each column block is delimited by certain characters.  In this
+Each block is delimited by certain characters.  In this
 example, these delimiters are spaces.  (Which characters are used as
 delimiters is configurable in using the
-=column-elements--column-block-delimiters= variable)
+=text-blocks--block-delimiters= variable)
 
-Each column block starts has a left boundary column and a right
+Each block starts has a left boundary column and a right
 boundary column.
 
 The left boundary column is the column containing the left-most
-character in a column block that's adjacent to a column full of
+character in a block that's adjacent to a column full of
 delimiters (which is known as a *gap column*) or column 0, if the text
-in that column block extends left to include column 0.
+in that block extends left to include column 0.
 
 The right boundary column is the column containing the right-most
-character in a column block that's adjacent to a *gap column* or the
-right-most column in the buffer, if the text in that column block
+character in a block that's adjacent to a *gap column* or the
+right-most column in the buffer, if the text in that block
 extends right to include the right-most column.
 
-The table below contains the boundaries for each of the column blocks
-in Diagram 1.  The column blocks are numbered left-to-right from 1
+The table below contains the boundaries for each of the blocks
+in Diagram 1.  The blocks are numbered left-to-right from 1
 to 4.
 
-|--------------+---------------+----------------|
-| Column block | Left boundary | Right boundary |
-|--------------+---------------+----------------|
-|            1 |             0 |             16 |
-|            2 |            20 |             38 |
-|            3 |            41 |             62 |
-|            4 |            65 |             81 |
-|--------------+---------------+----------------|
+|-------+---------------+----------------|
+| Block | Left boundary | Right boundary |
+|-------+---------------+----------------|
+|     1 |             0 |             16 |
+|     2 |            20 |             38 |
+|     3 |            41 |             62 |
+|     4 |            65 |             81 |
+|-------+---------------+----------------|
 
 Here, "Lorem ipsum" would be considered the first element in the first
-column block, "Proin quam nisl," would be considered the third element
-in the second column block, etc.
-*** Column block rows and top and bottom boundaries
-Column blocks have not just left and right boundaries, but top and bottom boundaries as well.
+block, "Proin quam nisl," would be considered the third element
+in the second block, etc.
+*** Block rows and top and bottom boundaries
+Blocks have not just left and right boundaries, but top and bottom boundaries as well.
 
 The top and bottom boundaries of a block are the lines of text adjacent to a *gap line* (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
 
@@ -91,7 +91,7 @@ Also note that Diagram 2 contains two rows of blocks.  The first row of blocks c
 
 Gap lines are not part of any block.
 ** Examples
-*** Example 1 - (column-elements--insert 'point)
+*** Example 1 - (text-blocks--insert 'point)
 Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
 **** Diagram Ex-1a:
 #+BEGIN_EXAMPLE
@@ -103,7 +103,7 @@ Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
 Now, with point anywhere in "Proin quam nisl,", calling
-(column-elements--insert 'point) will change the text in
+(text-blocks--insert 'point) will change the text in
 Diagram Ex-1a to that in Diagram Ex-1b, with point moving to where the "P"
 in "Proin quam nisl," used to be (ie. directly below the "p" in
 "posuere tellus.")
@@ -116,8 +116,8 @@ adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis
 Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
-*** Example 2 - (column-elements--move 'up)
-Then, calling (column-elements--move 'up) will change the text from
+*** Example 2 - (text-blocks--move 'up)
+Then, calling (text-blocks--move 'up) will change the text from
 Diagram Ex-1b to that in Diagram Ex-2, with point moving to where the "p"
 in "poseure tellus." used to be:
 **** Diagram Ex-2:
@@ -130,10 +130,10 @@ Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
 
-From Diagram Ex-2, if we had called (column-elements--move 'down) the
+From Diagram Ex-2, if we had called (text-blocks--move 'down) the
 text and point would change back to that shown in Diagram Ex-1b.
-*** Example 3 - (column-elements-move 'right)
-Instead, from Diagram Ex-2 we will call (column-elements--right) and
+*** Example 3 - (text-blocks-move 'right)
+Instead, from Diagram Ex-2 we will call (text-blocks--right) and
 get the text in Diagram Ex-3.
 **** Diagram Ex-3:
 #+BEGIN_EXAMPLE
@@ -144,9 +144,9 @@ adipiscing elit.    tincidunt et,mattis  dis parturient montes,  diam non turpis
 Donec hendrerit     eget,convallis       nascetur ridiculus
 tempor tellus.      nec,purus.           mus.
 #+END_EXAMPLE
-*** Example 4 - (column-elements--horizontal-wrap)
-If the column-elements-horizontal-wrap variable contains nil and from
-Diagram Ex-3 we call (column-elements--move 'right) twice more, the
+*** Example 4 - (text-blocks--horizontal-wrap)
+If the text-blocks-horizontal-wrap variable contains nil and from
+Diagram Ex-3 we call (text-blocks--move 'right) twice more, the
 text will change to that in Diagram Ex-4a.  Otherwise, it will change
 to that in Diagram Ex-4b.
 **** Diagram Ex-4a:
@@ -168,17 +168,17 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
 Donec hendrerit     eget,convallis       mus.
 #+END_EXAMPLE
 
-Likewise, vertical movement with (column-elements--move 'up) or
-(column-elements-move 'down) will wrap or not wrap based on the
+Likewise, vertical movement with (text-blocks--move 'up) or
+(text-blocks-move 'down) will wrap or not wrap based on the
 value of the same variable.
-*** Example 5 - (column-elements--move 'left)
-Note that entire column blocks will be shifted left or right to
+*** Example 5 - (text-blocks--move 'left)
+Note that entire blocks will be shifted left or right to
 maintain the original inter-column spacing, which in this case is 3
-spaces between the first two column blocks, and 2 spaces between each
-of the other column blocks.
+spaces between the first two blocks, and 2 spaces between each
+of the other blocks.
 
 For example, with point anywhere in "tincidunt et,mattis" in
-Diagram Ex-4b, calling (column-elements--move 'left) will result in the
+Diagram Ex-4b, calling (text-blocks--move 'left) will result in the
 text in Diagram Ex-5.
 **** Diagram Ex-5:
 #+BEGIN_EXAMPLE
@@ -189,13 +189,13 @@ amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
 tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 #+END_EXAMPLE
-*** Example 6 - (column-elements--delete)
-Another feature is by calling (column-elements--delete) we can delete
-column block entries and have the rest of the existing entries wrap to
+*** Example 6 - (text-blocks--delete)
+Another feature is by calling (text-blocks--delete) we can delete
+block entries and have the rest of the existing entries wrap to
 fill in the space left by the deleted entry.
 
 For example, to delete the blank space in the text in Diagram Ex-5, move point
-anywhere on it and call (column-elements--delete).  The text in
+anywhere on it and call (text-blocks--delete).  The text in
 Diagram Ex-5 will then change to that in Diagram Ex-6.
 **** Diagram Ex-6:
 #+BEGIN_EXAMPLE
@@ -207,54 +207,54 @@ adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Variables
-*** column-elements--delimiter
-The string to use as a delimiter of column blocks.
+*** text-blocks--delimiter
+The string to use as a delimiter of blocks.
 
-A vertical column of least one delimiter must extend from the top of the buffer to the bottom in order to distinguish one column block from the next.
+A vertical column of least one delimiter must extend from the top of the buffer to the bottom in order to distinguish one block from the next.
 
-If this variable is set to *nil*, then each column is considered to be a column block.
+If this variable is set to *nil*, then each column is considered to be a block.
 
-The default column block delimiter is " " (a space).
+The default block delimiter is " " (a space).
 **** Example 1
 #+BEGIN_EXAMPLE
 one   two foo
 three four
 #+END_EXAMPLE
 
-With this variable set to " " (a space), the above buffer would be considered to have two column blocks.  The first column block would contain the elements "one" and "three", while the second would contain the elements "two foo" and "four".
+With this variable set to " " (a space), the above buffer would be considered to have two blocks.  The first block would contain the elements "one" and "three", while the second would contain the elements "two foo" and "four".
 
-If this variable was set to *nil* then each column would be considered to be its own column block, so there would be 13 column blocks in this example.
+If this variable was set to *nil* then each column would be considered to be its own block, so there would be 13 blocks in this example.
 **** Example 2
 #+BEGIN_EXAMPLE
 one+++++two  foo
 three+++four bar
 #+END_EXAMPLE
 
-With this variable set to "+" (a plus sign), the above buffer would be considered to have two column blocks.  The first column block would consist of two elements: "one++" and "three".  The second column block would also have two elements: "two  foo" and "four bar".
-*** column-elements--horizontal-wrap
-This variable controls what happens when a column-elements-move
-command tries to move a column element to the right of the right-most
-column block, or to the left of the left-most column block.
+With this variable set to "+" (a plus sign), the above buffer would be considered to have two blocks.  The first block would consist of two elements: "one++" and "three".  The second block would also have two elements: "two  foo" and "four bar".
+*** text-blocks--horizontal-wrap
+This variable controls what happens when a text-blocks-move
+command tries to move a sub-block to the right of the right-most
+block, or to the left of the left-most block.
 
 Valid values of this variable are:
 **** nil
-Do not allow movement of column elements to the left of the left-most
-column block or to the right of the right-most column block.
+Do not allow movement of sub-block to the left of the left-most
+block or to the right of the right-most block.
 
 Whether an error is displayed when such forbidden movement is
 attempted is controlled by the
-column-elements--horizontal-wrap-error-level variable.
-***** Example - (setq column-elements--horizontal-wrap nil)
+text-blocks--horizontal-wrap-error-level variable.
+***** Example - (setq text-blocks--horizontal-wrap nil)
 #+BEGIN_EXAMPLE
 foobar  one  hello
 baz     two  there
 #+END_EXAMPLE
 Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
 **** 'same-row
-Movement of a column element to the left of the left-most column block moves the element to the same row of the right-most column block.
+Movement of a sub-block to the left of the left-most block moves the element to the same row of the right-most block.
 
-Movement of a column element to the right of the right-most column block moves the element to the same row of the left-most column block.
-***** Example - (setq column-elements--horizontal-wrap 'same-row)
+Movement of a sub-block to the right of the right-most block moves the element to the same row of the left-most block.
+***** Example - (setq text-blocks--horizontal-wrap 'same-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
 baz     two  there
@@ -267,16 +267,16 @@ baz  two    foobar
 one  hello  there
 #+END_EXAMPLE
 **** 'previous-next-row
-If the column element to be moved left is at the top-left of the left-most column block, it will be moved to the bottom-right of the right-most column block.
+If the sub-block to be moved left is at the top-left of the left-most block, it will be moved to the bottom-right of the right-most block.
 
-If the column element to be moved right is at the bottom-right of the right-most column block, it will be moved to the top-left of the left-most column block.
+If the sub-block to be moved right is at the bottom-right of the right-most block, it will be moved to the top-left of the left-most block.
 
 Otherwise:
 
-Movement of a column element to the left of the left-most column block moves the element to the previous row of the right-most column block.
+Movement of a sub-block to the left of the left-most block moves the element to the previous row of the right-most block.
 
-Movement of a column element to the right of the right-most column block moves the element to the next row of the left-most column block.
-***** Examples - (setq column-elements--horizontal-wrap 'previous-next-row)
+Movement of a sub-block to the right of the right-most block moves the element to the next row of the left-most block.
+***** Examples - (setq text-blocks--horizontal-wrap 'previous-next-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
 baz     two  there
@@ -295,21 +295,21 @@ From here, moving "there" to the right will result in:
 baz    one  hello
 there  two  foobar
 #+END_EXAMPLE
-*** column-elements--horizontal-wrap-error-level
+*** text-blocks--horizontal-wrap-error-level
 If the value of this variable is **nil** then no errors are displayed
-when movement of a column element is attempted to the left of the
-left-most column block or to the right of the right-most column block
-and the value of the column-elements--horizontal-wrap variable is
+when movement of a sub-block is attempted to the left of the
+left-most block or to the right of the right-most block
+and the value of the text-blocks--horizontal-wrap variable is
 **nil**.
 
-If the value of column-elements--horizontal-wrap-error-level is not
-**nil** and the column-elements--horizontal-wrap variable is **nil**,
-and movment of a column element is attempted to the left of the
-left-most column block or to the right of the right-most column block,
+If the value of text-blocks--horizontal-wrap-error-level is not
+**nil** and the text-blocks--horizontal-wrap variable is **nil**,
+and movment of a sub-block is attempted to the left of the
+left-most block or to the right of the right-most block,
 then an error will be displayed.
 ** Utility functions
-*** column-elements--column-block-count
-Returns the number of column blocks that are detected to be in the buffer.
+*** text-blocks--block-count
+Returns the number of blocks that are detected to be in the buffer.
 **** Example
 #+BEGIN_EXAMPLE
 foobar  hello
@@ -318,15 +318,15 @@ baz     there
 
 With the buffer containing only the text in the example above, this
 function will return 2.
-*** column-elements--column-block-boundaries-at-point
+*** text-blocks--block-boundaries-at-point
 This function takes a single argument, which must be one of either:
 ='left=, ='right=, ='top=, or ='bottom=
 
 If the argument is either ='left= or ='right=, then this function
-returns the left or right boundary of the column block at point.
+returns the left or right boundary of the block at point.
 
 If the argument is either ='top= or ='bottom=, then this function
-returns the top or bottom boundary of the entire row of column blocks
+returns the top or bottom boundary of the entire row of blocks
 at point.
 **** Example
 #+BEGIN_EXAMPLE
@@ -360,7 +360,7 @@ the function will return for every valid argument:
 
 With point anywhere else in the example buffer, this function will return nil.
 ** Notes
-*** All column blocks are assumed to be left-justified
+*** All blocks are assumed to be left-justified
 ** LICENSE
 Copyright (C) 2020 - Sergey Goldgaber
 
