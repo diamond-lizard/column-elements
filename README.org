@@ -11,7 +11,8 @@ This package will let you move, insert, delete, yank, and kill blocks
 and sub-blocks of text, and have the other blocks or sub-blocks
 automatically move aside or fill in gaps as needed.
 ** Definitions
-For these definitions, let's assume the only text in a buffer or narrowed region looks like this:
+For these definitions, let's assume the only text in a buffer or
+narrowed region looks like this:
 *** Diagram 1
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
@@ -63,7 +64,8 @@ In Diagram 1, "Lorem ipsum" is one sub-block of the first block.
 "Nullam tristique" and "diam non turpis." together are a sub-block of
 the fourth block.
 *** Block rows and top and bottom boundaries
-Blocks have not just left and right boundaries, but top and bottom boundaries as well.
+Blocks have not just left and right boundaries, but top and bottom
+boundaries as well.
 
 The top and bottom boundaries of a block are the lines of text
 adjacent to a *gap line* (a line that is either empty or which
@@ -104,7 +106,8 @@ contains blocks 3 and 4.
 Gap lines are not part of any block.
 ** Examples
 *** Example 1 - (text-blocks--insert 'point)
-Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
+Let's assume the only text in the current buffer (or narrowed buffer)
+looks like this:
 **** Diagram Ex-1a:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
@@ -270,7 +273,9 @@ text-blocks--horizontal-wrap-error-level variable.
 foobar  one  hello
 baz     two  there
 #+END_EXAMPLE
-Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
+Attempts to move "foobar" or "baz" left will fail.
+
+Attempts to move "hello" or "there" right will fail.
 **** 'same-row
 Movement of a sub-block to the left of the left-most block moves the
 sub-block to the same row of the right-most block.
@@ -290,9 +295,12 @@ baz  two    foobar
 one  hello  there
 #+END_EXAMPLE
 **** 'previous-next-row
-If the sub-block to be moved left is at the top-left of the left-most block, it will be moved to the bottom-right of the right-most block.
+If the sub-block to be moved left is at the top-left of the left-most
+block, it will be moved to the bottom-right of the right-most block.
 
-If the sub-block to be moved right is at the bottom-right of the right-most block, it will be moved to the top-left of the left-most block.
+If the sub-block to be moved right is at the bottom-right of the
+right-most block, it will be moved to the top-left of the left-most
+block.
 
 Otherwise:
 
@@ -359,8 +367,10 @@ foobar  hello
 baz     there
 #+END_EXAMPLE
 
-If the above text is the only text in the buffer or narrowed buffer, with point anywhere on "foobar", "baz", or the spaces directly under
-"bar", the table below shows what the function will return for every valid argument:
+If the above text is the only text in the buffer or narrowed buffer,
+with point anywhere on "foobar", "baz", or the spaces directly under
+"bar", the table below shows what the function will return for every
+valid argument:
 
 |----------+--------------|
 | Argument | Return Value |
