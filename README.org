@@ -55,9 +55,13 @@ to 4.
 |     4 |            65 |             81 |
 |-------+---------------+----------------|
 
-Here, "Lorem ipsum" would be considered the first element in the first
-block, "Proin quam nisl," would be considered the third element
-in the second block, etc.
+One or more lines of text within the boundaries of a block can be
+considered a sub-block.
+
+In Diagram 1, "Lorem ipsum" is one sub-block of the first block.
+"Proin quam nisl," is a sub-block of the second block.  Finally, both
+"Nullam tristique" and "diam non turpis." together are a sub-block of
+the fourth block.
 *** Block rows and top and bottom boundaries
 Blocks have not just left and right boundaries, but top and bottom boundaries as well.
 
