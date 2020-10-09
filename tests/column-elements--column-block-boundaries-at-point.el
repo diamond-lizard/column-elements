@@ -19,6 +19,7 @@
 
 (setq column-elements--filename-001 "tests/data/column-elements-test-001")
 (setq column-elements--filename-002 "tests/data/column-elements-test-002")
+(setq column-elements--filename-004 "tests/data/column-elements-test-004")
 
 ;; Read in test file 001, if it exists.
 (if (file-exists-p column-elements--filename-001)
@@ -33,6 +34,14 @@
     (setq column-elements--original-data-002
           (find-file-read-only column-elements--filename-002))
   (error "File '%s' does not exist" column-elements--filename-002))
+
+(setq default-directory (expand-file-name "../.."))
+
+;; Read in test file 004, if it exists.
+(if (file-exists-p column-elements--filename-004)
+    (setq column-elements--original-data-004
+          (find-file-read-only column-elements--filename-004))
+  (error "File '%s' does not exist" column-elements--filename-004))
 
 ;; END - Read in test files
 ;;
@@ -427,6 +436,135 @@
 ;;
 ;; END - Tests to make sure this function errors out with 'left and 'right
 ;;       when called on an empty buffer
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 'top with data 004
+;;
+(ert-deftest column-elements--column-block-boundaries-at-point--029 ()
+  "No column block boundaries in data 004 with point at 0"
+  :tags '(
+          top-boundary
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 0)
+     (column-elements--column-block-boundaries-at-point 'top))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--030 ()
+  "No column block boundaries in data 004 with point at 5"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 5)
+     (column-elements--column-block-boundaries-at-point 'top))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--031 ()
+  "No column block boundaries in data 004 with point at 252"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 252)
+     (column-elements--column-block-boundaries-at-point 'top))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--032 ()
+  "Finds the top boundaries of column block in data 004 with point at 7"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 7)
+      (column-elements--column-block-boundaries-at-point 'top))
+    3)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--033 ()
+  "Finds the top boundaries of column block in data 004 with point at 25"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 25)
+      (column-elements--column-block-boundaries-at-point 'top))
+    3)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--034 ()
+  "Finds the top boundaries of column block in data 004 with point at 250"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 250)
+      (column-elements--column-block-boundaries-at-point 'top))
+    3)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--035 ()
+  "Finds the top boundaries of column block in data 004 with point at 253"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 253)
+      (column-elements--column-block-boundaries-at-point 'top))
+    7)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--036 ()
+  "Finds the top boundaries of column block in data 004 with point at 376"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 376)
+      (column-elements--column-block-boundaries-at-point 'top))
+    7)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--037 ()
+  "No column block boundaries in data 004 with point at 412"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 412)
+     (column-elements--column-block-boundaries-at-point 'top))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--038 ()
+  "No column block boundaries in data 004 with point at 413"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 413)
+     (column-elements--column-block-boundaries-at-point 'top))))
+
+;;
+;; END - 'top with data 004
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
