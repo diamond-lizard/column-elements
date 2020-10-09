@@ -23,7 +23,7 @@ the column block at point."
       (concat
        "column-elements--column-block-boundaries-at-point: "
        "No arguments given.  "
-       "This function must be called with either: 'left, 'right or 'top")
+       "This function must be called with either: 'left, 'right, 'top, or 'bottom")
       side)))
   (cond
    ((equal side 'left)
@@ -65,13 +65,27 @@ the column block at point."
          do (setq top-boundary-of-this-row-of-column-blocks this-line)
          else return top-boundary-of-this-row-of-column-blocks
          finally return top-boundary-of-this-row-of-column-blocks)))
+   ((equal side 'bottom)
+    (if (equal (column-elements--gap-line-p) nil)
+        ;; Point is not on a gap line
+        (cl-loop
+         with start-line = (line-number-at-pos)
+         with bottom-boundary-of-this-row-of-column-blocks = start-line
+         with bottom-line = (line-number-at-pos (point-max))
+         for this-line from start-line upto bottom-line
+         if (equal
+             (column-elements--gap-line-p this-line)
+             nil)
+         do (setq bottom-boundary-of-this-row-of-column-blocks this-line)
+         else return bottom-boundary-of-this-row-of-column-blocks
+         finally return bottom-boundary-of-this-row-of-column-blocks)))
    (t
     (error
      (format
       (concat
        "column-elements--column-block-boundaries-at-point: "
        "Invalid argument '%s'.  "
-       "Valid arguments are: 'left, 'right, or 'top")
+       "Valid arguments are: 'left, 'right, 'top, or 'bottom")
       side))
     nil)))
 
