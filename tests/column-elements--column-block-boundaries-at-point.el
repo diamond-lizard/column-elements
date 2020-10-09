@@ -4,7 +4,7 @@
 
 ;; Binding test
 ;;
-(ert-deftest column-elements--column-block-boundaries-at-point-001 ()
+(ert-deftest column-elements--column-block-boundaries-at-point--001 ()
   "Make sure that column-elements--column-block-boundaries-at-point is bound"
   :tags '(
           bindings
