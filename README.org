@@ -21,7 +21,7 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-*** Column elements, columns, and column blocks
+*** Column elements, columns, column blocks, and column block boundaries
 Diagram 1 shows text that the functions in this package will interpret
 as 4 column blocks.
 
@@ -59,6 +59,37 @@ to 4.
 Here, "Lorem ipsum" would be considered the first element in the first
 column block, "Proin quam nisl," would be considered the third element
 in the second column block, etc.
+*** Column block rows and top and bottom boundaries
+Column blocks have not just left and right boundaries, but top and bottom boundaries as well.
+
+The top and bottom boundaries of a block are the lines of text adjacent to a *gap line* (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
+
+Consider a buffer which contains only the text in Diagram 2 below.
+*** Diagram 2
+#+BEGIN_EXAMPLE
+Lorem ipsum         Donec pretium
+dolor sit           posuere tellus.
+
+amet,consectetuer   Proin quam nisl,
+adipiscing elit.    tincidunt et,mattis
+#+END_EXAMPLE
+
+In Diagram 2 there are 4 blocks, which for the sake of this example we'll number 1 through 4, with block 1 being the block containing "Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere tellus.", block 3 contains "amet, consectetuer adipiscing elit." and block 4 contains "Proin quam nisl, tincidunt et,mattis".
+
+The table below contains the boundaries of each block:
+
+|-------+------+-------+-----+--------|
+| Block | Left | Right | Top | Bottom |
+|-------+------+-------+-----+--------|
+|     1 |    0 |    10 |   1 |      2 |
+|     2 |   20 |    34 |   1 |      2 |
+|     3 |    0 |    16 |   4 |      5 |
+|     4 |   20 |    38 |   4 |      5 |
+|-------+------+-------+-----+--------|
+
+Also note that Diagram 2 contains two rows of blocks.  The first row of blocks contains blocks 1 and 2, while the second row of blocks contains blocks 3 and 4.
+
+Gap lines are not part of any block.
 ** Examples
 *** Example 1 - (column-elements--insert 'point)
 Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
