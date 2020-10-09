@@ -237,8 +237,8 @@ three four
 
 With this variable set to " " (a space), the above buffer would be
 considered to have two blocks.  The first block would contain the
-elements "one" and "three", while the second would contain the
-elements "two foo" and "four".
+sub-blocks "one" and "three", while the second would contain the
+sub-blocks "two foo" and "four".
 
 If this variable was set to *nil* then each column would be considered
 to be its own block, so there would be 13 blocks in this example.
@@ -250,8 +250,8 @@ three+++four bar
 
 With this variable set to "+" (a plus sign), the above buffer would be
 considered to have two blocks.  The first block would consist of two
-elements: "one++" and "three".  The second block would also have two
-elements: "two foo" and "four bar".
+sub-blocks: "one++" and "three".  The second block would also have two
+sub-blocks: "two foo" and "four bar".
 *** text-blocks--horizontal-wrap
 This variable controls what happens when a text-blocks-move
 command tries to move a sub-block to the right of the right-most
@@ -273,10 +273,10 @@ baz     two  there
 Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
 **** 'same-row
 Movement of a sub-block to the left of the left-most block moves the
-element to the same row of the right-most block.
+sub-block to the same row of the right-most block.
 
 Movement of a sub-block to the right of the right-most block moves the
-element to the same row of the left-most block.
+sub-block to the same row of the left-most block.
 ***** Example - (setq text-blocks--horizontal-wrap 'same-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
@@ -297,10 +297,10 @@ If the sub-block to be moved right is at the bottom-right of the right-most bloc
 Otherwise:
 
 Movement of a sub-block to the left of the left-most block moves the
-element to the previous row of the right-most block.
+sub-block to the previous row of the right-most block.
 
 Movement of a sub-block to the right of the right-most block moves the
-element to the next row of the left-most block.
+sub-block to the next row of the left-most block.
 ***** Examples - (setq text-blocks--horizontal-wrap 'previous-next-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
