@@ -30,14 +30,14 @@ example, these delimiters are spaces.  (Which characters are used as
 delimiters is configurable in using the
 =text-blocks--block-delimiters= variable)
 
-Each block  has a left boundary column and a right boundary column.
+Each block  has a left boundary and a right boundary.
 
-The left boundary column is the column containing the left-most
+The left boundary is the column containing the left-most
 character in a block that's adjacent to a column full of
 delimiters (which is known as a *gap column*) or column 0, if the text
 in that block extends left to include column 0.
 
-The right boundary column is the column containing the right-most
+The right boundary is the column containing the right-most
 character in a block that's adjacent to a *gap column* or the
 right-most column in the buffer, if the text in that block
 extends right to include the right-most column.
