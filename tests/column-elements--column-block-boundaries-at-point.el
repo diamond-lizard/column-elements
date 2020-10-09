@@ -563,6 +563,15 @@
      (goto-char 413)
      (column-elements--column-block-boundaries-at-point 'top))))
 
+(ert-deftest column-elements--column-block-boundaries-at-point--039 ()
+  "No column block boundaries in data 004 with empty buffer"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (column-elements--column-block-boundaries-at-point 'top))))
+
 ;;
 ;; END - 'top with data 004
 ;;
