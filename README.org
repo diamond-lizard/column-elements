@@ -225,12 +225,6 @@ Donec hendrerit       nec,purus.        Nulla posuere.
 *** text-blocks--delimiter
 The string to use as a delimiter of blocks.
 
-A vertical column of least one delimiter must extend from the top of
-the buffer to the bottom in order to distinguish one block from the
-next.
-
-If this variable is set to *nil*, then each column is considered to be a block.
-
 The default block delimiter is " " (a space).
 **** Example 1
 #+BEGIN_EXAMPLE
