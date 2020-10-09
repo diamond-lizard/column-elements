@@ -281,18 +281,6 @@ this function will return (0 . 5)
 With point anywhere on "hello" or "there", this function will return (8 . 12)
 
 With point anywhere else in the example buffer, this function will return nil.
-*** column-elements--column-block-boundaries
-Returns a list of the boundaries of each column block.  The boundaries of
-each column block is represented by a cons pair of the start and end
-column of that column block.
-**** Example
-#+BEGIN_EXAMPLE
-foobar  hello
-baz
-#+END_EXAMPLE
-
-The boundaries of the two column blocks in the example would be
-((0 . 5) (8 . 12))
 ** Notes
 *** All column blocks are assumed to be left-justified
 ** LICENSE
