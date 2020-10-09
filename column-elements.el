@@ -23,11 +23,11 @@ the column block at point."
       (concat
        "column-elements--column-block-boundaries-at-point: "
        "No arguments given.  "
-       "This function must be called with either: 'left or 'right")
+       "This function must be called with either: 'left, 'right or 'top")
       side)))
-  (if (equal (column-elements--gap-column-p) nil)
-      (cond
-       ((equal side 'left)
+  (cond
+   ((equal side 'left)
+    (if (equal (column-elements--gap-column-p) nil)
         (cl-loop
          with start-column = (current-column)
          with left-most-column = 0
@@ -38,8 +38,9 @@ the column block at point."
              nil)
          do (setq left-boundary-of-this-column-block this-column)
          else return left-boundary-of-this-column-block
-         finally return left-boundary-of-this-column-block))
-       ((equal side 'right)
+         finally return left-boundary-of-this-column-block)))
+   ((equal side 'right)
+    (if (equal (column-elements--gap-column-p) nil)
         (cl-loop
          with start-column = (current-column)
          with right-most-column = (column-elements--get-buffer-width)
@@ -50,16 +51,29 @@ the column block at point."
              nil)
          do (setq right-boundary-of-this-column-block this-column)
          else return right-boundary-of-this-column-block
-         finally return right-boundary-of-this-column-block))
-       (t
-        (error
-         (format
-          (concat
-          "column-elements--column-block-boundaries-at-point: "
-          "Invalid argument '%s'.  "
-          "Valid arguments are: 'left, 'right")
-          side))))
-    nil))
+         finally return right-boundary-of-this-column-block)))
+   ((equal side 'top)
+    (if (equal (column-elements--gap-line-p) nil)
+        (cl-loop
+         with start-line = (line-number-at-pos)
+         with top-boundary-of-this-row-of-column-blocks = start-line
+         with top-line = 1
+         for this-line from start-line downto top-line
+         if (equal
+             (column-elements--gap-line-p this-line)
+             nil)
+         do (setq top-boundary-of-this-row-of-column-blocks this-line)
+         else return top-boundary-of-this-row-of-column-blocks
+         finally return top-boundary-of-this-row-of-column-blocks)))
+   (t
+    (error
+     (format
+      (concat
+       "column-elements--column-block-boundaries-at-point: "
+       "Invalid argument '%s'.  "
+       "Valid arguments are: 'left, 'right, or 'top")
+      side)))
+   nil))
 
 (defun column-elements--gap-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
