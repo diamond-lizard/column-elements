@@ -1,4 +1,11 @@
 * column-elements - Manipulate elements in column blocks
+NOTE: This package is in PRE-ALPHA
+
+Currently, most of it *does not work*.... yet.
+
+The documentation here is mostly aspirational.
+
+Hopefully it will be implemented some day.
 ** Introduction
 This package will let you move, insert, delete, yank, and kill
 elements in column block, and have the other elements automatically
