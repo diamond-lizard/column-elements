@@ -7,7 +7,7 @@
 ;; in columns, and have the other elements automatically move aside or fill
 ;; in gaps as needed.
 ;;
-;; See column-elements.org for details.
+;; See README.org for details.
 
 ;; What to use as a delimiter to determine column block boundaries.
 (defvar column-elements--delimiter " ")
