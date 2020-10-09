@@ -65,7 +65,10 @@ the fourth block.
 *** Block rows and top and bottom boundaries
 Blocks have not just left and right boundaries, but top and bottom boundaries as well.
 
-The top and bottom boundaries of a block are the lines of text adjacent to a *gap line* (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
+The top and bottom boundaries of a block are the lines of text
+adjacent to a *gap line* (a line that is either empty or which
+contains only delimiter characters) or adjacent to the top or bottom
+of the buffer.
 
 Consider a buffer which contains only the text in Diagram 2 below.
 *** Diagram 2
@@ -77,7 +80,11 @@ amet,consectetuer   Proin quam nisl,
 adipiscing elit.    tincidunt et,mattis
 #+END_EXAMPLE
 
-In Diagram 2 there are 4 blocks, which for the sake of this example we'll number 1 through 4, with block 1 being the block containing "Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere tellus.", block 3 contains "amet, consectetuer adipiscing elit." and block 4 contains "Proin quam nisl, tincidunt et,mattis".
+In Diagram 2 there are 4 blocks, which for the sake of this example
+we'll number 1 through 4, with block 1 being the block containing
+"Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere
+tellus.", block 3 contains "amet, consectetuer adipiscing elit." and
+block 4 contains "Proin quam nisl, tincidunt et,mattis".
 
 The table below contains the boundaries of each block:
 
@@ -90,7 +97,9 @@ The table below contains the boundaries of each block:
 |     4 |   20 |    38 |   4 |      5 |
 |-------+------+-------+-----+--------|
 
-Also note that Diagram 2 contains two rows of blocks.  The first row of blocks contains blocks 1 and 2, while the second row of blocks contains blocks 3 and 4.
+Also note that Diagram 2 contains two rows of blocks.  The first row
+of blocks contains blocks 1 and 2, while the second row of blocks
+contains blocks 3 and 4.
 
 Gap lines are not part of any block.
 ** Examples
@@ -213,7 +222,9 @@ Donec hendrerit       nec,purus.        Nulla posuere.
 *** text-blocks--delimiter
 The string to use as a delimiter of blocks.
 
-A vertical column of least one delimiter must extend from the top of the buffer to the bottom in order to distinguish one block from the next.
+A vertical column of least one delimiter must extend from the top of
+the buffer to the bottom in order to distinguish one block from the
+next.
 
 If this variable is set to *nil*, then each column is considered to be a block.
 
@@ -224,16 +235,23 @@ one   two foo
 three four
 #+END_EXAMPLE
 
-With this variable set to " " (a space), the above buffer would be considered to have two blocks.  The first block would contain the elements "one" and "three", while the second would contain the elements "two foo" and "four".
+With this variable set to " " (a space), the above buffer would be
+considered to have two blocks.  The first block would contain the
+elements "one" and "three", while the second would contain the
+elements "two foo" and "four".
 
-If this variable was set to *nil* then each column would be considered to be its own block, so there would be 13 blocks in this example.
+If this variable was set to *nil* then each column would be considered
+to be its own block, so there would be 13 blocks in this example.
 **** Example 2
 #+BEGIN_EXAMPLE
 one+++++two  foo
 three+++four bar
 #+END_EXAMPLE
 
-With this variable set to "+" (a plus sign), the above buffer would be considered to have two blocks.  The first block would consist of two elements: "one++" and "three".  The second block would also have two elements: "two  foo" and "four bar".
+With this variable set to "+" (a plus sign), the above buffer would be
+considered to have two blocks.  The first block would consist of two
+elements: "one++" and "three".  The second block would also have two
+elements: "two foo" and "four bar".
 *** text-blocks--horizontal-wrap
 This variable controls what happens when a text-blocks-move
 command tries to move a sub-block to the right of the right-most
@@ -254,9 +272,11 @@ baz     two  there
 #+END_EXAMPLE
 Attempts to move "foobar" or "baz" left will fail.  Attempts to move "hello" or "there" right will fail.
 **** 'same-row
-Movement of a sub-block to the left of the left-most block moves the element to the same row of the right-most block.
+Movement of a sub-block to the left of the left-most block moves the
+element to the same row of the right-most block.
 
-Movement of a sub-block to the right of the right-most block moves the element to the same row of the left-most block.
+Movement of a sub-block to the right of the right-most block moves the
+element to the same row of the left-most block.
 ***** Example - (setq text-blocks--horizontal-wrap 'same-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
@@ -276,9 +296,11 @@ If the sub-block to be moved right is at the bottom-right of the right-most bloc
 
 Otherwise:
 
-Movement of a sub-block to the left of the left-most block moves the element to the previous row of the right-most block.
+Movement of a sub-block to the left of the left-most block moves the
+element to the previous row of the right-most block.
 
-Movement of a sub-block to the right of the right-most block moves the element to the next row of the left-most block.
+Movement of a sub-block to the right of the right-most block moves the
+element to the next row of the left-most block.
 ***** Examples - (setq text-blocks--horizontal-wrap 'previous-next-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
