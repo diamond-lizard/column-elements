@@ -268,17 +268,44 @@ baz     there
 With the buffer containing only the text in the example above, this
 function will return 2.
 *** column-elements--column-block-boundaries-at-point
-Returns a cons pair containing the start and end column of the column block at point.
+This function takes a single argument, which must be one of either:
+='left=, ='right=, ='top=, or ='bottom=
+
+If the argument is either ='left= or ='right=, then this function
+returns the left or right boundary of the column block at point.
+
+If the argument is either ='top= or ='bottom=, then this function
+returns the top or bottom boundary of the entire row of column blocks
+at point.
 **** Example
 #+BEGIN_EXAMPLE
 foobar  hello
 baz     there
 #+END_EXAMPLE
 
-With point anywhere on "foobar", "baz", or the spaces directly under "bar",
-this function will return (0 . 5)
+If the above text is the only text in the buffer or narrowed buffer, with point anywhere on "foobar", "baz", or the spaces directly under
+"bar", the table below shows what the function will return for every valid argument:
 
-With point anywhere on "hello" or "there", this function will return (8 . 12)
+|----------+--------------|
+| Argument | Return Value |
+|----------+--------------|
+| 'top     |            1 |
+| 'bottom  |            2 |
+| 'left    |            0 |
+| 'right   |            5 |
+|----------+--------------|
+
+With point anywhere on "hello" or "there", the table below shows what
+the function will return for every valid argument:
+
+|----------+--------------|
+| Argument | Return Value |
+|----------+--------------|
+| 'top     |            1 |
+| 'bottom  |            2 |
+| 'left    |            8 |
+| 'right   |           12 |
+|----------+--------------|
 
 With point anywhere else in the example buffer, this function will return nil.
 ** Notes
