@@ -30,8 +30,7 @@ example, these delimiters are spaces.  (Which characters are used as
 delimiters is configurable in using the
 =text-blocks--block-delimiters= variable)
 
-Each block starts has a left boundary column and a right
-boundary column.
+Each block  has a left boundary column and a right boundary column.
 
 The left boundary column is the column containing the left-most
 character in a block that's adjacent to a column full of
