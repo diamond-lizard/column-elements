@@ -72,8 +72,8 @@ the column block at point."
        "column-elements--column-block-boundaries-at-point: "
        "Invalid argument '%s'.  "
        "Valid arguments are: 'left, 'right, or 'top")
-      side)))
-   nil))
+      side))
+    nil)))
 
 (defun column-elements--gap-column-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
