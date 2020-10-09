@@ -572,6 +572,18 @@
    (with-temp-buffer
      (column-elements--column-block-boundaries-at-point 'top))))
 
+(ert-deftest column-elements--column-block-boundaries-at-point--040 ()
+  "Finds the top boundaries of column block buffer with one character"
+  :tags '(
+          top-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (insert "a")
+      (column-elements--column-block-boundaries-at-point 'top))
+    1)))
+
 ;;
 ;; END - 'top with data 004
 ;;
