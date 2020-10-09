@@ -1,4 +1,4 @@
-* emacs-text-block - Manipulate blocks and sub-blocks of text
+* emacs-text-blocks - Manipulate blocks and sub-blocks of text
 NOTE: This package is in PRE-ALPHA
 
 Currently, most of it *does not work*.... yet.
