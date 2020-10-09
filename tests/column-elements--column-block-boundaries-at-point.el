@@ -589,4 +589,154 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 'bottom with data 004
+;;
+(ert-deftest column-elements--column-block-boundaries-at-point--041 ()
+  "No column block boundaries in data 004 with point at 0"
+  :tags '(
+          bottom-boundary
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 0)
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--042 ()
+  "No column block boundaries in data 004 with point at 5"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 5)
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--043 ()
+  "No column block boundaries in data 004 with point at 252"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 252)
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--043 ()
+  "Finds the bottom boundaries of column block in data 004 with point at 7"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 7)
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    5)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--044 ()
+  "Finds the bottom boundaries of column block in data 004 with point at 25"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 25)
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    5)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--045 ()
+  "Finds the bottom boundaries of column block in data 004 with point at 250"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 250)
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    5)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--046 ()
+  "Finds the bottom boundaries of column block in data 004 with point at 253"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 253)
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    9)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--047 ()
+  "Finds the bottom boundaries of column block in data 004 with point at 376"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (replace-buffer-contents column-elements--original-data-004)
+      (goto-char 376)
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    9)))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--048 ()
+  "No column block boundaries in data 004 with point at 412"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 412)
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--049 ()
+  "No column block boundaries in data 004 with point at 413"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents column-elements--original-data-004)
+     (goto-char 413)
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--050 ()
+  "No column block boundaries in data 004 with empty buffer"
+  :tags '(
+          not-delimiter-column
+          )
+  (should-not
+   (with-temp-buffer
+     (column-elements--column-block-boundaries-at-point 'bottom))))
+
+(ert-deftest column-elements--column-block-boundaries-at-point--051 ()
+  "Finds the bottom boundaries of column block buffer with one character"
+  :tags '(
+          bottom-boundary
+          )
+  (should
+   (equal
+    (with-temp-buffer
+      (insert "a")
+      (column-elements--column-block-boundaries-at-point 'bottom))
+    1)))
+
+;;
+;; END - 'bottom with data 004
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (provide 'column-elements--column-block-boundaries-at-point)
