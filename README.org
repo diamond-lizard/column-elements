@@ -41,7 +41,7 @@ In Diagram 1, the minimum number of vertical gap columns in a vertical gap has b
 
 **This is important to understand because vertical gaps end at the top and bottom boundaries of the row of blocks that they are in.  As a consequence, it is not necessary for vertical gap columns to extend from the top of the buffer to the bottom in order to form a vertical gap and distinguish blocks from one another.  It is sufficient that vertical gap columns extend only from the top boundary to the bottom boundary of the row of blocks that it is in.**
 
-**Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then the vertical gap columns must extend from the top to the bottom of the buffer in order to form a vertical gap.**
+**Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then its vertical gap columns must extend from the top to the bottom of the buffer in order to form vertical gaps.**
 
 Each block has a left boundary and a right boundary.
 
