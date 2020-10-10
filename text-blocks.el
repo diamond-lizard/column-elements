@@ -103,6 +103,52 @@ the block at point."
        "Valid arguments are: 'left, 'right, 'top, or 'bottom")
       side)))))
 
+(defun text-blocks--narrow-between-lines (top bottom)
+  "Narrow between the `TOP' and `BOTTOM' lines."
+  (save-excursion
+  (let ((first-char-on-top-line
+         (save-excursion
+           (goto-char (point-min))
+           (forward-line (- top 1))
+           (goto-char (line-beginning-position))
+           ;; Make sure top line is inside the buffer
+           (if (not (equal
+                     (line-number-at-pos)
+                     top))
+               ;; Top line is outside the buffer
+               (error
+                (format
+                 (concat
+                  "text-blocks--narrow-between-lines: "
+                  "Error: "
+                  "Top line '%s' is outside of buffer.")
+                 top))
+             ;; Top line is inside the buffer
+             (message (format "Point at top line: '%s'" (point)))
+             (point))))
+        (last-char-on-bottom-line
+         (save-excursion
+           (goto-char (point-min))
+           (forward-line (- bottom 1))
+           (goto-char (line-end-position))
+           ;; Make sure bottom line is inside the buffer
+           (if (not (equal
+                     (line-number-at-pos)
+                     bottom))
+               ;; Bottom line is outside the buffer
+               (error
+                (format
+                 (concat
+                  "text-blocks--narrow-between-lines: "
+                  "Error: "
+                  "Bottom line '%s' is outside of buffer.")
+                 bottom))
+             ;; Bottom line is inside the buffer
+             (point)))))
+    (narrow-to-region
+     first-char-on-top-line
+     last-char-on-bottom-line))))
+
 (defun text-blocks--vertical-gap-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
 otherwise returns nil."
