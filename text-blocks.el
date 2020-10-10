@@ -70,28 +70,28 @@ the block at point."
          else return right-boundary-of-this-block
          finally return right-boundary-of-this-block)))
    ((equal side 'top)
-    (if (equal (text-blocks--gap-line-p) nil)
+    (if (equal (text-blocks--horizontal-gap-p) nil)
         (cl-loop
          with start-line = (line-number-at-pos)
          with top-boundary-of-this-row-of-blocks = start-line
          with top-line = 1
          for this-line from start-line downto top-line
          if (equal
-             (text-blocks--gap-line-p this-line)
+             (text-blocks--horizontal-gap-p this-line)
              nil)
          do (setq top-boundary-of-this-row-of-blocks this-line)
          else return top-boundary-of-this-row-of-blocks
          finally return top-boundary-of-this-row-of-blocks)))
    ((equal side 'bottom)
-    (if (equal (text-blocks--gap-line-p) nil)
-        ;; Point is not on a gap line
+    (if (equal (text-blocks--horizontal-gap-p) nil)
+        ;; Point is not on a horizontal gap
         (cl-loop
          with start-line = (line-number-at-pos)
          with bottom-boundary-of-this-row-of-blocks = start-line
          with bottom-line = (line-number-at-pos (point-max))
          for this-line from start-line upto bottom-line
          if (equal
-             (text-blocks--gap-line-p this-line)
+             (text-blocks--horizontal-gap-p this-line)
              nil)
          do (setq bottom-boundary-of-this-row-of-blocks this-line)
          else return bottom-boundary-of-this-row-of-blocks
@@ -148,7 +148,7 @@ otherwise returns nil."
        (format "%s" current-column-is-a-gap-column)))
     current-column-is-a-gap-column))
 
-(defun text-blocks--gap-line-p (&optional desired-line)
+(defun text-blocks--horizontal-gap-p (&optional desired-line)
   "Returns t if the line at point or `desired-line' is empty
 or contains only delimiters, otherwise returns nil."
   (interactive)
@@ -165,7 +165,7 @@ or contains only delimiters, otherwise returns nil."
           (if (not (equal
                     current-line
                     desired-line))
-              (error "text-blocks--gap-line-p: Error: line outside of buffer.")
+              (error "text-blocks--horizontal-gap-p: Error: line outside of buffer.")
             (cond
              ;; An empty line:
              ((equal (line-beginning-position) (line-end-position))

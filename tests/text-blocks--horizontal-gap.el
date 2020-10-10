@@ -17,13 +17,13 @@
 
 (require 'text-blocks)
 
-(ert-deftest text-blocks--gap-line-p--001 ()
-  "Make sure that text-blocks--gap-line-p is bound"
+(ert-deftest text-blocks--horizontal-gap-p--001 ()
+  "Make sure that text-blocks--horizontal-gap-p is bound"
   :tags '(
           bindings
           )
   (should
-   (fboundp 'text-blocks--gap-line-p)))
+   (fboundp 'text-blocks--horizontal-gap-p)))
 
 (setq text-blocks--filename-004 "tests/data/text-blocks-test-004")
 
@@ -34,200 +34,200 @@
   (error "File '%s' does not exist" text-blocks--filename-004))
 
 
-(ert-deftest text-blocks--gap-line-p--002 ()
-  "position 1 in data/004 is on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--002 ()
+  "position 1 in data/004 is on a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 1)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--003 ()
-  "position 4 in data/004 is on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--003 ()
+  "position 4 in data/004 is on a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 4)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--004 ()
-  "position 7 in data/004 is not on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--004 ()
+  "position 7 in data/004 is not on a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 7)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--005 ()
-  "position 250 in data/004 is not on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--005 ()
+  "position 250 in data/004 is not on a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 250)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--006 ()
-  "position 252 in data/004 is on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--006 ()
+  "position 252 in data/004 is on a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 252)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--007 ()
-  "position 253 in data/004 is not on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--007 ()
+  "position 253 in data/004 is not on a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 253)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--008 ()
-  "position 412 in data/004 is on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--008 ()
+  "position 412 in data/004 is on a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
      (goto-char 412)
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(ert-deftest text-blocks--gap-line-p--009 ()
-  "line 1 in data/004 is a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--009 ()
+  "line 1 in data/004 is a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 1))))
+     (text-blocks--horizontal-gap-p 1))))
 
-(ert-deftest text-blocks--gap-line-p--010 ()
-  "line 2 in data/004 is a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--010 ()
+  "line 2 in data/004 is a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 2))))
+     (text-blocks--horizontal-gap-p 2))))
 
-(ert-deftest text-blocks--gap-line-p--011 ()
-  "line 3 in data/004 is not a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--011 ()
+  "line 3 in data/004 is not a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 3))))
+     (text-blocks--horizontal-gap-p 3))))
 
-(ert-deftest text-blocks--gap-line-p--012 ()
-  "line 5 in data/004 is not a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--012 ()
+  "line 5 in data/004 is not a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 5))))
+     (text-blocks--horizontal-gap-p 5))))
 
-(ert-deftest text-blocks--gap-line-p--013 ()
-  "line 6 in data/004 is a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--013 ()
+  "line 6 in data/004 is a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 6))))
+     (text-blocks--horizontal-gap-p 6))))
 
-(ert-deftest text-blocks--gap-line-p--014 ()
-  "line 7 in data/004 is not a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--014 ()
+  "line 7 in data/004 is not a horizontal gap"
   :tags '(
-          not-gap-line
+          not-horizontal-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 7))))
+     (text-blocks--horizontal-gap-p 7))))
 
-(ert-deftest text-blocks--gap-line-p--015 ()
-  "line 10 in data/004 is a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--015 ()
+  "line 10 in data/004 is a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 10))))
+     (text-blocks--horizontal-gap-p 10))))
 
-(ert-deftest text-blocks--gap-line-p--016 ()
-  "line 11 in data/004 is a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--016 ()
+  "line 11 in data/004 is a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 11))))
+     (text-blocks--horizontal-gap-p 11))))
 
-(ert-deftest text-blocks--gap-line-p--017 ()
-  "Trying to check whether line 12 is a gap line should error"
+(ert-deftest text-blocks--horizontal-gap-p--017 ()
+  "Trying to check whether line 12 is a horizontal gap should error"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should-error
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 12))))
+     (text-blocks--horizontal-gap-p 12))))
 
-(ert-deftest text-blocks--gap-line-p--018 ()
-  "Trying to check whether line 0 is a gap line should error"
+(ert-deftest text-blocks--horizontal-gap-p--018 ()
+  "Trying to check whether line 0 is a horizontal gap should error"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should-error
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p 0))))
+     (text-blocks--horizontal-gap-p 0))))
 
-(ert-deftest text-blocks--gap-line-p--017 ()
-  "Trying to check whether line -1 is a gap line should error"
+(ert-deftest text-blocks--horizontal-gap-p--017 ()
+  "Trying to check whether line -1 is a horizontal gap should error"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should-error
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--gap-line-p -1))))
+     (text-blocks--horizontal-gap-p -1))))
 
-(ert-deftest text-blocks--gap-line-p--018 ()
-  "Point in an empty buffer is on a gap line"
+(ert-deftest text-blocks--horizontal-gap-p--018 ()
+  "Point in an empty buffer is on a horizontal gap"
   :tags '(
-          gap-line
+          horizontal-gap
           )
   (should
    (with-temp-buffer
-     (text-blocks--gap-line-p))))
+     (text-blocks--horizontal-gap-p))))
 
-(provide 'text-blocks--gap-line-p)
+(provide 'text-blocks--horizontal-gap-p)
