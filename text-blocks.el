@@ -103,8 +103,7 @@ the block at point."
        "text-blocks--block-boundaries-at-point: "
        "Invalid argument '%s'.  "
        "Valid arguments are: 'left, 'right, 'top, or 'bottom")
-      side))
-    nil)))
+      side)))))
 
 (defun text-blocks--vertical-gap-p-aux (column)
   "Returns t if `COLUMN' contains only delimiters,
