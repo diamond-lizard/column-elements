@@ -36,12 +36,10 @@
 the block at point."
   (when (equal side nil)
     (error
-     (format
-      (concat
-       "text-blocks--block-boundaries-at-point: "
-       "No arguments given.  "
-       "This function must be called with either: 'left, 'right, 'top, or 'bottom")
-      side)))
+     (concat
+      "text-blocks--block-boundaries-at-point: "
+      "No arguments given.  "
+      "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
   (cond
    ((equal side 'left)
     (if (equal (text-blocks--vertical-gap-p) nil)
