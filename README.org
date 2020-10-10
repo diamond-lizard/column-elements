@@ -357,6 +357,26 @@ returns the left or right boundary of the block at point.
 If the argument is either 'top or 'bottom, then this function
 returns the top or bottom boundary of the entire row of blocks
 at point.
+**** Details
+The *left* boundary of a given block is the column containing the
+left-most non-delimiter character in the block adjacent to a vertical
+gap or (if there is no vertical gap) it will be the left-most column
+in the buffer.
+
+The *right* boundary of a given block is the column containing the
+right-most non-delimiter character in the block adjacent to a vertical
+gap or (if there is no vertical gap) it will be the right-most column
+in the buffer.
+
+The *top* boundary of a given block is the line containing the
+top-most non-delimiter character in the block adjacent ot a horizontal
+gap or (if there is no horizontal gap) it will be the first line of
+the buffer.
+
+The *bottom* boundary of a given block is the line containing the
+bottom-most non-delimiter character in the block adjacent ot a
+horizontal gap or (if there is no horizontal gap) it will be the last
+line of the buffer.
 **** Example
 #+BEGIN_EXAMPLE
 foobar  hello
