@@ -35,11 +35,11 @@ Each block  has a left boundary and a right boundary.
 
 The left boundary is the column containing the left-most
 character in a block that's adjacent to a column full of
-delimiters (which is known as a *gap column*) or column 0, if the text
+delimiters (which is known as a *vertical gap*) or column 0, if the text
 in that block extends left to include column 0.
 
 The right boundary is the column containing the right-most
-character in a block that's adjacent to a *gap column* or the
+character in a block that's adjacent to a *vertical gap* or the
 right-most column in the buffer, if the text in that block
 extends right to include the right-most column.
 
@@ -68,7 +68,7 @@ Blocks have not just left and right boundaries, but top and bottom
 boundaries as well.
 
 The top and bottom boundaries of a block are the lines of text
-adjacent to a *gap line* (a line that is either empty or which
+adjacent to a *horizontal gap* (a line that is either empty or which
 contains only delimiter characters) or adjacent to the top or bottom
 of the buffer.
 
@@ -103,7 +103,7 @@ Also note that Diagram 2 contains two rows of blocks.  The first row
 of blocks contains blocks 1 and 2, while the second row of blocks
 contains blocks 3 and 4.
 
-Gap lines are not part of any block.
+horizontal gaps are not part of any block.
 ** Examples
 *** Example 1 - (text-blocks--insert 'point)
 Let's assume the only text in the current buffer (or narrowed buffer)
