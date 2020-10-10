@@ -124,7 +124,6 @@ the block at point."
                   "Top line '%s' is outside of buffer.")
                  top))
              ;; Top line is inside the buffer
-             (message (format "Point at top line: '%s'" (point)))
              (point))))
         (last-char-on-bottom-line
          (save-excursion
