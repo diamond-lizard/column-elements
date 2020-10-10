@@ -10,7 +10,7 @@ TESTS += text-blocks--block-boundaries-at-point
 
 .PHONY: test
 
-all: test
+all: clean test
 
 compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 
