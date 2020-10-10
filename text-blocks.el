@@ -175,20 +175,55 @@ otherwise returns nil."
                   (any ,text-blocks--delimiter)))))
            (search-failed nil)))))))
 
-(defun text-blocks--vertical-gap-p (&optional column)
-  "Returns t if the column at point contains only delimiters,
-otherwise returns nil."
+(defun text-blocks--vertical-gap-p (&optional position)
+  "If given a `POSITION', return t if the position in
+the buffer is on a vertical gap, nil otherwise.
+
+If not given a `POSITION', return t if point is on a
+vertical gap, nil otherwise.
+
+Note that vertical gaps are detected only between
+horizontal gaps, an a position or point on a horizontal
+gap is never considered to be on a vertical gap.  So
+that if the desired position is on a horizontal gap,
+this function will return nil."
   (interactive)
-  (let* ((column
-          (if (equal column nil)
-              (current-column)
-            column))
-         (current-column-is-a-vertical-gap
-          (text-blocks--vertical-gap-p-aux column)))
-    (when (called-interactively-p 'interactive)
-      (message
-       (format "%s" current-column-is-a-vertical-gap)))
-    current-column-is-a-vertical-gap))
+  (let* ((position
+          (if (equal position nil)
+              (point)
+            position)))
+    (when (or
+           (< position (point-min))
+           (> position (point-max)))
+      (error
+       (concat
+        "text-blocks--vertical-gap-p: "
+        "Error: "
+        "POSITION '%s' is outside the buffer")))
+    (save-excursion
+      (save-restriction
+        (goto-char position)
+        (if (text-blocks--horizontal-gap-p)
+            nil
+          (let ((column (current-column))
+                (top-boundary
+                 (text-blocks--block-boundaries-at-point 'top))
+                (bottom-boundary
+                 (text-blocks--block-boundaries-at-point 'bottom)))
+            (text-blocks--narrow-between-lines
+             top-boundary
+             bottom-boundary)
+            (goto-char (point-min))
+            (not
+             (re-search-forward
+              (rx-to-string
+               `(seq
+                 line-start
+                 (= ,column (not "\n"))
+                 (not
+                  (any ,text-blocks--delimiter "\n"))))
+              nil
+              t))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "Returns t if the line at point or `desired-line' is empty
