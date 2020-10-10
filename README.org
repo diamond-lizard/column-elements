@@ -381,6 +381,9 @@ line of the buffer.
 #+BEGIN_EXAMPLE
 foobar  hello
 baz     there
+
+one     two
+three   four
 #+END_EXAMPLE
 
 If the above text is the only text in the buffer or narrowed buffer,
@@ -397,16 +400,16 @@ valid argument:
 | 'right   |            5 |
 |----------+--------------|
 
-With point anywhere on "hello" or "there", the table below shows what
+With point anywhere on "two" or "four", the table below shows what
 the function will return for every valid argument:
 
 |----------+--------------|
 | Argument | Return Value |
 |----------+--------------|
-| 'top     |            1 |
-| 'bottom  |            2 |
+| 'top     |            4 |
+| 'bottom  |            5 |
 | 'left    |            8 |
-| 'right   |           12 |
+| 'right   |           11 |
 |----------+--------------|
 
 With point anywhere else in the example buffer, this function will return nil.
