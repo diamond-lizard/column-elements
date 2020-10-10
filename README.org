@@ -358,7 +358,7 @@ right-most non-delimiter character in the block.
 
 If the argument is either 'top or 'bottom, then this function
 returns the top or bottom boundary of the entire row of blocks
-at point. This boundary will be the column containing
+at point. This boundary will be the line containing
 the top-most or bottom-most non-delimiter character in the block.
 **** Example
 #+BEGIN_EXAMPLE
