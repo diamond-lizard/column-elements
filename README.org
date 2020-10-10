@@ -37,11 +37,11 @@ Note that a vertical gap will only extend from the top boundary of a row of bloc
 
 In Diagram 1, the minimum number of vertical gap columns in a vertical gap has been set to 2.
 
-**Note: It is very important to understand that horizontal gaps are found first and used to distinguish rows of blocks, and only then are vertical gaps found within each row of blocks and used to distinguish blocks within that row.**
+/Note: It is very important to understand that horizontal gaps are found first and used to distinguish rows of blocks, and only then are vertical gaps found within each row of blocks and used to distinguish blocks within that row./
 
-**This is important to understand because vertical gaps end at the top and bottom boundaries of the row of blocks that they are in.  As a consequence, it is not necessary for vertical gap columns to extend from the top of the buffer to the bottom in order to form a vertical gap and distinguish blocks from one another.  It is sufficient that vertical gap columns extend only from the top boundary to the bottom boundary of the row of blocks that it is in.**
+/This is important to understand because vertical gaps end at the top and bottom boundaries of the row of blocks that they are in.  As a consequence, it is not necessary for vertical gap columns to extend from the top of the buffer to the bottom in order to form a vertical gap and distinguish blocks from one another.  It is sufficient that vertical gap columns extend only from the top boundary to the bottom boundary of the row of blocks that it is in./
 
-**Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then its vertical gap columns must extend from the top to the bottom of the buffer in order to form vertical gaps.**
+/Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then its vertical gap columns must extend from the top to the bottom of the buffer in order to form vertical gaps./
 
 Each block has a left boundary and a right boundary.
 
@@ -315,9 +315,9 @@ baz    one  hello
 there  two  foobar
 #+END_EXAMPLE
 *** text-blocks--horizontal-wrap-error-level
-If the value of this variable is **nil** then no errors are displayed when movement of a sub-block is attempted to the left of the left-most block or to the right of the right-most block and the value of the text-blocks--horizontal-wrap variable is **nil**.
+If the value of this variable is /nil/ then no errors are displayed when movement of a sub-block is attempted to the left of the left-most block or to the right of the right-most block and the value of the text-blocks--horizontal-wrap variable is /nil/.
 
-If the value of text-blocks--horizontal-wrap-error-level is not **nil** and the text-blocks--horizontal-wrap variable is **nil**, and movment of a sub-block is attempted to the left of the left-most block or to the right of the right-most block, then an error will be displayed.
+If the value of text-blocks--horizontal-wrap-error-level is not /nil/ and the text-blocks--horizontal-wrap variable is /nil/, and movment of a sub-block is attempted to the left of the left-most block or to the right of the right-most block, then an error will be displayed.
 ** Utility functions
 *** text-blocks--block-count
 Returns the number of blocks that are detected to be in the buffer.
