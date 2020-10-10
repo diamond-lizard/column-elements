@@ -17,13 +17,13 @@
 
 (require 'text-blocks)
 
-(ert-deftest text-blocks--gap-column-p--001 ()
-  "Make sure that text-blocks--gap-column-p is bound"
+(ert-deftest text-blocks--vertical-gap-p--001 ()
+  "Make sure that text-blocks--vertical-gap-p is bound"
   :tags '(
           bindings
           )
   (should
-   (fboundp 'text-blocks--gap-column-p)))
+   (fboundp 'text-blocks--vertical-gap-p)))
 
 (setq text-blocks--filename-001 "tests/data/text-blocks-test-001")
 
@@ -34,114 +34,114 @@
   (error "File '%s' does not exist" text-blocks--filename-001))
 
 
-(ert-deftest text-blocks--gap-column-p--002 ()
-  "position 1 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--002 ()
+  "position 1 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 1)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--003 ()
-  "position 4 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--003 ()
+  "position 4 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 4)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--004 ()
-  "position 7 in data/001 is on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--004 ()
+  "position 7 in data/001 is on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 7)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--005 ()
-  "position 9 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--005 ()
+  "position 9 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 9)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--006 ()
-  "position 13 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--006 ()
+  "position 13 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 13)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--007 ()
-  "position 15 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--007 ()
+  "position 15 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 15)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--008 ()
-  "position 18 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--008 ()
+  "position 18 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 18)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--009 ()
-  "position 21 in data/001 is on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--009 ()
+  "position 21 in data/001 is on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 21)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--010 ()
-  "position 23 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--010 ()
+  "position 23 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 23)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(ert-deftest text-blocks--gap-column-p--011 ()
-  "position 27 in data/001 is not on a gap column"
+(ert-deftest text-blocks--vertical-gap-p--011 ()
+  "position 27 in data/001 is not on a vertical gap"
   :tags '(
-          not-gap-column
+          not-vertical-gap
           )
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 27)
-     (text-blocks--gap-column-p))))
+     (text-blocks--vertical-gap-p))))
 
-(provide 'text-blocks--gap-column-p)
+(provide 'text-blocks--vertical-gap-p)
