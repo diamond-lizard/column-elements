@@ -7,70 +7,74 @@ The documentation here is mostly aspirational.
 
 Hopefully it will be implemented some day.
 ** Introduction
-This package will let you move, insert, delete, yank, and kill blocks
-and sub-blocks of text, and have the other blocks or sub-blocks
-automatically move aside or fill in gaps as needed.
-** Definitions
-For these definitions, let's assume the only text in a buffer or
-narrowed region looks like this:
+This package will let you move, insert, delete, yank, and kill blocks and sub-blocks of text, and have the other blocks or sub-blocks automatically move aside or fill in gaps as needed.
+** Concepts and terminology
+For the following discussion, let's assume a buffer contains only the text in Diagram 1.
 *** Diagram 1
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
-dolor sit           posuere tellus.      penatibus et magnis     Donec vitae dolor
-amet,consectetuer   Proin quam nisl,     dis parturient montes,  Nullam tristique
-adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis.
-Donec hendrerit     eget,convallis       mus.
+Lorem ipsum         Donec pretium        Cum sociis natoque
+dolor sit           posuere tellus.      penatibus et magnis
+amet,consectetuer   Proin quam nisl,     dis parturient montes,
+
+adipiscing elit.    tincidunt et,mattis nascetur ridiculus
+Donec hendrerit     eget,convallis      mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-*** Blocks, sub-blocks, and block boundaries
-Diagram 1 shows text that the functions in this package will interpret
-as 4 blocks.
+*** Blocks, sub-blocks, rows of blocks, and gaps
+Diagram 1 shows 5 *blocks* of text in two *rows of blocks*, where the first row of blocks contains 3 blocks, and the second row of blocks contains 2 blocks.
 
-Each block is delimited by certain characters.  In this
-example, these delimiters are spaces.  (Which characters are used as
-delimiters is configurable in using the
-=text-blocks--block-delimiters= variable)
+Each row of blocks is distinguished from other rows of blocks by a *horizontal gap*, which must have at least a certain number of empty lines or lines containing only *block row delimiter characters*.
 
-Each block  has a left boundary and a right boundary.
+The lines that together make up a horizontal gap in between any two block rows are called the *horizontal gap lines*.
 
-The left boundary is the column containing the left-most
-character in a block that's adjacent to a column full of
-delimiters (which is known as a *vertical gap*) or column 0, if the text
-in that block extends left to include column 0.
+In Diagram 1, the minimum number of horizontal gap lines in a horizontal gap has been set to 1, so a single empty line is sufficient to separate the first row of blocks from the second row of blocks.
 
-The right boundary is the column containing the right-most
-character in a block that's adjacent to a *vertical gap* or the
-right-most column in the buffer, if the text in that block
-extends right to include the right-most column.
+Within a row of blocks, each block is distinguished from other blocks by a *vertical gap* of at least a certain number of columns containing only *block delimiter characters* (not to be confused with block row delimiter characters).
 
-The table below contains the boundaries for each of the blocks
-in Diagram 1.  The blocks are numbered left-to-right from 1
-to 4.
+The columns of block delimiter characters that together make up a particular vertical gap are called *vertical gap columns*.
 
+Note that a vertical gap will only extend from the top boundary of a row of blocks to the bottom boundary of a row of blocks.
+
+In Diagram 1, the minimum number of vertical gap columns in a vertical gap has been set to 2.
+
+**Note: It is very important to understand that horizontal gaps are found first and used to distinguish rows of blocks, and only then are vertical gaps found within each row of blocks and used to distinguish blocks within that row.**
+
+**This is important to understand because vertical gaps end at the top and bottom boundaries of the row of blocks that they are in.  As a consequence, it is not necessary for vertical gap columns to extend from the top of the buffer to the bottom in order to form a vertical gap and distinguish blocks from one another.  It is sufficient that vertical gap columns extend only from the top boundary to the bottom boundary of the row of blocks that it is in.**
+
+**Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then the vertical gap columns must extend from the top to the bottom of the buffer in order to form a vertical gap.**
+
+Each block has a left boundary and a right boundary.
+
+The *left boundary* of a block is the column containing the left-most character in the block that is not a block delimiter.
+
+The *right boundary* of a block is the column containing the right-most character in the block that is not a block delimiter.
+
+The table below contains the left and right boundaries for each of the blocks in Diagram 1. The blocks are numbered from left to right.
+
+In the first row of blocks:
 |-------+---------------+----------------|
 | Block | Left boundary | Right boundary |
 |-------+---------------+----------------|
 |     1 |             0 |             16 |
-|     2 |            20 |             38 |
+|     2 |            20 |             35 |
 |     3 |            41 |             62 |
-|     4 |            65 |             81 |
 |-------+---------------+----------------|
 
-One or more lines of text within the boundaries of a block can be
-considered a sub-block.
+In the second row of blocks:
+|-------+---------------+----------------|
+| Block | Left boundary | Right boundary |
+|-------+---------------+----------------|
+|     1 |             0 |             15 |
+|     2 |            20 |             57 |
+|-------+---------------+----------------|
 
-In Diagram 1, "Lorem ipsum" is one sub-block of the first block.
-"Proin quam nisl," is a sub-block of the second block.  Finally, both
-"Nullam tristique" and "diam non turpis." together are a sub-block of
-the fourth block.
+One or more lines of text within the boundaries of a block can be considered a *sub-block*.
+
+Some examples: In Diagram 1, "Lorem ipsum" is one sub-block of the first block in the first row of blocks. "Proin quam nisl," is a sub-block of the second block in the first row of blocks.  Finally, both "eget,convallis" and "nec,purus." together could be a sub-block of the second block in the second row of blocks.
 *** Block rows and top and bottom boundaries
-Blocks have not just left and right boundaries, but top and bottom
-boundaries as well.
+Blocks also have top and bottom boundaries.
 
-The top and bottom boundaries of a block are the lines of text
-adjacent to a *horizontal gap* (a line that is either empty or which
-contains only delimiter characters) or adjacent to the top or bottom
-of the buffer.
+The *top and bottom boundaries* of a block are the lines of text adjacent to a horizontal gap (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
 
 Consider a buffer which contains only the text in Diagram 2 below.
 *** Diagram 2
@@ -110,10 +114,10 @@ Let's assume the only text in the current buffer (or narrowed buffer)
 looks like this:
 **** Diagram Ex-1a:
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
-dolor sit           posuere tellus.      penatibus et magnis     Donec vitae dolor
-amet,consectetuer   Proin quam nisl,     dis parturient montes,  Nullam tristique
-adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      diam non turpis.
+Lorem ipsum         Donec pretium        Cum sociis natoque
+dolor sit           posuere tellus.      penatibus et magnis
+amet,consectetuer   Proin quam nisl,     dis parturient montes,
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
@@ -124,10 +128,10 @@ in "Proin quam nisl," used to be (ie. directly below the "p" in
 "posuere tellus.")
 **** Diagram Ex-1b:
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
-dolor sit           posuere tellus.      Cum sociis natoque      Donec vitae dolor
-amet,consectetuer                        penatibus et magnis     Nullam tristique
-adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis.
+Lorem ipsum         Donec pretium        nec,purus.
+dolor sit           posuere tellus.      Cum sociis natoque
+amet,consectetuer                        penatibus et magnis
+adipiscing elit.    Proin quam nisl,     dis parturient montes,
 Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
@@ -137,10 +141,10 @@ Diagram Ex-1b to that in Diagram Ex-2, with point moving to where the "p"
 in "poseure tellus." used to be:
 **** Diagram Ex-2:
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        nec,purus.              Nulla posuere.
-dolor sit                                Cum sociis natoque      Donec vitae dolor
-amet,consectetuer   posuere tellus.      penatibus et magnis     Nullam tristique
-adipiscing elit.    Proin quam nisl,     dis parturient montes,  diam non turpis.
+Lorem ipsum         Donec pretium        nec,purus.
+dolor sit                                Cum sociis natoque
+amet,consectetuer   posuere tellus.      penatibus et magnis
+adipiscing elit.    Proin quam nisl,     dis parturient montes,
 Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
@@ -152,10 +156,10 @@ Instead, from Diagram Ex-2 we will call (text-blocks--right) and
 get the text in Diagram Ex-3.
 **** Diagram Ex-3:
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
-dolor sit           posuere tellus.                              Donec vitae dolor
-amet,consectetuer   Proin quam nisl,     penatibus et magnis     Nullam tristique
-adipiscing elit.    tincidunt et,mattis  dis parturient montes,  diam non turpis.
+Lorem ipsum         Donec pretium        Cum sociis natoque
+dolor sit           posuere tellus.
+amet,consectetuer   Proin quam nisl,     penatibus et magnis
+adipiscing elit.    tincidunt et,mattis  dis parturient montes,
 Donec hendrerit     eget,convallis       nascetur ridiculus
 tempor tellus.      nec,purus.           mus.
 #+END_EXAMPLE
@@ -166,19 +170,19 @@ text will change to that in Diagram Ex-4a.  Otherwise, it will change
 to that in Diagram Ex-4b.
 **** Diagram Ex-4a:
 #+BEGIN_EXAMPLE
-Lorem ipsum         Donec pretium        Cum sociis natoque      Nulla posuere.
+Lorem ipsum         Donec pretium        Cum sociis natoque
 dolor sit           posuere tellus.      penatibus et magnis
-amet,consectetuer   Proin quam nisl,     dis parturient montes,  Donec vitae dolor
-adipiscing elit.    tincidunt et,mattis  nascetur ridiculus      Nullam tristique
-Donec hendrerit     eget,convallis       mus.                    diam non turpis.
+amet,consectetuer   Proin quam nisl,     dis parturient montes,
+adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
+Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
 **** Diagram Ex-4b:
 #+BEGIN_EXAMPLE
-Lorem ipsum         tempor tellus.       nec,purus.              Nulla posuere.
-                    Donec pretium        Cum sociis natoque      Donec vitae dolor
-dolor sit           posuere tellus.      penatibus et magnis     Nullam tristique
-amet,consectetuer   Proin quam nisl,     dis parturient montes,  diam non turpis.
+Lorem ipsum         tempor tellus.       nec,purus.
+                    Donec pretium        Cum sociis natoque
+dolor sit           posuere tellus.      penatibus et magnis
+amet,consectetuer   Proin quam nisl,     dis parturient montes,
 adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
 Donec hendrerit     eget,convallis       mus.
 #+END_EXAMPLE
@@ -197,10 +201,10 @@ Diagram Ex-4b, calling (text-blocks--move 'left) will result in the
 text in Diagram Ex-5.
 **** Diagram Ex-5:
 #+BEGIN_EXAMPLE
-Lorem ipsum           Donec hendrerit   nec,purus.              Nulla posuere.
-                      tempor tellus.    Cum sociis natoque      Donec vitae dolor
-dolor sit             Donec pretium     penatibus et magnis     Nullam tristique
-amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
+Lorem ipsum           Donec hendrerit   nec,purus.
+                      tempor tellus.    Cum sociis natoque
+dolor sit             Donec pretium     penatibus et magnis
+amet,consectetuer     posuere tellus.   dis parturient montes,
 tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 #+END_EXAMPLE
@@ -214,25 +218,26 @@ anywhere on it and call (text-blocks--delete).  The text in
 Diagram Ex-5 will then change to that in Diagram Ex-6.
 **** Diagram Ex-6:
 #+BEGIN_EXAMPLE
-Lorem ipsum           tempor tellus.    Cum sociis natoque      Donec vitae dolor
-dolor sit             Donec pretium     penatibus et magnis     Nullam tristique
-amet,consectetuer     posuere tellus.   dis parturient montes,  diam non turpis.
+Lorem ipsum           tempor tellus.    Cum sociis natoque
+dolor sit             Donec pretium     penatibus et magnis
+amet,consectetuer     posuere tellus.   dis parturient montes,
 tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Variables
-*** text-blocks--delimiter
-The string to use as a delimiter of blocks.
+*** text-blocks--vertical-block-delimiters
+A list of strings, where each string is considered a vertical delimiter
+of blocks.
 
-The default block delimiter is " " (a space).
+The default vertical block delimiter is " " (a space).
 **** Example 1
 #+BEGIN_EXAMPLE
 one   two foo
 three four
 #+END_EXAMPLE
 
-With this variable set to " " (a space), the above buffer would be
+With this variable set to ='(" ")= (a space), the above buffer would be
 considered to have two blocks.  The first block would contain the
 sub-blocks "one" and "three", while the second would contain the
 sub-blocks "two foo" and "four".
@@ -242,10 +247,35 @@ one+++++two  foo
 three+++four bar
 #+END_EXAMPLE
 
-With this variable set to "+" (a plus sign), the above buffer would be
+With this variable set to ='("+")= (a plus sign), the above buffer would be
 considered to have two blocks.  The first block would consist of two
 sub-blocks: "one++" and "three".  The second block would also have two
 sub-blocks: "two foo" and "four bar".
+*** text-blocks--horizontal-block-delimiters
+A list of strings, where each string is considered a horizontal delimiter
+of blocks.
+
+The default horizontal block delimiters is ='(" " "\n")= (a space or a newline).
+**** Example 1
+#+BEGIN_EXAMPLE
+foo
+
+bar
+#+END_EXAMPLE
+
+With this variable set to ='(" " "\n")= (a space or a newline), and =text-blocks--minimum-horizontal-gap-lines= set to 1, the above buffer would be considered to have two rows of blocks.
+
+The first row of blocks would contain "foo" and the second row of blocks would contain "bar".
+**** Example 2
+#+BEGIN_EXAMPLE
+foo
++++
+bar
+#+END_EXAMPLE
+
+With this variable set to ='("+" "\n")= (a plus sign or a newline), and =text-blocks--minimum-horizontal-gap-lines= set to 1, the above buffer would be considered to have two rows of blocks.
+
+The first row of blocks would contain "foo" and the second row of blocks would contain "bar".
 *** text-blocks--horizontal-wrap
 This variable controls what happens when a text-blocks-move
 command tries to move a sub-block to the right of the right-most
