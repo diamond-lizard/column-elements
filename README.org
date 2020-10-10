@@ -86,11 +86,7 @@ amet,consectetuer   Proin quam nisl,
 adipiscing elit.    tincidunt et,mattis
 #+END_EXAMPLE
 
-In Diagram 2 there are 4 blocks, which for the sake of this example
-we'll number 1 through 4, with block 1 being the block containing
-"Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere
-tellus.", block 3 contains "amet, consectetuer adipiscing elit." and
-block 4 contains "Proin quam nisl, tincidunt et,mattis".
+In Diagram 2 there are 4 blocks, which for the sake of this example we'll number 1 through 4, with block 1 being the block containing "Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere tellus.", block 3 contains "amet, consectetuer adipiscing elit." and block 4 contains "Proin quam nisl, tincidunt et,mattis".
 
 The table below contains the boundaries of each block:
 
@@ -103,15 +99,12 @@ The table below contains the boundaries of each block:
 |     4 |   20 |    38 |   4 |      5 |
 |-------+------+-------+-----+--------|
 
-Also note that Diagram 2 contains two rows of blocks.  The first row
-of blocks contains blocks 1 and 2, while the second row of blocks
-contains blocks 3 and 4.
+Also note that Diagram 2 contains two rows of blocks.  The first row of blocks contains blocks 1 and 2, while the second row of blocks contains blocks 3 and 4.
 
 horizontal gaps are not part of any block.
 ** Examples
 *** Example 1 - (text-blocks--insert 'point)
-Let's assume the only text in the current buffer (or narrowed buffer)
-looks like this:
+Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
 **** Diagram Ex-1a:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque
@@ -121,11 +114,7 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
 Donec hendrerit     eget,convallis       mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-Now, with point anywhere in "Proin quam nisl,", calling
-(text-blocks--insert 'point) will change the text in
-Diagram Ex-1a to that in Diagram Ex-1b, with point moving to where the "P"
-in "Proin quam nisl," used to be (ie. directly below the "p" in
-"posuere tellus.")
+Now, with point anywhere in "Proin quam nisl,", calling (text-blocks--insert 'point) will change the text in Diagram Ex-1a to that in Diagram Ex-1b, with point moving to where the "P" in "Proin quam nisl," used to be (ie. directly below the "p" in "posuere tellus.")
 **** Diagram Ex-1b:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        nec,purus.
@@ -136,9 +125,7 @@ Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
 *** Example 2 - (text-blocks--move 'up)
-Then, calling (text-blocks--move 'up) will change the text from
-Diagram Ex-1b to that in Diagram Ex-2, with point moving to where the "p"
-in "poseure tellus." used to be:
+Then, calling (text-blocks--move 'up) will change the text from Diagram Ex-1b to that in Diagram Ex-2, with point moving to where the "p" in "poseure tellus." used to be:
 **** Diagram Ex-2:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        nec,purus.
@@ -149,11 +136,9 @@ Donec hendrerit     tincidunt et,mattis  nascetur ridiculus
 tempor tellus.      eget,convallis       mus.
 #+END_EXAMPLE
 
-From Diagram Ex-2, if we had called (text-blocks--move 'down) the
-text and point would change back to that shown in Diagram Ex-1b.
+From Diagram Ex-2, if we had called (text-blocks--move 'down) the text and point would change back to that shown in Diagram Ex-1b.
 *** Example 3 - (text-blocks-move 'right)
-Instead, from Diagram Ex-2 we will call (text-blocks--right) and
-get the text in Diagram Ex-3.
+Instead, from Diagram Ex-2 we will call (text-blocks--right) and get the text in Diagram Ex-3.
 **** Diagram Ex-3:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque
@@ -164,10 +149,7 @@ Donec hendrerit     eget,convallis       nascetur ridiculus
 tempor tellus.      nec,purus.           mus.
 #+END_EXAMPLE
 *** Example 4 - (text-blocks--horizontal-wrap)
-If the text-blocks-horizontal-wrap variable contains nil and from
-Diagram Ex-3 we call (text-blocks--move 'right) twice more, the
-text will change to that in Diagram Ex-4a.  Otherwise, it will change
-to that in Diagram Ex-4b.
+If the text-blocks-horizontal-wrap variable contains nil and from Diagram Ex-3 we call (text-blocks--move 'right) twice more, the text will change to that in Diagram Ex-4a.  Otherwise, it will change to that in Diagram Ex-4b.
 **** Diagram Ex-4a:
 #+BEGIN_EXAMPLE
 Lorem ipsum         Donec pretium        Cum sociis natoque
@@ -187,18 +169,11 @@ adipiscing elit.    tincidunt et,mattis  nascetur ridiculus
 Donec hendrerit     eget,convallis       mus.
 #+END_EXAMPLE
 
-Likewise, vertical movement with (text-blocks--move 'up) or
-(text-blocks-move 'down) will wrap or not wrap based on the
-value of the same variable.
+Likewise, vertical movement with (text-blocks--move 'up) or (text-blocks-move 'down) will wrap or not wrap based on the value of the same variable.
 *** Example 5 - (text-blocks--move 'left)
-Note that entire blocks will be shifted left or right to
-maintain the original inter-column spacing, which in this case is 3
-spaces between the first two blocks, and 2 spaces between each
-of the other blocks.
+Note that entire blocks will be shifted left or right to maintain the original inter-column spacing, which in this case is 3 spaces between the first two blocks, and 2 spaces between each of the other blocks.
 
-For example, with point anywhere in "tincidunt et,mattis" in
-Diagram Ex-4b, calling (text-blocks--move 'left) will result in the
-text in Diagram Ex-5.
+For example, with point anywhere in "tincidunt et,mattis" in Diagram Ex-4b, calling (text-blocks--move 'left) will result in the text in Diagram Ex-5.
 **** Diagram Ex-5:
 #+BEGIN_EXAMPLE
 Lorem ipsum           Donec hendrerit   nec,purus.
@@ -209,13 +184,9 @@ tincidunt et,mattis   Proin quam nisl,  nascetur ridiculus
 adipiscing elit.      eget,convallis    mus.
 #+END_EXAMPLE
 *** Example 6 - (text-blocks--delete)
-Another feature is by calling (text-blocks--delete) we can delete
-block entries and have the rest of the existing entries wrap to
-fill in the space left by the deleted entry.
+Another feature is by calling (text-blocks--delete) we can delete block entries and have the rest of the existing entries wrap to fill in the space left by the deleted entry.
 
-For example, to delete the blank space in the text in Diagram Ex-5, move point
-anywhere on it and call (text-blocks--delete).  The text in
-Diagram Ex-5 will then change to that in Diagram Ex-6.
+For example, to delete the blank space in the text in Diagram Ex-5, move point anywhere on it and call (text-blocks--delete).  The text in Diagram Ex-5 will then change to that in Diagram Ex-6.
 **** Diagram Ex-6:
 #+BEGIN_EXAMPLE
 Lorem ipsum           tempor tellus.    Cum sociis natoque
@@ -227,8 +198,7 @@ Donec hendrerit       nec,purus.        Nulla posuere.
 #+END_EXAMPLE
 ** Variables
 *** text-blocks--vertical-block-delimiters
-A list of strings, where each string is considered a vertical delimiter
-of blocks.
+A list of strings, where each string is considered a vertical delimiter of blocks.
 
 The default vertical block delimiter is " " (a space).
 **** Example 1
@@ -252,8 +222,7 @@ considered to have two blocks.  The first block would consist of two
 sub-blocks: "one++" and "three".  The second block would also have two
 sub-blocks: "two foo" and "four bar".
 *** text-blocks--horizontal-block-delimiters
-A list of strings, where each string is considered a horizontal delimiter
-of blocks.
+A list of strings, where each string is considered a horizontal delimiter of blocks.
 
 The default horizontal block delimiters is ='(" " "\n")= (a space or a newline).
 **** Example 1
@@ -277,18 +246,13 @@ With this variable set to ='("+" "\n")= (a plus sign or a newline), and =text-bl
 
 The first row of blocks would contain "foo" and the second row of blocks would contain "bar".
 *** text-blocks--horizontal-wrap
-This variable controls what happens when a text-blocks-move
-command tries to move a sub-block to the right of the right-most
-block, or to the left of the left-most block.
+This variable controls what happens when a text-blocks-move command tries to move a sub-block to the right of the right-most block, or to the left of the left-most block.
 
 Valid values of this variable are:
 **** nil
-Do not allow movement of sub-block to the left of the left-most
-block or to the right of the right-most block.
+Do not allow movement of sub-block to the left of the left-most block or to the right of the right-most block.
 
-Whether an error is displayed when such forbidden movement is
-attempted is controlled by the
-text-blocks--horizontal-wrap-error-level variable.
+Whether an error is displayed when such forbidden movement is attempted is controlled by the text-blocks--horizontal-wrap-error-level variable.
 ***** Example - (setq text-blocks--horizontal-wrap nil)
 #+BEGIN_EXAMPLE
 foobar  one  hello
@@ -298,11 +262,9 @@ Attempts to move "foobar" or "baz" left will fail.
 
 Attempts to move "hello" or "there" right will fail.
 **** 'same-row
-Movement of a sub-block to the left of the left-most block moves the
-sub-block to the same row of the right-most block.
+Movement of a sub-block to the left of the left-most block moves the sub-block to the same row of the right-most block.
 
-Movement of a sub-block to the right of the right-most block moves the
-sub-block to the same row of the left-most block.
+Movement of a sub-block to the right of the right-most block moves the sub-block to the same row of the left-most block.
 ***** Example - (setq text-blocks--horizontal-wrap 'same-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
@@ -316,20 +278,15 @@ baz  two    foobar
 one  hello  there
 #+END_EXAMPLE
 **** 'previous-next-row
-If the sub-block to be moved left is at the top-left of the left-most
-block, it will be moved to the bottom-right of the right-most block.
+If the sub-block to be moved left is at the top-left of the left-most block, it will be moved to the bottom-right of the right-most block.
 
-If the sub-block to be moved right is at the bottom-right of the
-right-most block, it will be moved to the top-left of the left-most
-block.
+If the sub-block to be moved right is at the bottom-right of the right-most block, it will be moved to the top-left of the left-most block.
 
 Otherwise:
 
-Movement of a sub-block to the left of the left-most block moves the
-sub-block to the previous row of the right-most block.
+Movement of a sub-block to the left of the left-most block moves the sub-block to the previous row of the right-most block.
 
-Movement of a sub-block to the right of the right-most block moves the
-sub-block to the next row of the left-most block.
+Movement of a sub-block to the right of the right-most block moves the sub-block to the next row of the left-most block.
 ***** Examples - (setq text-blocks--horizontal-wrap 'previous-next-row)
 #+BEGIN_EXAMPLE
 foobar  one  hello
@@ -350,17 +307,9 @@ baz    one  hello
 there  two  foobar
 #+END_EXAMPLE
 *** text-blocks--horizontal-wrap-error-level
-If the value of this variable is **nil** then no errors are displayed
-when movement of a sub-block is attempted to the left of the
-left-most block or to the right of the right-most block
-and the value of the text-blocks--horizontal-wrap variable is
-**nil**.
+If the value of this variable is **nil** then no errors are displayed when movement of a sub-block is attempted to the left of the left-most block or to the right of the right-most block and the value of the text-blocks--horizontal-wrap variable is **nil**.
 
-If the value of text-blocks--horizontal-wrap-error-level is not
-**nil** and the text-blocks--horizontal-wrap variable is **nil**,
-and movment of a sub-block is attempted to the left of the
-left-most block or to the right of the right-most block,
-then an error will be displayed.
+If the value of text-blocks--horizontal-wrap-error-level is not **nil** and the text-blocks--horizontal-wrap variable is **nil**, and movment of a sub-block is attempted to the left of the left-most block or to the right of the right-most block, then an error will be displayed.
 ** Utility functions
 *** text-blocks--block-count
 Returns the number of blocks that are detected to be in the buffer.
@@ -370,8 +319,7 @@ foobar  hello
 baz     there
 #+END_EXAMPLE
 
-With the buffer containing only the text in the example above, this
-function will return 2.
+With the buffer containing only the text in the example above, this function will return 2.
 *** text-blocks--block-boundaries-at-point
 This function takes a single argument, which must be one of either:
 |---------|
@@ -381,15 +329,9 @@ This function takes a single argument, which must be one of either:
 | 'bottom |
 |---------|
 
-If the argument is either 'left or 'right, then this function
-returns the left or right boundary of the block at point.
-This boundary will be the column containing the left-most or
-right-most non-delimiter character in the block.
+If the argument is either 'left or 'right, then this function returns the left or right boundary of the block at point. This boundary will be the column containing the left-most or right-most non-delimiter character in the block.
 
-If the argument is either 'top or 'bottom, then this function
-returns the top or bottom boundary of the entire row of blocks
-at point. This boundary will be the line containing
-the top-most or bottom-most non-delimiter character in the block.
+If the argument is either 'top or 'bottom, then this function returns the top or bottom boundary of the entire row of blocks at point. This boundary will be the line containing the top-most or bottom-most non-delimiter character in the block.
 **** Example
 #+BEGIN_EXAMPLE
 foobar  hello
@@ -399,10 +341,7 @@ one     two
 three   four
 #+END_EXAMPLE
 
-If the above text is the only text in the buffer or narrowed buffer,
-with point anywhere on "foobar", "baz", or the spaces directly under
-"bar", the table below shows what the function will return for every
-valid argument:
+If the above text is the only text in the buffer or narrowed buffer, with point anywhere on "foobar", "baz", or the spaces directly under "bar", the table below shows what the function will return for every valid argument:
 
 |----------+--------------|
 | Argument | Return Value |
@@ -413,8 +352,7 @@ valid argument:
 | 'right   |            5 |
 |----------+--------------|
 
-With point anywhere on "two" or "four", the table below shows what
-the function will return for every valid argument:
+With point anywhere on "two" or "four", the table below shows what the function will return for every valid argument:
 
 |----------+--------------|
 | Argument | Return Value |
@@ -431,15 +369,8 @@ With point anywhere else in the example buffer, this function will return nil.
 ** LICENSE
 Copyright (C) 2020 - Sergey Goldgaber
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
