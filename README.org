@@ -20,7 +20,7 @@ adipiscing elit.    tincidunt et,mattis nascetur ridiculus
 Donec hendrerit     eget,convallis      mus.
 tempor tellus.      nec,purus.
 #+END_EXAMPLE
-*** Blocks, sub-blocks, rows of blocks, and gaps
+*** Blocks, rows of blocks, and gaps
 Diagram 1 shows 5 *blocks* of text in two *rows of blocks*, where the first row of blocks contains 3 blocks, and the second row of blocks contains 2 blocks.
 
 Each row of blocks is distinguished from other rows of blocks by a *horizontal gap*, which must have at least a certain number of empty lines or lines containing only *block row delimiter characters*.
@@ -42,7 +42,7 @@ In Diagram 1, the minimum number of vertical gap columns in a vertical gap has b
 /This is important to understand because vertical gaps end at the top and bottom boundaries of the row of blocks that they are in.  As a consequence, it is not necessary for vertical gap columns to extend from the top of the buffer to the bottom in order to form a vertical gap and distinguish blocks from one another.  It is sufficient that vertical gap columns extend only from the top boundary to the bottom boundary of the row of blocks that it is in./
 
 /Of course, if the top of the buffer is the top boundary of a row of blocks and the bottom of the buffer is its bottom boundary, then its vertical gap columns must extend from the top to the bottom of the buffer in order to form vertical gaps./
-
+*** Left and right block boundaries
 Each block has a left boundary and a right boundary.
 
 The *left boundary* of a block is the column containing the left-most character in the block that is not a block delimiter.
@@ -67,11 +67,11 @@ In the second row of blocks:
 |     1 |             0 |             15 |
 |     2 |            20 |             57 |
 |-------+---------------+----------------|
-
+*** Sub-blocks
 One or more lines of text within the boundaries of a block can be considered a *sub-block*.
 
 Some examples: In Diagram 1, "Lorem ipsum" is one sub-block of the first block in the first row of blocks. "Proin quam nisl," is a sub-block of the second block in the first row of blocks.  Finally, both "eget,convallis" and "nec,purus." together could be a sub-block of the second block in the second row of blocks.
-*** Block rows and top and bottom block boundaries
+*** Rows of blocks and top and bottom block boundaries
 The *top and bottom boundaries* of a block are the lines of text adjacent to a horizontal gap (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
 
 Consider a buffer which contains only the text in Diagram 2 below.
