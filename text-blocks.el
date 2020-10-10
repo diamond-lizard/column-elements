@@ -27,7 +27,10 @@
 
 
 ;; What to use as a delimiter to determine block boundaries.
-(defvar text-blocks--delimiter " ")
+(defvar text-blocks--block-delimiter " ")
+
+;; What to use as a delimiter to determine block row boundaries.
+(defvar text-blocks--block-row-delimiter " ")
 
 (require 'cl-macs)
 
@@ -149,7 +152,7 @@ the block at point."
      last-char-on-bottom-line))))
 
 (defun text-blocks--vertical-gap-p-aux (column)
-  "Returns t if `COLUMN' contains only delimiters,
+  "Returns t if `COLUMN' contains only block delimiters,
 otherwise returns nil."
   (when (< column 0)
     (error
@@ -172,7 +175,7 @@ otherwise returns nil."
                  line-start
                  (= ,column anychar)
                  (not
-                  (any ,text-blocks--delimiter)))))
+                  (any ,text-blocks--block-delimiter)))))
            (search-failed nil)))))))
 
 (defun text-blocks--vertical-gap-p (&optional position)
@@ -221,13 +224,13 @@ this function will return nil."
                  line-start
                  (= ,column (not "\n"))
                  (not
-                  (any ,text-blocks--delimiter "\n"))))
+                  (any ,text-blocks--block-delimiter "\n"))))
               nil
               t))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "Returns t if the line at point or `desired-line' is empty
-or contains only delimiters, otherwise returns nil."
+or contains only block row delimiters, otherwise returns nil."
   (interactive)
   (let ((desired-line
          (if (equal desired-line nil)
@@ -247,15 +250,16 @@ or contains only delimiters, otherwise returns nil."
              ;; An empty line:
              ((equal (line-beginning-position) (line-end-position))
               t)
-             ;; A line containing just delimiter chars:
+             ;; A line containing just block row delimiter chars:
              ((looking-at-p
                (rx-to-string
                 `(seq
                   line-start
-                  (one-or-more ,text-blocks--delimiter)
+                  (one-or-more ,text-blocks--block-row-delimiter)
                   line-end)))
               t)
-             ;; Not an empty line, nor a line containing just delimiter chars:
+             ;; Not an empty line,
+             ;; nor a line containing just block row delimiter chars:
              (t
               nil))))))))
 
