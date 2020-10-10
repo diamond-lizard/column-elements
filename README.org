@@ -72,8 +72,6 @@ One or more lines of text within the boundaries of a block can be considered a *
 
 Some examples: In Diagram 1, "Lorem ipsum" is one sub-block of the first block in the first row of blocks. "Proin quam nisl," is a sub-block of the second block in the first row of blocks.  Finally, both "eget,convallis" and "nec,purus." together could be a sub-block of the second block in the second row of blocks.
 *** Block rows and top and bottom boundaries
-Blocks also have top and bottom boundaries.
-
 The *top and bottom boundaries* of a block are the lines of text adjacent to a horizontal gap (a line that is either empty or which contains only delimiter characters) or adjacent to the top or bottom of the buffer.
 
 Consider a buffer which contains only the text in Diagram 2 below.
