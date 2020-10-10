@@ -52,7 +52,7 @@ the block at point."
          with left-boundary-of-this-block = start-column
          for this-column from start-column downto left-most-column
          if (equal
-             (text-blocks--vertical-gap-p-aux this-column)
+             (text-blocks--vertical-gap-column-p this-column)
              nil)
          do (setq left-boundary-of-this-block this-column)
          else return left-boundary-of-this-block
@@ -65,7 +65,7 @@ the block at point."
          with right-boundary-of-this-block = start-column
          for this-column from start-column upto right-most-column
          if (equal
-             (text-blocks--vertical-gap-p-aux this-column)
+             (text-blocks--vertical-gap-column-p this-column)
              nil)
          do (setq right-boundary-of-this-block this-column)
          else return right-boundary-of-this-block
@@ -151,18 +151,18 @@ the block at point."
      first-char-on-top-line
      last-char-on-bottom-line))))
 
-(defun text-blocks--vertical-gap-p-aux (column)
+(defun text-blocks--vertical-gap-column-p (column)
   "Returns t if `COLUMN' contains only block delimiters,
 otherwise returns nil."
   (when (< column 0)
     (error
-     "text-blocks--vertical-gap-p-aux: Error: COLUMN must not be < 0"))
+     "text-blocks--vertical-gap-column-p: Error: COLUMN must not be < 0"))
                                         ; Detect empty buffers
   (if (equal
        (point-min)
        (point-max))
       ;; Empty buffer
-      (error "text-blocks--vertical-gap-p-aux: Error: Empty buffer detected.")
+      (error "text-blocks--vertical-gap-column-p: Error: Empty buffer detected.")
     ;; Not empty buffer
     (save-excursion
       (save-restriction

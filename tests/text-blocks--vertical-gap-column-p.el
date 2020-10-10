@@ -17,13 +17,13 @@
 
 (require 'text-blocks)
 
-(ert-deftest text-blocks--vertical-gap-p-aux--001 ()
-  "Make sure that text-blocks--vertical-gap-p-aux is bound"
+(ert-deftest text-blocks--vertical-gap-column-p--001 ()
+  "Make sure that text-blocks--vertical-gap-column-p is bound"
   :tags '(
           bindings
           )
   (should
-   (fboundp 'text-blocks--vertical-gap-p-aux)))
+   (fboundp 'text-blocks--vertical-gap-column-p)))
 
 (setq text-blocks--filename-001 "tests/data/text-blocks-test-001")
 
@@ -33,7 +33,7 @@
           (find-file-read-only text-blocks--filename-001))
   (error "File '%s' does not exist" text-blocks--filename-001))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--002 ()
+(ert-deftest text-blocks--vertical-gap-column-p--002 ()
   "column 0 in data/001 is not a vertical gap"
   :tags '(
           not-vertical-gap
@@ -41,9 +41,9 @@
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 0))))
+       (text-blocks--vertical-gap-column-p 0))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--003 ()
+(ert-deftest text-blocks--vertical-gap-column-p--003 ()
   "column 1 in data/001 is not a vertical gap"
   :tags '(
           not-vertical-gap
@@ -51,9 +51,9 @@
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 1))))
+       (text-blocks--vertical-gap-column-p 1))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--004 ()
+(ert-deftest text-blocks--vertical-gap-column-p--004 ()
   "column 3 in data/001 is not a vertical gap"
   :tags '(
           not-vertical-gap
@@ -61,9 +61,9 @@
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 3))))
+       (text-blocks--vertical-gap-column-p 3))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--005 ()
+(ert-deftest text-blocks--vertical-gap-column-p--005 ()
   "column 6 in data/001 is a vertical gap"
   :tags '(
           is-vertical-gap
@@ -71,9 +71,9 @@
   (should
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 6))))
+       (text-blocks--vertical-gap-column-p 6))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--006 ()
+(ert-deftest text-blocks--vertical-gap-column-p--006 ()
   "column 8 in data/001 is not a vertical gap"
   :tags '(
           not-vertical-gap
@@ -81,9 +81,9 @@
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 8))))
+       (text-blocks--vertical-gap-column-p 8))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--007 ()
+(ert-deftest text-blocks--vertical-gap-column-p--007 ()
   "column 12 in data/001 is not a vertical gap"
   :tags '(
           not-vertical-gap
@@ -91,9 +91,9 @@
   (should-not
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux 12))))
+       (text-blocks--vertical-gap-column-p 12))))
 
-(ert-deftest text-blocks--vertical-gap-p-aux--008 ()
+(ert-deftest text-blocks--vertical-gap-column-p--008 ()
   "checking to see if column -1 in data/001 is a vertical gap errors out"
   :tags '(
           error
@@ -103,6 +103,6 @@
   (should-error
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
-       (text-blocks--vertical-gap-p-aux -1))))
+       (text-blocks--vertical-gap-column-p -1))))
 
-(provide 'text-blocks--vertical-gap-p-aux)
+(provide 'text-blocks--vertical-gap-column-p)

@@ -2,7 +2,7 @@ EMACS := emacs
 ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
 TEST_DIR := tests
 
-TESTS := text-blocks--vertical-gap-p-aux
+TESTS := text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--get-buffer-width
@@ -28,8 +28,8 @@ text-blocks--block-boundaries-at-point: compile
 text-blocks--vertical-gap-p: compile
 	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--vertical-gap-p.el -f ert-run-tests-batch-and-exit
 
-text-blocks--vertical-gap-p-aux: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--vertical-gap-p-aux.el -f ert-run-tests-batch-and-exit
+text-blocks--vertical-gap-column-p: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--vertical-gap-column-p.el -f ert-run-tests-batch-and-exit
 
 text-blocks--horizontal-gap-p: compile
 	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--horizontal-gap-p.el -f ert-run-tests-batch-and-exit
