@@ -229,8 +229,13 @@ this function will return nil."
               t))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
-  "Returns t if the line at point or `desired-line' is empty
-or contains only block row delimiters, otherwise returns nil."
+  "If no argument is given, this function will look at the line
+at point, while if the `desired-line' argument is given, this
+function will look at that line instead.
+
+If whichever of these lines the function looks at is either empty
+or contains only block row delimiters then it will return t,
+otherwise it will return nil."
   (interactive)
   (let ((desired-line
          (if (equal desired-line nil)
