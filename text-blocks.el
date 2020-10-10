@@ -202,7 +202,8 @@ this function will return nil."
        (concat
         "text-blocks--vertical-gap-p: "
         "Error: "
-        "POSITION '%s' is outside the buffer")))
+        "POSITION '%s' is outside the buffer")
+       position))
     (save-excursion
       (save-restriction
         (goto-char position)
