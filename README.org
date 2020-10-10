@@ -82,9 +82,10 @@ dolor sit           posuere tellus.
 
 amet,consectetuer   Proin quam nisl,
 adipiscing elit.    tincidunt et,mattis
+tempor tellus.
 #+END_EXAMPLE
 
-In Diagram 2 there are 4 blocks, which for the sake of this example we'll number 1 through 4, with block 1 being the block containing "Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere tellus.", block 3 contains "amet, consectetuer adipiscing elit." and block 4 contains "Proin quam nisl, tincidunt et,mattis".
+In Diagram 2 there are 4 blocks, which for the sake of this example we'll number 1 through 4, with block 1 being the block containing "Lorem ipsum dolor sit", block 2 contains "Donec pretium posuere tellus.", block 3 contains "amet, consectetuer adipiscing elit. tempor tellus." and block 4 contains "Proin quam nisl, tincidunt et,mattis".
 
 The table below contains the boundaries of each block:
 
@@ -93,13 +94,22 @@ The table below contains the boundaries of each block:
 |-------+------+-------+-----+--------|
 |     1 |    0 |    10 |   1 |      2 |
 |     2 |   20 |    34 |   1 |      2 |
-|     3 |    0 |    16 |   4 |      5 |
+|     3 |    0 |    16 |   4 |      6 |
 |     4 |   20 |    38 |   4 |      5 |
 |-------+------+-------+-----+--------|
 
-Also note that Diagram 2 contains two rows of blocks.  The first row of blocks contains blocks 1 and 2, while the second row of blocks contains blocks 3 and 4.
+Diagram 2 also contains two rows of blocks with their own top and bottom boundaries:
 
-horizontal gaps are not part of any block.
+|---------------+--------+-----+--------|
+| Row of blocks | Blocks | Top | Bottom |
+|---------------+--------+-----+--------|
+|             1 | 1, 2   |   1 |      2 |
+|             2 | 3, 4   |   3 |      5 |
+|---------------+--------+-----+--------|
+
+The top and bottom boundaries of any particular block need not concide with the top and bottom boundaries of the row of blocks it is part of.
+
+Notice how in Diagram 2 the bottom boundary of block 3 is above the bottom boundary of the second row of blocks.
 ** Examples
 *** Example 1 - (text-blocks--insert 'point)
 Let's assume the only text in the current buffer (or narrowed buffer) looks like this:
