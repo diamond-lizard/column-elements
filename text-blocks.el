@@ -32,6 +32,9 @@
 ;; What to use as a delimiter to determine block row boundaries.
 (defvar text-blocks--block-row-delimiter " ")
 
+;; A vertical gap must have at least this many vertical columns
+(defvar min-vert-cols-per-vert-gap 2)
+
 (require 'cl-macs)
 
 (defun text-blocks--block-boundaries-at-point (&optional side)
