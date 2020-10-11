@@ -186,7 +186,7 @@ If not given a `POSITION', return t if point is on a
 vertical gap, nil otherwise.
 
 Note that vertical gaps are detected only between
-horizontal gaps, an a position or point on a horizontal
+horizontal gaps, and a position or point on a horizontal
 gap is never considered to be on a vertical gap.  So
 that if the desired position is on a horizontal gap,
 this function will return nil."
