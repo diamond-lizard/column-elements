@@ -26,12 +26,21 @@
    (fboundp 'text-blocks--vertical-gap-p)))
 
 (setq text-blocks--filename-001 "tests/data/text-blocks-test-001")
+(setq text-blocks--filename-004 "tests/data/text-blocks-test-004")
 
 ;; Read in test file 001, if it exists.
 (if (file-exists-p text-blocks--filename-001)
     (setq text-blocks--original-data-001
           (find-file-read-only text-blocks--filename-001))
   (error "File '%s' does not exist" text-blocks--filename-001))
+
+(setq default-directory (expand-file-name "../.."))
+
+;; Read in test file 004, if it exists.
+(if (file-exists-p text-blocks--filename-004)
+    (setq text-blocks--original-data-004
+          (find-file-read-only text-blocks--filename-004))
+  (error "File '%s' does not exist" text-blocks--filename-004))
 
 
 (ert-deftest text-blocks--vertical-gap-p--002 ()
@@ -142,6 +151,79 @@
    (with-temp-buffer
      (replace-buffer-contents text-blocks--original-data-001)
      (goto-char 27)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--012 ()
+  "position 1 in data/004 is not on a vertical gap"
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 1)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--013 ()
+  "position 2 in data/004 is not on a vertical gap"
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 2)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--014 ()
+  "position 5 in data/004 is not on a vertical gap"
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 5)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--015 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 7)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--016 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 12)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--017 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 23)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--018 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 24)
      (text-blocks--vertical-gap-p))))
 
 (provide 'text-blocks--vertical-gap-p)
