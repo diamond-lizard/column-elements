@@ -240,6 +240,29 @@ this function will return nil."
                     for leading-cols from min-leading-cols upto max-leading-cols
                     collect (progn
                               (goto-char (point-min))
+                              ;; We search for a column NOT containing a delimiter
+                              ;; then negate the results.
+                              ;;
+                              ;; This convoluted method is necessary because
+                              ;; the more straight-forward search for
+                              ;; a column with a delimiter could match too early,
+                              ;; succeeding even when there are non-delimiters
+                              ;; further down the same column.
+                              ;;
+                              ;; So we have to search the column for non-delimiters.
+                              ;; Upon finding any single non-delimiter we know
+                              ;; that the column contains at least one non-delimiter
+                              ;;
+                              ;; So then we negate the result so that finding
+                              ;; a column with a non-delimiter counts as a failure.
+                              ;;
+                              ;; Conversely, if we didn't find a non-delimiter
+                              ;; in the entire column, that "failure" is negated
+                              ;; to be a success.
+                              ;;
+                              ;; Because of all these negations, the result is
+                              ;; that a column with any delimiter in it returns nil,
+                              ;; while a column containing only delimiters returns t
                               (not (re-search-forward
                                     (rx-to-string
                                      `(seq
