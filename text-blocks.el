@@ -212,25 +212,38 @@ this function will return nil."
         (goto-char position)
         (if (text-blocks--horizontal-gap-p)
             nil
-          (let ((column (current-column))
-                (top-boundary
-                 (text-blocks--block-boundaries-at-point 'top))
-                (bottom-boundary
-                 (text-blocks--block-boundaries-at-point 'bottom)))
+          (let* ((column (current-column))
+                 (min-leading-cols (+
+                                    (- column min-vert-cols-per-vert-gap)
+                                    1))
+                 (min-leading-cols (if (< min-leading-cols 0)
+                                       0
+                                     min-leading-cols))
+                 (max-leading-cols (- column 1))
+                 (top-boundary
+                  (text-blocks--block-boundaries-at-point 'top))
+                 (bottom-boundary
+                  (text-blocks--block-boundaries-at-point 'bottom)))
+            ;; (message
+            ;;  (format "n: %s m: %s column: %s" n m column))
             (text-blocks--narrow-between-lines
              top-boundary
              bottom-boundary)
             (goto-char (point-min))
-            (not
-             (re-search-forward
-              (rx-to-string
-               `(seq
-                 line-start
-                 (= ,column (not "\n"))
-                 (not
-                  (any ,text-blocks--block-delimiter "\n"))))
-              nil
-              t))))))))
+            ;; (cl-every #'identity foo) will perform a logical and on
+            ;; the list of booleans in foo
+            (cl-every #'identity
+                      (cl-loop
+                       for leading-cols from min-leading-cols to max-leading-cols
+                       collect (not (re-search-forward
+                                     (rx-to-string
+                                      `(seq
+                                        line-start
+                                        (= ,leading-cols (not "\n"))
+                                        (= ,min-vert-cols-per-vert-gap
+                                           (not ,text-blocks--block-delimiter))))
+                                     nil
+                                     t))))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "If no argument is given, this function will look at the line
