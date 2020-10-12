@@ -13,6 +13,7 @@ TESTS += text-blocks--block-boundaries-at-point
 EMACS_ERT_ARGS_1 := -batch -l ert -L . -l
 EMACS_ERT_ARGS_2 := -f ert-run-tests-batch-and-exit
 
+.PHONY: clean
 .PHONY: test
 
 all: clean test
