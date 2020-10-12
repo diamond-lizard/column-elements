@@ -22,22 +22,22 @@ compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 test: $(TESTS)
 
 text-blocks--get-buffer-width: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--get-buffer-width.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 text-blocks--block-boundaries-at-point: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--block-boundaries-at-point.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 text-blocks--vertical-gap-p: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--vertical-gap-p.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 text-blocks--vertical-gap-column-p: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--vertical-gap-column-p.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 text-blocks--horizontal-gap-p: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--horizontal-gap-p.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 text-blocks--search-for-consecutive-non-nils: compile
-	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--search-for-consecutive-non-nils.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/$@.el -f ert-run-tests-batch-and-exit
 
 clean:
 	rm -f *.elc $(TEST_DIR)/*.elc
