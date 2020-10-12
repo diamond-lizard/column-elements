@@ -217,7 +217,8 @@ this function will return nil."
                  ;; so we need to add 1
                  (min-leading-cols
                   (+ 1
-                     (- column text-blocks--min-vert-cols-per-vert-gap)))
+                     (- column
+                        text-blocks--min-vert-cols-per-vert-gap)))
                  ;; min-leading-cols should never be less than 0
                  ;; as it's impossible prepend the search with
                  ;; less than 0 characters
