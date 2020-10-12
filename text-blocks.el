@@ -234,7 +234,7 @@ this function will return nil."
             ;; the list of booleans in foo
             (cl-every #'identity
                       (cl-loop
-                       for leading-cols from min-leading-cols to max-leading-cols
+                       for leading-cols from min-leading-cols upto max-leading-cols
                        collect (not (re-search-forward
                                      (rx-to-string
                                       `(seq
