@@ -219,9 +219,7 @@ this function will return nil."
                  (min-leading-cols (if (< min-leading-cols 0)
                                        0
                                      min-leading-cols))
-                 (max-leading-cols (if (> column 0)
-                                       (- column 1)
-                                     0))
+                 (max-leading-cols (+ column 1))
                  (top-boundary
                   (text-blocks--block-boundaries-at-point 'top))
                  (bottom-boundary
@@ -232,20 +230,27 @@ this function will return nil."
              top-boundary
              bottom-boundary)
             (goto-char (point-min))
-            ;; (cl-every #'identity foo) will perform a logical and on
-            ;; the list of booleans in foo
-            (cl-every #'identity
-                      (cl-loop
-                       for leading-cols from min-leading-cols upto max-leading-cols
-                       collect (not (re-search-forward
-                                     (rx-to-string
-                                      `(seq
-                                        line-start
-                                        (= ,leading-cols (not "\n"))
-                                        (= ,min-vert-cols-per-vert-gap
-                                           (not ,text-blocks--block-delimiter))))
-                                     nil
-                                     t))))))))))
+            (let ((results
+                   (cl-loop
+                    for leading-cols from min-leading-cols upto max-leading-cols
+                    collect (progn
+                              (goto-char (point-min))
+                                    ;; (rx-to-string
+                                    ;;  `(seq
+                                    ;;    line-start
+                                    ;;    (= ,leading-cols (not "\n"))
+                                    ;;    (= ,min-vert-cols-per-vert-gap
+                                    ;;       (not ,text-blocks--block-delimiter))))))))
+                              (not (re-search-forward
+                                    (rx-to-string
+                                     `(seq
+                                       line-start
+                                       (= ,leading-cols (not "\n"))
+                                       (not ,text-blocks--block-delimiter)))
+                                    nil
+                                    t))))))
+              (text-blocks--search-for-consecutive-non-nils
+               min-vert-cols-per-vert-gap results))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "If no argument is given, this function will look at the line
@@ -309,6 +314,51 @@ otherwise it will return nil."
          until (eobp)
          maximize buffer-width
          finally return buffer-width)))))
+
+(defun text-blocks--search-for-consecutive-elements (n pred list-to-search)
+  "Search for n consecutive elements in list-to-search
+that pass the predicate."
+  (if (< n 1)
+      (error
+       (format
+        (concat
+         "text-blocks--search-for-consecutive-elements: "
+         "Error: "
+         "You tried to search for '%s' elements, "
+         "but you must search for at least one.")
+        n))
+    (cl-loop
+     with streak = 0
+     with min-streak-length = (- n 1)
+     for x in list-to-search
+       if (and (funcall pred x)
+               (equal streak min-streak-length))
+         ;; x passes the predicate
+         ;; and there are already enough consecutive elements
+         return t
+       else if (funcall pred x)
+         ;; x passes the predictate
+         ;; but there aren't yet enough consecutive elements
+         do (setq streak (+ streak 1))
+       else
+         ;; x does not pass the predicate
+         do (setq streak 0))))
+
+(defun text-blocks--search-for-consecutive-non-nils (n list-to-search)
+  "Search for n consecutive non-nil elements"
+  (if (< n 1)
+      (error
+       (format
+        (concat
+         "text-blocks--search-for-consecutive-non-nils: "
+         "Error: "
+         "You tried to search for '%s' elements, "
+         "but you must search for at least one.")
+        n))
+    (let ((pred
+           (lambda (x)
+             (not (equal nil x)))))
+      (text-blocks--search-for-consecutive-elements n pred list-to-search))))
 
 ;;
 ;;------------------------------------------------------------------------
