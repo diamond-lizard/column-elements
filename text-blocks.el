@@ -224,8 +224,6 @@ this function will return nil."
                   (text-blocks--block-boundaries-at-point 'top))
                  (bottom-boundary
                   (text-blocks--block-boundaries-at-point 'bottom)))
-            ;; (message
-            ;;  (format "n: %s m: %s column: %s" n m column))
             (text-blocks--narrow-between-lines
              top-boundary
              bottom-boundary)
