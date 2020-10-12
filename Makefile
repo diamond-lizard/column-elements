@@ -21,9 +21,9 @@ TEST_DIR := tests
 TESTS :=
 TESTS += text-blocks--search-for-consecutive-non-nils
 TESTS += text-blocks--get-buffer-width
+TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-p
-TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--block-boundaries-at-point
 
 EMACS_ERT_ARGS_1 := -batch -l ert -L . -l
