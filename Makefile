@@ -2,7 +2,9 @@ EMACS := emacs
 ELISP_FILES := $(shell ls *.el | grep -v -- '-pkg\.el$$')
 TEST_DIR := tests
 
-TESTS := text-blocks--vertical-gap-column-p
+TESTS :=
+TESTS += text-blocks--search-for-consecutive-non-nils
+TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--get-buffer-width
@@ -33,6 +35,9 @@ text-blocks--vertical-gap-column-p: compile
 
 text-blocks--horizontal-gap-p: compile
 	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--horizontal-gap-p.el -f ert-run-tests-batch-and-exit
+
+text-blocks--search-for-consecutive-non-nils: compile
+	$(EMACS) -batch -l ert -L . -l $(TEST_DIR)/text-blocks--search-for-consecutive-non-nils.el -f ert-run-tests-batch-and-exit
 
 clean:
 	rm -f *.elc $(TEST_DIR)/*.elc
