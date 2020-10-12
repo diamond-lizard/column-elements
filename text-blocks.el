@@ -235,12 +235,6 @@ this function will return nil."
                     for leading-cols from min-leading-cols upto max-leading-cols
                     collect (progn
                               (goto-char (point-min))
-                                    ;; (rx-to-string
-                                    ;;  `(seq
-                                    ;;    line-start
-                                    ;;    (= ,leading-cols (not "\n"))
-                                    ;;    (= ,min-vert-cols-per-vert-gap
-                                    ;;       (not ,text-blocks--block-delimiter))))))))
                               (not (re-search-forward
                                     (rx-to-string
                                      `(seq
