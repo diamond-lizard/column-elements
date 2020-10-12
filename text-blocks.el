@@ -219,7 +219,9 @@ this function will return nil."
                  (min-leading-cols (if (< min-leading-cols 0)
                                        0
                                      min-leading-cols))
-                 (max-leading-cols (- column 1))
+                 (max-leading-cols (if (> column 0)
+                                       (- column 1)
+                                     0))
                  (top-boundary
                   (text-blocks--block-boundaries-at-point 'top))
                  (bottom-boundary
