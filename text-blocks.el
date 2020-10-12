@@ -213,12 +213,13 @@ this function will return nil."
         (if (text-blocks--horizontal-gap-p)
             nil
           (let* ((column (current-column))
-                 (min-leading-cols (+
-                                    (- column text-blocks--min-vert-cols-per-vert-gap)
-                                    1))
-                 (min-leading-cols (if (< min-leading-cols 0)
-                                       0
-                                     min-leading-cols))
+                 (min-leading-cols
+                  (+ 1
+                     (- column text-blocks--min-vert-cols-per-vert-gap)))
+                 (min-leading-cols
+                  (if (< min-leading-cols 0)
+                      0
+                    min-leading-cols))
                  (max-leading-cols (+ column 1))
                  (top-boundary
                   (text-blocks--block-boundaries-at-point 'top))
