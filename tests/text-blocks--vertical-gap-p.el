@@ -68,7 +68,7 @@
 (ert-deftest text-blocks--vertical-gap-p--004 ()
   "position 7 in data/001 is on a vertical gap"
   :tags '(
-          not-vertical-gap
+          vertical-gap
           )
   (should
    (with-temp-buffer
@@ -123,7 +123,7 @@
 (ert-deftest text-blocks--vertical-gap-p--009 ()
   "position 21 in data/001 is on a vertical gap"
   :tags '(
-          not-vertical-gap
+          vertical-gap
           )
   (should
    (with-temp-buffer
