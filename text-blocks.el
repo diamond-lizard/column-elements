@@ -230,7 +230,7 @@ this function will return nil."
              top-boundary
              bottom-boundary)
             (goto-char (point-min))
-            (let ((results
+            (let ((maybe-gap-columns
                    (cl-loop
                     for leading-cols from min-leading-cols upto max-leading-cols
                     collect (progn
@@ -244,7 +244,8 @@ this function will return nil."
                                     nil
                                     t))))))
               (text-blocks--search-for-consecutive-non-nils
-               text-blocks--min-vert-cols-per-vert-gap results))))))))
+               text-blocks--min-vert-cols-per-vert-gap
+               maybe-gap-columns))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "If no argument is given, this function will look at the line
