@@ -33,7 +33,7 @@
 (defvar text-blocks--block-row-delimiter " ")
 
 ;; A vertical gap must have at least this many vertical columns
-(defvar min-vert-cols-per-vert-gap 2)
+(defvar text-blocks--min-vert-cols-per-vert-gap 2)
 
 (require 'cl-macs)
 
@@ -214,7 +214,7 @@ this function will return nil."
             nil
           (let* ((column (current-column))
                  (min-leading-cols (+
-                                    (- column min-vert-cols-per-vert-gap)
+                                    (- column text-blocks--min-vert-cols-per-vert-gap)
                                     1))
                  (min-leading-cols (if (< min-leading-cols 0)
                                        0
@@ -244,7 +244,7 @@ this function will return nil."
                                     nil
                                     t))))))
               (text-blocks--search-for-consecutive-non-nils
-               min-vert-cols-per-vert-gap results))))))))
+               text-blocks--min-vert-cols-per-vert-gap results))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
   "If no argument is given, this function will look at the line
