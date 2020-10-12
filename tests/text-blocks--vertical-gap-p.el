@@ -226,4 +226,144 @@
      (goto-char 24)
      (text-blocks--vertical-gap-p))))
 
+(ert-deftest text-blocks--vertical-gap-p--019 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 25)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--020 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 26)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--021 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 27)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--022 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 32)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--023 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 42)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--024 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 43)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--025 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 233)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--026 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 234)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--027 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 168)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--028 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 252)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--029 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 253)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--030 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 269)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--031 ()
+  :tags '(
+          not-vertical-gap
+          )
+  (should-not
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 302)
+     (text-blocks--vertical-gap-p))))
+
+(ert-deftest text-blocks--vertical-gap-p--032 ()
+  :tags '(
+          vertical-gap
+          )
+  (should
+   (with-temp-buffer
+     (replace-buffer-contents text-blocks--original-data-004)
+     (goto-char 316)
+     (text-blocks--vertical-gap-p))))
+
 (provide 'text-blocks--vertical-gap-p)
