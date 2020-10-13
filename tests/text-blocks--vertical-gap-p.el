@@ -66,7 +66,8 @@
         (test-id 29 data-file-id 004 position 253 expect 'not-vertical-gap)
         (test-id 30 data-file-id 004 position 269 expect 'vertical-gap)
         (test-id 31 data-file-id 004 position 302 expect 'not-vertical-gap)
-        (test-id 32 data-file-id 004 position 316 expect 'vertical-gap)))
+        (test-id 32 data-file-id 004 position 316 expect 'vertical-gap)
+        (test-id 33 data-file-id 004 position 410 expect 'not-vertical-gap)))
 
 (defun text-blocks--create-test-name (name)
   "Generate test names like foo-001, foo-002, etc.."
