@@ -74,17 +74,23 @@
         (test-id 3 data-file-id 002 position 81)
         (test-id 4 data-file-id 003 position 78)))
 
+(setq text-blocks--test-name-prefix
+      "text-blocks--get-buffer-width--should-pass")
+(setq text-blocks--test-file-name-prefix "text-blocks--original-data-00")
+
 (defun text-blocks--create-test-name (name)
   (intern
    (format
-    "text-blocks--get-buffer-width--should-pass-%03d"
+    (concat
+     text-blocks--test-name-prefix
+     "-%03d")
     name)))
 
 (defun get-data-file-buffer-name (data-file-id)
   (symbol-value
    (intern
     (concat
-     "text-blocks--original-data-00"
+     text-blocks--test-file-name-prefix
      (number-to-string data-file-id)))))
 
 (defun text-blocks--get-test-body
