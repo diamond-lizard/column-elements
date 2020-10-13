@@ -35,6 +35,11 @@
       "text-blocks--vertical-gap-p-")
 (setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
 
+;; Some global settings that these tests assume
+(setq text-blocks--block-delimiter " ")
+(setq text-blocks--block-row-delimiter " ")
+(setq text-blocks--min-vert-cols-per-vert-gap 2)
+
 (setq text-blocks--test-metadata
       '((test-id 02 data-file-id 001 position 001 expect 'not-vertical-gap)
         (test-id 03 data-file-id 001 position 004 expect 'not-vertical-gap)
