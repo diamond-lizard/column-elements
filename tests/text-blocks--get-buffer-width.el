@@ -70,9 +70,9 @@
 
 
 (setq test-metadata
-      '((test-id 2 data-file-id 001 position 12)
-        (test-id 3 data-file-id 002 position 81)
-        (test-id 4 data-file-id 003 position 78)))
+      '((test-id 2 data-file-id 001 expected-buffer-width 12)
+        (test-id 3 data-file-id 002 expected-buffer-width 81)
+        (test-id 4 data-file-id 003 expected-buffer-width 78)))
 
 (setq text-blocks--test-name-prefix
       "text-blocks--get-buffer-width--should-pass")
@@ -119,7 +119,8 @@
  for test-metadata-element in test-metadata
  do (let* ((test-id (plist-get test-metadata-element 'test-id))
            (data-file-id (plist-get test-metadata-element 'data-file-id))
-           (expected-buffer-width (plist-get test-metadata-element 'position))
+           (expected-buffer-width
+            (plist-get test-metadata-element 'expected-buffer-width))
            (name (text-blocks--create-test-name test-id)))
       (ert-set-test
        name
