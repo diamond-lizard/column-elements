@@ -130,4 +130,4 @@
                data-file-id
                expected-buffer-width)))))
 
-(provide 'text-blocks--get-buffer-width-2)
+(provide 'text-blocks--get-buffer-width)
