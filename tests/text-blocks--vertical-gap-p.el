@@ -38,7 +38,7 @@
 ;; Some global settings that these tests assume
 (setq text-blocks--block-delimiter " ")
 (setq text-blocks--block-row-delimiter " ")
-(setq text-blocks--min-vert-cols-per-vert-gap 2)
+(setq text-blocks--min-cols-per-vert-gap 2)
 
 (setq text-blocks--test-metadata
       '((test-id 02 data-file-id 001 position 001 expect 'not-vertical-gap)

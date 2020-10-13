@@ -32,8 +32,8 @@
 ;; What to use as a delimiter to determine block row boundaries.
 (defvar text-blocks--block-row-delimiter " ")
 
-;; A vertical gap must have at least this many vertical columns
-(defvar text-blocks--min-vert-cols-per-vert-gap 2)
+;; A vertical gap must have at least this many columns
+(defvar text-blocks--min-cols-per-vert-gap 2)
 
 (require 'cl-macs)
 
@@ -218,7 +218,7 @@ this function will return nil."
                  (min-leading-cols
                   (+ 1
                      (- column
-                        text-blocks--min-vert-cols-per-vert-gap)))
+                        text-blocks--min-cols-per-vert-gap)))
                  ;; min-leading-cols should never be less than 0
                  ;; as it's impossible prepend the search with
                  ;; less than 0 characters
@@ -272,7 +272,7 @@ this function will return nil."
                                     nil
                                     t))))))
               (text-blocks--search-for-consecutive-non-nils
-               text-blocks--min-vert-cols-per-vert-gap
+               text-blocks--min-cols-per-vert-gap
                maybe-gap-columns))))))))
 
 (defun text-blocks--horizontal-gap-p (&optional desired-line)
