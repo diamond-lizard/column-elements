@@ -112,28 +112,30 @@
                 (goto-char ,position)
                 (text-blocks--vertical-gap-p))))
          (cond
-           ((equal t result) (cond
-               ((equal ,expect 'vertical-gap) (ert-pass))
-               ((equal ,expect 'not-vertical-gap)
-                (ert-fail
-                 (print
-                  (format
-                   "At position '%s' in file '%s' expected non-gap but got gap"
-                   ,position ,data-file-id))))))
-           ((equal nil result) (cond
-                 ((equal ,expect 'not-vertical-gap) (ert-pass))
-                 ((equal ,expect 'vertical-gap)
-                  (ert-fail
-                   (print
-                    (format
-                     "At position '%s' in file '%s' expected gap but got not-gap"
-                     ,position ,data-file-id))))))
-           ('otherwise
-            (ert-fail
-             (print
-              (format
-               "Unexpected test result '%s'.  This should always be t or nil."
-               result)))))))))
+          ((equal t result)
+           (cond
+            ((equal ,expect 'vertical-gap) (ert-pass))
+            ((equal ,expect 'not-vertical-gap)
+             (ert-fail
+              (print
+               (format
+                "At position '%s' in file '%s' expected non-gap but got gap"
+                ,position ,data-file-id))))))
+          ((equal nil result)
+           (cond
+            ((equal ,expect 'not-vertical-gap) (ert-pass))
+            ((equal ,expect 'vertical-gap)
+             (ert-fail
+              (print
+               (format
+                "At position '%s' in file '%s' expected gap but got not-gap"
+                ,position ,data-file-id))))))
+          ('otherwise
+           (ert-fail
+            (print
+             (format
+              "Unexpected test result '%s'.  This should always be t or nil."
+              result)))))))))
 
 ;; These tests should all pass
 (cl-loop
