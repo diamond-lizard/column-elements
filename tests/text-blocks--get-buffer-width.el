@@ -81,9 +81,8 @@
 (defun text-blocks--create-test-name (name)
   (intern
    (format
-    (concat
-     text-blocks--test-name-prefix
-     "-%03d")
+    "%s-%03d"
+    text-blocks--test-name-prefix
     name)))
 
 (defun get-data-file-buffer-name (data-file-id)
