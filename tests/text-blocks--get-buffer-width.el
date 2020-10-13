@@ -17,6 +17,9 @@
 
 (require 'text-blocks)
 
+;; For cl-loop
+(require 'cl-macs)
+
 ;; Binding test
 ;;
 (ert-deftest text-blocks--get-buffer-width-001 ()
@@ -62,86 +65,63 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; buffer-width of data 001
-;;
-(ert-deftest text-blocks--get-buffer-width--002 ()
-  "Finds the buffer width of data 001"
-  :tags '(
-          buffer-width
-          )
-  (should
-   (equal
-    (with-temp-buffer
-      (replace-buffer-contents text-blocks--original-data-001)
-      (text-blocks--get-buffer-width))
-    12)))
 
-;;
-;; END - buffer-width of data 001
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq ert-batch-backtrace-right-margin 400)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; buffer width of data 002
-;;
-(ert-deftest text-blocks--get-buffer-width--003 ()
-  "Finds the buffer width of data 002"
-  :tags '(
-          buffer-width
-          )
-  (should
-   (equal
-    (with-temp-buffer
-      (replace-buffer-contents text-blocks--original-data-002)
-      (text-blocks--get-buffer-width))
-    81)))
 
-;; END - buffer width of data 002
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq test-metadata
+      '((test-id 2 data-file-id 001 position 12)
+        (test-id 3 data-file-id 002 position 81)
+        (test-id 4 data-file-id 003 position 78)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; buffer width of data 003
-;;
-(ert-deftest text-blocks--get-buffer-width--004 ()
-  "Finds the buffer width of data 003"
-  :tags '(
-          buffer-width
-          )
-  (should
-   (equal
-    (with-temp-buffer
-      (replace-buffer-contents text-blocks--original-data-003)
-      (text-blocks--get-buffer-width))
-    78)))
+(defun text-blocks--create-test-name (name)
+  (intern
+   (format
+    "text-blocks--get-buffer-width--should-pass-%03d"
+    name)))
 
-;; END - buffer width of data 002
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun get-data-file-buffer-name (data-file-id)
+  (symbol-value
+   (intern
+    (concat
+     "text-blocks--original-data-00"
+     (number-to-string data-file-id)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; buffer width of empty buffer
-;;
+(defun text-blocks--get-test-body
+    (data-file-id
+     expected-buffer-width)
+  (let ((data-file-buffer-name
+         (get-data-file-buffer-name data-file-id)))
+    `(lambda ()
+       (let ((actual-buffer-width
+              (with-temp-buffer
+                (replace-buffer-contents
+                 ,data-file-buffer-name)
+                (text-blocks--get-buffer-width))))
+         (if (equal
+              actual-buffer-width
+              ,expected-buffer-width)
+             (ert-pass)
+           (ert-fail
+            (print
+             (format "Expected buffer width '%s' but got '%s'"
+                     ,expected-buffer-width
+                     actual-buffer-width))))))))
 
-(ert-deftest text-blocks--get-buffer-width--003 ()
-  "'left errors out on an empty buffer"
-  :tags '(
-          empty-buffer
-          )
-  (should
-   (equal
-    (with-temp-buffer
-      (text-blocks--get-buffer-width))
-    0)))
+;; These tests should all pass
+(cl-loop
+ for test-metadata-element in test-metadata
+ do (let* ((test-id (plist-get test-metadata-element 'test-id))
+           (data-file-id (plist-get test-metadata-element 'data-file-id))
+           (expected-buffer-width (plist-get test-metadata-element 'position))
+           (name (text-blocks--create-test-name test-id)))
+      (ert-set-test
+       name
+       (make-ert-test
+        :expected-result-type :passed
+        :name name
+        :body (text-blocks--get-test-body
+               data-file-id
+               expected-buffer-width)))))
 
-;;
-;; END - buffer width of empty buffer
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(provide 'text-blocks--get-buffer-width)
+(provide 'text-blocks--get-buffer-width-2)
