@@ -17,7 +17,7 @@
 
 (require 'text-blocks)
 
-(ert-deftest text-blocks--horizontal-gap-p--001 ()
+(ert-deftest text-blocks--001--horizontal-gap-p--is-bound ()
   "Make sure that text-blocks--horizontal-gap-p is bound"
   :tags '(
           bindings
