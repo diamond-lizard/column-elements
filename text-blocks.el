@@ -278,9 +278,9 @@ this function will return nil."
                text-blocks--min-cols-per-vert-gap
                maybe-gap-columns))))))))
 
-(defun text-blocks--horizontal-gap-line-p (&optional desired-line)
+(defun text-blocks--horizontal-gap-line-p (&optional line-to-check)
   "If no argument is given, this function will look at the line at
-point, while if the `desired-line' argument is given, this function
+point, while if the `line-to-check' argument is given, this function
 will look at that line instead.
 
 If whichever of these lines the function looks at is a horizontal gap
@@ -289,19 +289,19 @@ line, then it returns t, otherwise nil.
 A horizontal gap line is a line that is either empty or contains
 no other characters than those in `text-blocks--block-row-delimiter'"
   (interactive)
-  (let ((desired-line
-         (if (equal desired-line nil)
+  (let ((line-to-check
+         (if (equal line-to-check nil)
              (line-number-at-pos)
-           desired-line)))
+           line-to-check)))
     (save-excursion
       (save-restriction
         (goto-char (point-min))
-        (forward-line (- desired-line 1))
+        (forward-line (- line-to-check 1))
         (let ((current-line
                (line-number-at-pos)))
           (if (not (equal
                     current-line
-                    desired-line))
+                    line-to-check))
               (error
                "text-blocks--horizontal-gap-line-p: Error: line outside of buffer.")
             (cond
@@ -321,9 +321,9 @@ no other characters than those in `text-blocks--block-row-delimiter'"
              (t
               nil))))))))
 
-(defun text-blocks--horizontal-gap-p (&optional desired-line)
+(defun text-blocks--horizontal-gap-p (&optional line-to-check)
   "If no argument is given, this function will look at the line at point,
-while if the `desired-line' argument is given, this function will look
+while if the `line-to-check' argument is given, this function will look
 at that line instead.
 
 If whichever of these lines the function looks at is on a horizontal gap,
@@ -333,24 +333,24 @@ A horizontal gap is made of at least text-blocks--min-lines-per-horiz-gap
 lines, each of which must be either empty or contain no other characters
 than those in `text-blocks--block-row-delimiter'"
   (interactive)
-  (let ((desired-line
-         (if (equal desired-line nil)
+  (let ((line-to-check
+         (if (equal line-to-check nil)
              (line-number-at-pos)
-           desired-line)))
-    (if (text-blocks--horizontal-gap-line-p desired-line)
-        ;; desired-line is a horizontal gap line
+           line-to-check)))
+    (if (text-blocks--horizontal-gap-line-p line-to-check)
+        ;; line-to-check is a horizontal gap line
         (save-excursion
           (save-restriction
             (goto-char (point-min))
-            (forward-line (- desired-line 1))
-            ;; we don't need to check here whether desired-line
+            (forward-line (- line-to-check 1))
+            ;; we don't need to check here whether line-to-check
             ;; is within the buffer, as text-blocks--horizontal-gap-line-p
             ;; already did
             (let* ((current-line (line-number-at-pos))
                    (first-line
-                    (- desired-line
+                    (- line-to-check
                        text-blocks--min-lines-per-horiz-gap))
-                   (last-line desired-line)
+                   (last-line line-to-check)
                    (maybe-gap-lines
                     (cl-loop
                      for line from first-line upto last-line
@@ -362,7 +362,7 @@ than those in `text-blocks--block-row-delimiter'"
               (text-blocks--search-for-consecutive-non-nils
                text-blocks--min-lines-per-horiz-gap
                maybe-gap-lines))))
-      ;; desired-line is not a horizontal gap line
+      ;; line-to-check is not a horizontal gap line
       ;; so no need to check further
       nil)))
 
