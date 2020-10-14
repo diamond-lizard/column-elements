@@ -20,7 +20,7 @@
 ;; For cl-case:
 (require 'cl-macs)
 
-(ert-deftest text-blocks--vertical-gap-p--001 ()
+(ert-deftest text-blocks--001-verical-gap-p--is-bound ()
   "Make sure that text-blocks--vertical-gap-p is bound"
   :tags '(
           bindings
@@ -32,7 +32,7 @@
 (setq text-blocks--filename-004 "tests/data/text-blocks-test-004")
 
 (setq text-blocks--test-name-prefix
-      "text-blocks--vertical-gap-p-")
+      "text-blocks")
 (setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
 
 ;; Some global settings that these tests assume
@@ -74,13 +74,31 @@
         (test-id 32 data-file-id 004 position 316 expect 'vertical-gap)
         (test-id 33 data-file-id 004 position 410 expect 'not-vertical-gap)))
 
-(defun text-blocks--create-test-name (name)
+(defun text-blocks--create-test-name
+    (test-id
+     data-file-id
+     position
+     expect)
   "Generate test names like foo-001, foo-002, etc.."
-  (intern
-   (format
-    "%s-%03d"
-    text-blocks--test-name-prefix
-    name)))
+  (let ((expect
+         (cond
+          ((equal (cadr expect) 'vertical-gap) "vertical-gap")
+          ((equal (cadr expect) 'not-vertical-gap) "not-vertical-gap")
+          (t (error
+              (format
+               (concat
+                "text-blocks--create-test-name: "
+                "Error: "
+                "unexpected 'expect' value '%s'")
+               expect))))))
+    (intern
+     (format
+      "%s--%03d-file-%s-pos-%03d-expect-%s"
+      text-blocks--test-name-prefix
+      test-id
+      data-file-id
+      position
+      expect))))
 
 (defun get-data-file-buffer-name (data-file-id)
   (symbol-value
@@ -149,7 +167,11 @@
            (data-file-id (plist-get test-metadata-element 'data-file-id))
            (position (plist-get test-metadata-element 'position))
            (expect (plist-get test-metadata-element 'expect))
-           (name (text-blocks--create-test-name test-id)))
+           (name (text-blocks--create-test-name
+                  test-id
+                  data-file-id
+                  position
+                  expect)))
       (ert-set-test
        name
        (make-ert-test
