@@ -303,7 +303,8 @@ must be either empty or contain only text-blocks--block-row-delimiter"
           (if (not (equal
                     current-line
                     desired-line))
-              (error "text-blocks--horizontal-gap-p: Error: line outside of buffer.")
+              (error
+               "text-blocks--horizontal-gap-p: Error: line outside of buffer.")
             (cond
              ;; An empty line:
              ((equal (line-beginning-position) (line-end-position))
