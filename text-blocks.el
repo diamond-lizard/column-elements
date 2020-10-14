@@ -32,6 +32,9 @@
 ;; What to use as a delimiter to determine block row boundaries.
 (defvar text-blocks--block-row-delimiter " ")
 
+;; A horizontal gap must have at least this many lines
+(defvar text-blocks--min-lines-per-horiz-gap 2)
+
 ;; A vertical gap must have at least this many columns
 (defvar text-blocks--min-cols-per-vert-gap 2)
 
@@ -280,9 +283,12 @@ this function will return nil."
 at point, while if the `desired-line' argument is given, this
 function will look at that line instead.
 
-If whichever of these lines the function looks at is either empty
-or contains only block row delimiters then it will return t,
-otherwise it will return nil."
+If whichever of these lines the function looks at is on a
+horizontal gap, then it returns t, otherwise nil.
+
+A horizontal gap is made of at least
+text-blocks--min-lines-per-horiz-gap lines, each of which
+must be either empty or contain only text-blocks--block-row-delimiter"
   (interactive)
   (let ((desired-line
          (if (equal desired-line nil)
