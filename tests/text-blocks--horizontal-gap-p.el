@@ -235,7 +235,7 @@
      (replace-buffer-contents text-blocks--original-data-004)
      (text-blocks--horizontal-gap-p 0))))
 
-(ert-deftest text-blocks--horizontal-gap-p--017 ()
+(ert-deftest text-blocks--horizontal-gap-p--019 ()
   "Trying to check whether line -1 is a horizontal gap should error"
   :tags '(
           horizontal-gap
@@ -245,7 +245,7 @@
      (replace-buffer-contents text-blocks--original-data-004)
      (text-blocks--horizontal-gap-p -1))))
 
-(ert-deftest text-blocks--horizontal-gap-p--018 ()
+(ert-deftest text-blocks--horizontal-gap-p--020 ()
   "Point in an empty buffer is on a horizontal gap"
   :tags '(
           horizontal-gap
