@@ -346,17 +346,16 @@ than those in `text-blocks--block-row-delimiter'"
             ;; we don't need to check here whether line-to-check
             ;; is within the buffer, as text-blocks--horizontal-gap-line-p
             ;; already did
-            (let* ((current-line (line-number-at-pos))
-                   (first-line
+            (let* ((first-line
                     (- line-to-check
                        text-blocks--min-lines-per-horiz-gap))
                    (last-line line-to-check)
                    (maybe-gap-lines
                     (cl-loop
-                     for line from first-line upto last-line
+                     for current-line from first-line upto last-line
                      collect (progn
                                (goto-char (point-min))
-                               (forward-line line)
+                               (forward-line current-line)
                                (text-blocks--horizontal-gap-line-p
                                 (line-number-at-pos))))))
               (text-blocks--search-for-consecutive-non-nils
