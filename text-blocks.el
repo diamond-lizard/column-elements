@@ -388,6 +388,13 @@ than those in `text-blocks--block-row-delimiter'"
          maximize buffer-width
          finally return buffer-width)))))
 
+(defun text-blocks--get-number-of-last-line-in-buffer ()
+  "Returns the line number of the last line in the buffer."
+  (save-excursion
+    (save-restriction
+      (goto-char (point-max))
+      (line-number-at-pos))))
+
 (defun text-blocks--search-for-consecutive-elements (n pred list-to-search)
   "Search for n consecutive elements in list-to-search
 that pass the predicate."

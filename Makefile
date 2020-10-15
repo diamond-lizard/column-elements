@@ -21,6 +21,7 @@ TEST_DIR := tests
 TESTS :=
 TESTS += text-blocks--search-for-consecutive-non-nils
 TESTS += text-blocks--get-buffer-width
+TESTS += text-blocks--get-number-of-last-line-in-buffer
 TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--horizontal-gap-p-02
 TESTS += text-blocks--horizontal-gap-p-03
@@ -44,6 +45,9 @@ compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 test: $(TESTS)
 
 text-blocks--get-buffer-width: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--get-number-of-last-line-in-buffer: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--block-boundaries-at-point: compile
