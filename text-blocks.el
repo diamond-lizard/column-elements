@@ -157,32 +157,56 @@ the block at point."
      first-char-on-top-line
      last-char-on-bottom-line))))
 
-(defun text-blocks--vertical-gap-column-p (column)
-  "Returns t if `COLUMN' contains only block delimiters,
-otherwise returns nil."
-  (when (< column 0)
-    (error
-     "text-blocks--vertical-gap-column-p: Error: COLUMN must not be < 0"))
-                                        ; Detect empty buffers
+(defun text-blocks--vertical-gap-column-p (column &optional line)
+  "Returns non-nil if `column' in the row of blocks that the
+current line or the given `line' is on is on a vertical gap,
+otherwise returns nil.
+"
   (if (equal
        (point-min)
        (point-max))
       ;; Empty buffer
-      (error "text-blocks--vertical-gap-column-p: Error: Empty buffer detected.")
+      nil
     ;; Not empty buffer
-    (save-excursion
-      (save-restriction
-        (goto-char (point-min))
-        (not
-         (condition-case nil
-             (re-search-forward
-              (rx-to-string
-               `(seq
-                 line-start
-                 (= ,column anychar)
-                 (not
-                  (any ,text-blocks--block-delimiter)))))
-           (search-failed nil)))))))
+    (if (< column 0)
+        (error
+         "text-blocks--vertical-gap-column-p: Error: COLUMN < 0")
+      (let* ((line
+              (if line
+                  line
+                (line-number-at-pos))))
+        (save-excursion
+          (save-restriction
+            (goto-char (point-min))
+            (forward-line (- line 1))
+            (if (text-blocks--horizontal-gap-line-p)
+                nil
+              (let ((top-boundary
+                     (text-blocks--block-boundaries-at-point 'top))
+                    (bottom-boundary
+                     (text-blocks--block-boundaries-at-point 'bottom)))
+                (goto-char (point-min))
+                (forward-line (- top-boundary 1))
+                (let ((start-of-region (line-beginning-position)))
+                  (goto-char (point-min))
+                  (goto-char (- bottom-boundary 1))
+                  (let ((end-of-region (line-end-position)))
+                    (narrow-to-region start-of-region end-of-region)))
+                (let ((buffer-width (text-blocks--get-buffer-width)))
+                  (if
+                      (> column buffer-width)
+                      (error
+                       (concat
+                        "text-blocks--vertical-gap-column-p: "
+                        "Error: COLUMN > %s (longest line in this row of blocks)")
+                       buffer-width)
+                    (let* ((longest-line
+                            (text-blocks--line-number-of-longest-line)))
+                      (goto-char (point-min))
+                      (forward-line (- longest-line 1))
+                      (goto-char (line-beginning-position))
+                      (forward-char column)
+                      (text-blocks--vertical-gap-p (point)))))))))))))
 
 (defun text-blocks--vertical-gap-p (&optional position)
   "If given a `POSITION', return t if the position in
