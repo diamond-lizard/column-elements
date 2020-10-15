@@ -72,28 +72,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Automatically generated tests
+;; Automatic test generation functions
 ;;
-
-(setq text-blocks--test-metadata
-      '((test-id 03 data-file-id 004 position 001 expect 'horizontal-gap)
-        (test-id 04 data-file-id 004 position 004 expect 'horizontal-gap)
-        (test-id 05 data-file-id 004 position 007 expect 'not-horizontal-gap)
-        (test-id 06 data-file-id 004 position 250 expect 'not-horizontal-gap)
-        (test-id 07 data-file-id 004 position 252 expect 'horizontal-gap)
-        (test-id 08 data-file-id 004 position 253 expect 'not-horizontal-gap)
-        (test-id 09 data-file-id 004 position 412 expect 'horizontal-gap)
-        (test-id 10 data-file-id 004 line 01 expect 'horizontal-gap)
-        (test-id 11 data-file-id 004 line 02 expect 'horizontal-gap)
-        (test-id 12 data-file-id 004 line 03 expect 'not-horizontal-gap)
-        (test-id 13 data-file-id 004 line 05 expect 'not-horizontal-gap)
-        (test-id 14 data-file-id 004 line 06 expect 'horizontal-gap)
-        (test-id 15 data-file-id 004 line 07 expect 'not-horizontal-gap)
-        (test-id 16 data-file-id 004 line 10 expect 'horizontal-gap)
-        (test-id 17 data-file-id 004 line 11 expect 'horizontal-gap)
-        (test-id 18 data-file-id 004 line 12 expect 'error)
-        (test-id 19 data-file-id 004 line 00 expect 'error)
-        (test-id 20 data-file-id 004 line -1 expect 'error)))
 
 (defun text-blocks--create-test-name
     (text-blocks--test-metadata-element)
@@ -238,6 +218,36 @@
               "Unexpected test result '%s'.  This should always be t or nil."
               horizontal-gap-test-result)))))))))
 
+;;
+;; End of automatic test generation functions
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Automatically generated tests - 01
+;;
+
+(setq text-blocks--test-metadata
+      '((test-id 03 data-file-id 004 position 001 expect 'horizontal-gap)
+        (test-id 04 data-file-id 004 position 004 expect 'horizontal-gap)
+        (test-id 05 data-file-id 004 position 007 expect 'not-horizontal-gap)
+        (test-id 06 data-file-id 004 position 250 expect 'not-horizontal-gap)
+        (test-id 07 data-file-id 004 position 252 expect 'horizontal-gap)
+        (test-id 08 data-file-id 004 position 253 expect 'not-horizontal-gap)
+        (test-id 09 data-file-id 004 position 412 expect 'horizontal-gap)
+        (test-id 10 data-file-id 004 line 01 expect 'horizontal-gap)
+        (test-id 11 data-file-id 004 line 02 expect 'horizontal-gap)
+        (test-id 12 data-file-id 004 line 03 expect 'not-horizontal-gap)
+        (test-id 13 data-file-id 004 line 05 expect 'not-horizontal-gap)
+        (test-id 14 data-file-id 004 line 06 expect 'horizontal-gap)
+        (test-id 15 data-file-id 004 line 07 expect 'not-horizontal-gap)
+        (test-id 16 data-file-id 004 line 10 expect 'horizontal-gap)
+        (test-id 17 data-file-id 004 line 11 expect 'horizontal-gap)
+        (test-id 18 data-file-id 004 line 12 expect 'error)
+        (test-id 19 data-file-id 004 line 00 expect 'error)
+        (test-id 20 data-file-id 004 line -1 expect 'error)))
+
 ;; Read in test file 004, if it exists.
 (if (file-exists-p text-blocks--filename-004)
     (setq text-blocks--original-data-004
@@ -261,7 +271,7 @@
                text-blocks--test-metadata-element)))))
 
 ;;
-;; End of automatically generated tests
+;; End of automatically generated tests - 01
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
