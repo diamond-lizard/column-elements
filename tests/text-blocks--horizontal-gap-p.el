@@ -51,201 +51,12 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Read in test file 004, if it exists.
-(if (file-exists-p text-blocks--filename-004)
-    (setq text-blocks--original-data-004
-          (find-file-read-only text-blocks--filename-004))
-  (error "File '%s' does not exist" text-blocks--filename-004))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Tests that need to be written manually
+;;
 
-
-(ert-deftest text-blocks--horizontal-gap-p--002 ()
-  "position 1 in data/004 is on a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 1)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--003 ()
-  "position 4 in data/004 is on a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 4)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--004 ()
-  "position 7 in data/004 is not on a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 7)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--005 ()
-  "position 250 in data/004 is not on a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 250)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--006 ()
-  "position 252 in data/004 is on a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 252)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--007 ()
-  "position 253 in data/004 is not on a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 253)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--008 ()
-  "position 412 in data/004 is on a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (goto-char 412)
-     (text-blocks--horizontal-gap-p))))
-
-(ert-deftest text-blocks--horizontal-gap-p--009 ()
-  "line 1 in data/004 is a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 1))))
-
-(ert-deftest text-blocks--horizontal-gap-p--010 ()
-  "line 2 in data/004 is a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 2))))
-
-(ert-deftest text-blocks--horizontal-gap-p--011 ()
-  "line 3 in data/004 is not a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 3))))
-
-(ert-deftest text-blocks--horizontal-gap-p--012 ()
-  "line 5 in data/004 is not a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 5))))
-
-(ert-deftest text-blocks--horizontal-gap-p--013 ()
-  "line 6 in data/004 is a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 6))))
-
-(ert-deftest text-blocks--horizontal-gap-p--014 ()
-  "line 7 in data/004 is not a horizontal gap"
-  :tags '(
-          not-horizontal-gap
-          )
-  (should-not
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 7))))
-
-(ert-deftest text-blocks--horizontal-gap-p--015 ()
-  "line 10 in data/004 is a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 10))))
-
-(ert-deftest text-blocks--horizontal-gap-p--016 ()
-  "line 11 in data/004 is a horizontal gap"
-  :tags '(
-          horizontal-gap
-          )
-  (should
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 11))))
-
-(ert-deftest text-blocks--horizontal-gap-p--017 ()
-  "Trying to check whether line 12 is a horizontal gap should error"
-  :tags '(
-          horizontal-gap
-          )
-  (should-error
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 12))))
-
-(ert-deftest text-blocks--horizontal-gap-p--018 ()
-  "Trying to check whether line 0 is a horizontal gap should error"
-  :tags '(
-          horizontal-gap
-          )
-  (should-error
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p 0))))
-
-(ert-deftest text-blocks--horizontal-gap-p--019 ()
-  "Trying to check whether line -1 is a horizontal gap should error"
-  :tags '(
-          horizontal-gap
-          )
-  (should-error
-   (with-temp-buffer
-     (replace-buffer-contents text-blocks--original-data-004)
-     (text-blocks--horizontal-gap-p -1))))
-
-(ert-deftest text-blocks--horizontal-gap-p--020 ()
+(ert-deftest text-blocks--002--horizontal-gap-p ()
   "Point in an empty buffer is on a horizontal gap"
   :tags '(
           horizontal-gap
@@ -253,5 +64,205 @@
   (should
    (with-temp-buffer
      (text-blocks--horizontal-gap-p))))
+
+;;
+;; End of tests that need to be written manually
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Automatically generated tests
+;;
+
+(setq text-blocks--test-metadata
+      '((test-id 03 data-file-id 004 position 001 expect 'horizontal-gap)
+        (test-id 04 data-file-id 004 position 004 expect 'horizontal-gap)
+        (test-id 05 data-file-id 004 position 007 expect 'not-horizontal-gap)
+        (test-id 06 data-file-id 004 position 250 expect 'not-horizontal-gap)
+        (test-id 07 data-file-id 004 position 252 expect 'horizontal-gap)
+        (test-id 08 data-file-id 004 position 253 expect 'not-horizontal-gap)
+        (test-id 09 data-file-id 004 position 412 expect 'horizontal-gap)
+        (test-id 10 data-file-id 004 line 01 expect 'horizontal-gap)
+        (test-id 11 data-file-id 004 line 02 expect 'horizontal-gap)
+        (test-id 12 data-file-id 004 line 03 expect 'not-horizontal-gap)
+        (test-id 13 data-file-id 004 line 05 expect 'not-horizontal-gap)
+        (test-id 14 data-file-id 004 line 06 expect 'horizontal-gap)
+        (test-id 15 data-file-id 004 line 07 expect 'not-horizontal-gap)
+        (test-id 16 data-file-id 004 line 10 expect 'horizontal-gap)
+        (test-id 17 data-file-id 004 line 11 expect 'horizontal-gap)
+        (test-id 18 data-file-id 004 line 12 expect 'error)
+        (test-id 19 data-file-id 004 line 00 expect 'error)
+        (test-id 20 data-file-id 004 line -1 expect 'error)))
+
+(defun text-blocks--create-test-name
+    (text-blocks--test-metadata-element)
+  "Generate test names like foo-001, foo-002, etc.."
+  (let* ((test-id (plist-get text-blocks--test-metadata-element 'test-id))
+         (data-file-id (plist-get text-blocks--test-metadata-element 'data-file-id))
+         (position (plist-get text-blocks--test-metadata-element 'position))
+         (line (plist-get text-blocks--test-metadata-element 'line))
+         (expect (plist-get text-blocks--test-metadata-element 'expect))
+         (expect
+          (cond
+           ((equal (cadr expect) 'horizontal-gap) "horizontal-gap")
+           ((equal (cadr expect) 'not-horizontal-gap) "not-horizontal-gap")
+           ((equal (cadr expect) 'error) "error")
+           (t (error
+               (format
+                (concat
+                 "text-blocks--create-test-name: "
+                 "Error: "
+                 "unexpected 'expect' value '%s'")
+                expect)))))
+         (position-or-line-string
+          (cond
+           (position "pos")
+           (line "line")
+           (t (error
+               (format
+                (concat
+                 "text-blocks--create-test-name: "
+                 "Error: "
+                 "Could not find a position or line in test metadata")))))))
+    (intern
+     (format
+      "%s--%03d-file-%s-%s-%03d-expect-%s"
+      text-blocks--test-name-prefix
+      test-id
+      data-file-id
+      position-or-line-string
+      (if position
+          position
+        line)
+      expect))))
+
+(defun get-data-file-buffer-name (data-file-id)
+  (symbol-value
+   (intern
+    (concat
+     text-blocks--test-buffer-name-prefix
+     (number-to-string data-file-id)))))
+
+;; Automated generation of test bodies
+(defun text-blocks--get-test-body
+    (text-blocks--test-metadata-element)
+  (let* ((test-id (plist-get text-blocks--test-metadata-element 'test-id))
+         (data-file-id (plist-get text-blocks--test-metadata-element 'data-file-id))
+         (position (plist-get text-blocks--test-metadata-element 'position))
+         (line (plist-get text-blocks--test-metadata-element 'line))
+         (expect (plist-get text-blocks--test-metadata-element 'expect))
+         (data-file-buffer-name
+          (get-data-file-buffer-name data-file-id)))
+    `(lambda ()
+       (let ((horizontal-gap-test-result
+              (with-temp-buffer
+                (replace-buffer-contents
+                 ,data-file-buffer-name)
+                (if (equal ,expect 'error)
+                    (should-error
+                     (cond
+                      (,position
+                       (progn
+                         (goto-char ,position)
+                         (text-blocks--horizontal-gap-p)))
+                      (,line (text-blocks--horizontal-gap-p ,line))
+                      (t
+                       (ert-fail
+                        (print
+                         (format
+                          "Expected a line or a position, but found neither"))))))
+                  (cond
+                   (,position
+                    (progn
+                      (goto-char ,position)
+                      (text-blocks--horizontal-gap-p)))
+                   (,line (text-blocks--horizontal-gap-p ,line))
+                   (t
+                    (ert-fail
+                     (print
+                      (format
+                       "Expected a line or a position, but found neither")))))))))
+         (cond
+          ((equal horizontal-gap-test-result t)
+           (cond
+            ((equal ,expect 'horizontal-gap) (ert-pass))
+            ((equal ,expect 'not-horizontal-gap)
+             (ert-fail
+              (print
+               (format
+                "At %s '%s' in file '%s' expected non-gap but got gap"
+                (if ,position
+                    "position"
+                  "line")
+                (if ,position
+                    ,position
+                  ,line)
+                ,data-file-id))))))
+          ((equal horizontal-gap-test-result nil)
+           (cond
+            ((equal ,expect 'not-horizontal-gap) (ert-pass))
+            ((equal ,expect 'horizontal-gap)
+             (ert-fail
+              (print
+               (format
+                "At %s '%s' in file '%s' expected gap but got not-gap"
+                (if ,position
+                    "position"
+                  "line")
+                (if ,position
+                    ,position
+                  ,line)
+                ,data-file-id))))))
+          ;; Expected errors should pass
+          ;;
+          ;; On error, ERT's should-error returns a cons pair
+          ;; containing 'error as the first element,
+          ;; so if we are expecting an error, we check for that
+          ((and
+            (equal
+             ,expect
+             'error)
+            (equal
+             (type-of horizontal-gap-test-result)
+             'cons)
+            (equal
+             (car horizontal-gap-test-result)
+             'error))
+           (ert-pass))
+          ;; Everything else fails
+          ('otherwise
+           (ert-fail
+            (print
+             (format
+              "Unexpected test result '%s'.  This should always be t or nil."
+              horizontal-gap-test-result)))))))))
+
+;; Read in test file 004, if it exists.
+(if (file-exists-p text-blocks--filename-004)
+    (setq text-blocks--original-data-004
+          (find-file-read-only text-blocks--filename-004))
+  (error "File '%s' does not exist" text-blocks--filename-004))
+
+;; Automatic test generation
+(cl-loop
+ for text-blocks--test-metadata-element in text-blocks--test-metadata
+ do (let* ((name (text-blocks--create-test-name
+                  text-blocks--test-metadata-element))
+           (expect (plist-get text-blocks--test-metadata-element 'expect)))
+      (ert-set-test
+       name
+       (make-ert-test
+        :expected-result-type (if (equal expect 'error)
+                                  :error
+                                :passed)
+        :name name
+        :body (text-blocks--get-test-body
+               text-blocks--test-metadata-element)))))
+
+;;
+;; End of automatically generated tests
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'text-blocks--horizontal-gap-p)
