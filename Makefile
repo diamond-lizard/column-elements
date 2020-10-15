@@ -23,6 +23,7 @@ TESTS += text-blocks--search-for-consecutive-non-nils
 TESTS += text-blocks--get-buffer-width
 TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--horizontal-gap-p-02
+TESTS += text-blocks--horizontal-gap-p-03
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--block-boundaries-at-point
@@ -58,6 +59,9 @@ text-blocks--horizontal-gap-p: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--horizontal-gap-p-02: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--horizontal-gap-p-03: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--search-for-consecutive-non-nils: compile
