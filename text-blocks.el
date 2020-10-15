@@ -392,6 +392,9 @@ than those in `text-blocks--block-row-delimiter'"
   "Return the line number of the longest line within
 the current buffer, or if `top' and `bottom' line
 boundaries are given, within them (inclusive).
+
+If there is one such line, the one closest to the top of the buffer
+is returned.
 "
   (let ((top
          (if top
