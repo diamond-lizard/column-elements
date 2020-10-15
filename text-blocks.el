@@ -388,6 +388,62 @@ than those in `text-blocks--block-row-delimiter'"
          maximize buffer-width
          finally return buffer-width)))))
 
+(defun text-blocks--line-number-of-longest-line (&optional top bottom)
+  "Return the line number of the longest line within
+the current buffer, or if `top' and `bottom' line
+boundaries are given, within them (inclusive).
+"
+  (let ((top
+         (if top
+             top
+           1))
+        (bottom
+         (if bottom
+             bottom
+           (save-excursion
+             (goto-char (point-max))
+             (line-number-at-pos)))))
+    (cond
+     ((< top 1)
+      (error
+       (concat
+        "text-blocks--get-longest-line-within-bounds: "
+        "Error: "
+        "Given top line '%s' < 1 (first line in buffer)")
+       top))
+     ((> bottom (text-blocks--get-number-of-last-line-in-buffer))
+      (error
+       (concat
+        "text-blocks--get-longest-line-within-bounds: "
+        "Error: "
+        "Given bottom line '%s' > '%s' (last line in buffer)")
+       bottom
+       (text-blocks--get-number-of-last-line-in-buffer)))
+     (t
+      (save-excursion
+        (save-restriction
+          (goto-char (point-min))
+          (forward-line (- top 1))
+          (if (equal top bottom)
+              (line-number-at-pos)
+            (let ((longest-line-number (line-number-at-pos))
+                  (longest-line-length
+                   (- (line-end-position) (line-beginning-position))))
+              (cl-loop
+               for line-number from top upto bottom
+               do (progn
+                    (forward-line)
+                    (let ((current-line-length
+                           (- (line-end-position)
+                              (line-beginning-position))))
+                      (when (> current-line-length longest-line-length)
+                        (progn
+                          (setq longest-line-length
+                                current-line-length)
+                          (setq longest-line-number
+                                (+ line-number 1))))))
+               finally return longest-line-number)))))))))
+
 (defun text-blocks--get-number-of-last-line-in-buffer ()
   "Returns the line number of the last line in the buffer."
   (save-excursion
