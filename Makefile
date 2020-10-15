@@ -25,6 +25,7 @@ TESTS += text-blocks--get-number-of-last-line-in-buffer
 TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--horizontal-gap-p-02
 TESTS += text-blocks--horizontal-gap-p-03
+TESTS += text-blocks--line-number-of-longest-line
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--block-boundaries-at-point
@@ -51,6 +52,9 @@ text-blocks--get-number-of-last-line-in-buffer: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--block-boundaries-at-point: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--line-number-of-longest-line: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--vertical-gap-p: compile
