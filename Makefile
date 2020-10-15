@@ -45,22 +45,13 @@ compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 
 test: $(TESTS)
 
+text-blocks--block-boundaries-at-point: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
 text-blocks--get-buffer-width: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--get-number-of-last-line-in-buffer: compile
-	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
-
-text-blocks--block-boundaries-at-point: compile
-	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
-
-text-blocks--line-number-of-longest-line: compile
-	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
-
-text-blocks--vertical-gap-p: compile
-	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
-
-text-blocks--vertical-gap-column-p: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--horizontal-gap-p: compile
@@ -72,7 +63,16 @@ text-blocks--horizontal-gap-p-02: compile
 text-blocks--horizontal-gap-p-03: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
+text-blocks--line-number-of-longest-line: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
 text-blocks--search-for-consecutive-non-nils: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--vertical-gap-p: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--vertical-gap-column-p: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 clean:
