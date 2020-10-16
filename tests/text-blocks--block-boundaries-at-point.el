@@ -17,6 +17,26 @@
 
 (require 'text-blocks)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Some global settings that these tests assume
+
+;; What to use as a delimiter to determine block boundaries.
+(setq text-blocks--block-delimiter " ")
+
+;; What to use as a delimiter to determine block row boundaries.
+(setq text-blocks--block-row-delimiter " ")
+
+;; A horizontal gap must have at least this many lines
+(setq text-blocks--min-lines-per-horiz-gap 1)
+
+;; A vertical gap must have at least this many columns
+(setq text-blocks--min-cols-per-vert-gap 2)
+
+;; End of global settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Binding test
 ;;
 (ert-deftest text-blocks--block-boundaries-at-point--001 ()
