@@ -50,8 +50,8 @@
 (setq text-blocks--test-metadata
       '((test-id 03 data-file-id 001 position 001 column 000 line nil expect nil)
         (test-id 04 data-file-id 001 position 006 column 000 line nil expect nil)
-        (test-id 05 data-file-id 001 position 007 column 000 line nil expect 't)
-        (test-id 06 data-file-id 001 position 008 column 000 line nil expect 't)
+        (test-id 05 data-file-id 001 position 007 column 000 line nil expect nil)
+        (test-id 06 data-file-id 001 position 008 column 000 line nil expect nil)
         (test-id 07 data-file-id 001 position 009 column 000 line nil expect nil)
         (test-id 08 data-file-id 001 position 015 column 000 line nil expect nil)))
 
