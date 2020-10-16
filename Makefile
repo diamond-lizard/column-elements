@@ -26,9 +26,9 @@ TESTS += text-blocks--horizontal-gap-p
 TESTS += text-blocks--horizontal-gap-p-02
 TESTS += text-blocks--horizontal-gap-p-03
 TESTS += text-blocks--line-number-of-longest-line
+TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-column-p-02
-TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--block-boundaries-at-point
 
 EMACS_ERT_ARGS_1 := -batch -l ert -L . -l
