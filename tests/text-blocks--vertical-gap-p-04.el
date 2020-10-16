@@ -163,7 +163,7 @@
 
 (setq default-directory (expand-file-name "../.."))
 
-;; Read in test file 004, if it exists.
+;; Read in test file 007, if it exists.
 (if (file-exists-p text-blocks--filename-007)
     (setq text-blocks--original-data-007
           (find-file-read-only text-blocks--filename-007))
