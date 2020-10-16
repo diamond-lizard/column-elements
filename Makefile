@@ -29,6 +29,7 @@ TESTS += text-blocks--line-number-of-longest-line
 TESTS += text-blocks--vertical-gap-p
 TESTS += text-blocks--vertical-gap-p-02
 TESTS += text-blocks--vertical-gap-p-03
+TESTS += text-blocks--vertical-gap-p-04
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-column-p-02
 TESTS += text-blocks--block-boundaries-at-point
@@ -79,6 +80,9 @@ text-blocks--vertical-gap-p-02: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--vertical-gap-p-03: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--vertical-gap-p-04: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--vertical-gap-column-p: compile
