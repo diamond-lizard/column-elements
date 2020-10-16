@@ -53,7 +53,14 @@
         (test-id 05 data-file-id 001 position 007 column 000 line nil expect nil)
         (test-id 06 data-file-id 001 position 008 column 000 line nil expect nil)
         (test-id 07 data-file-id 001 position 009 column 000 line nil expect nil)
-        (test-id 08 data-file-id 001 position 015 column 000 line nil expect nil)))
+        (test-id 08 data-file-id 001 position 015 column 000 line nil expect nil)
+        (test-id 09 data-file-id 001 position 001 column 005 line nil expect nil)
+        (test-id 10 data-file-id 001 position 006 column 005 line nil expect nil)
+        (test-id 11 data-file-id 001 position 007 column 005 line nil expect nil)
+        (test-id 12 data-file-id 001 position 008 column 005 line nil expect nil)
+        (test-id 13 data-file-id 001 position 009 column 005 line nil expect nil)
+        (test-id 14 data-file-id 001 position 015 column 005 line nil expect nil)
+        ))
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
