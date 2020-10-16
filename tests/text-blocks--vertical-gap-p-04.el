@@ -105,7 +105,7 @@
         (test-id 47 data-file-id 007 position 272 expect 'not-vertical-gap)
         (test-id 48 data-file-id 007 position 354 expect 'not-vertical-gap)
         (test-id 49 data-file-id 007 position 293 expect 'vertical-gap)
-        (test-id 50 data-file-id 007 position 375 expect 'not-vertical-gap)
+        (test-id 50 data-file-id 007 position 375 expect 'vertical-gap)
         (test-id 51 data-file-id 007 position 302 expect 'not-vertical-gap)
         (test-id 52 data-file-id 007 position 313 expect 'not-vertical-gap)
         ))
