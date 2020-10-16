@@ -161,6 +161,12 @@ the block at point."
   "Returns non-nil if `column' in the row of blocks that the
 current line or the given `line' is on is on a vertical gap,
 otherwise returns nil.
+
+Note that vertical gaps are detected only between
+horizontal gaps, and a position or point on a horizontal
+gap is never considered to be on a vertical gap.  So
+that if the checked position is on a horizontal gap,
+this function will return nil.
 "
   (if (equal
        (point-min)
