@@ -72,6 +72,18 @@
         (test-id 24 data-file-id 001 position 008 column 007 line nil expect 't)
         (test-id 25 data-file-id 001 position 009 column 007 line nil expect 't)
         (test-id 26 data-file-id 001 position 015 column 007 line nil expect 't)
+        (test-id 27 data-file-id 001 position 001 column 008 line nil expect nil)
+        (test-id 28 data-file-id 001 position 006 column 008 line nil expect nil)
+        (test-id 29 data-file-id 001 position 007 column 008 line nil expect nil)
+        (test-id 30 data-file-id 001 position 008 column 008 line nil expect nil)
+        (test-id 31 data-file-id 001 position 009 column 008 line nil expect nil)
+        (test-id 32 data-file-id 001 position 015 column 008 line nil expect nil)
+        (test-id 33 data-file-id 001 position 001 column 012 line nil expect nil)
+        (test-id 34 data-file-id 001 position 006 column 012 line nil expect nil)
+        (test-id 35 data-file-id 001 position 007 column 012 line nil expect nil)
+        (test-id 36 data-file-id 001 position 008 column 012 line nil expect nil)
+        (test-id 37 data-file-id 001 position 009 column 012 line nil expect nil)
+        (test-id 38 data-file-id 001 position 015 column 012 line nil expect nil)
         ))
 
 (setq text-blocks--test-name-prefix
