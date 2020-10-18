@@ -34,6 +34,7 @@ TESTS += text-blocks--vertical-gap-p-05
 TESTS += text-blocks--vertical-gap-p-06
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-column-p-02
+TESTS += text-blocks--vertical-gap-column-p-03
 TESTS += text-blocks--block-boundaries-at-point
 
 EMACS_ERT_ARGS_1 := -batch -l ert -L . -l
@@ -97,6 +98,9 @@ text-blocks--vertical-gap-column-p: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--vertical-gap-column-p-02: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--vertical-gap-column-p-03: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 clean:
