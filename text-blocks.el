@@ -195,7 +195,7 @@ this function will return nil.
                 (forward-line (- top-boundary 1))
                 (let ((start-of-region (line-beginning-position)))
                   (goto-char (point-min))
-                  (goto-char (- bottom-boundary 1))
+                  (forward-line (- bottom-boundary 1))
                   (let ((end-of-region (line-end-position)))
                     (narrow-to-region start-of-region end-of-region)))
                 (let ((buffer-width (text-blocks--get-buffer-width)))
