@@ -21,11 +21,13 @@
 ;;
 
 (defun get-data-file-buffer-name (data-file-id)
-  (symbol-value
-   (intern
-    (concat
-     text-blocks--test-buffer-name-prefix
-     (number-to-string data-file-id)))))
+  (if (equal (type-of data-file-id) 'integer)
+      (symbol-value
+       (intern
+        (concat
+         text-blocks--test-buffer-name-prefix
+         (number-to-string data-file-id))))
+    nil))
 
 ;;
 ;; End of automatic test generation functions
