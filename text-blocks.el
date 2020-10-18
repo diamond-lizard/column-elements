@@ -123,7 +123,7 @@ the row of blocks at point."
   (when (equal side nil)
     (error
      (concat
-      "text-blocks--block-boundaries-at-point: "
+      "text-blocks--row-of-blocks-boundaries-at-point: "
       "No arguments given.  "
       "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
   (if (equal (point-min) (point-max))
@@ -186,7 +186,7 @@ the row of blocks at point."
       (error
        (format
         (concat
-         "text-blocks--block-boundaries-at-point: "
+         "text-blocks--row-of-blocks-boundaries-at-point: "
          "Invalid argument '%s'.  "
          "Valid arguments are: 'left, 'right, 'top, or 'bottom")
         side))))))
