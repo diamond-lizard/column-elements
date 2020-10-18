@@ -117,6 +117,80 @@ be those of the row of blocks it is part of."
          "Valid arguments are: 'left, 'right, 'top, or 'bottom")
         side))))))
 
+(defun text-blocks--row-of-blocks-boundaries-at-point (&optional side)
+  "Return the 'left, 'right, or 'both boundaries of
+the row of blocks at point."
+  (when (equal side nil)
+    (error
+     (concat
+      "text-blocks--block-boundaries-at-point: "
+      "No arguments given.  "
+      "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
+  (if (equal (point-min) (point-max))
+      nil
+    (cond
+     ((equal side 'left)
+      (if (equal (text-blocks--vertical-gap-p) nil)
+          (cl-loop
+           with start-column = (current-column)
+           with left-most-column = 0
+           with left-boundary-of-this-block = start-column
+           for this-column from start-column downto left-most-column
+           if (equal
+               (text-blocks--vertical-gap-column-p this-column)
+               nil)
+           do (setq left-boundary-of-this-block this-column)
+           else return left-boundary-of-this-block
+           finally return left-boundary-of-this-block)))
+     ((equal side 'right)
+      (if (equal (text-blocks--vertical-gap-p) nil)
+          (cl-loop
+           with start-column = (current-column)
+           with right-most-column = (text-blocks--get-buffer-width)
+           with right-boundary-of-this-block = start-column
+           for this-column from start-column upto right-most-column
+           if (equal
+               (text-blocks--vertical-gap-column-p this-column)
+               nil)
+           do (setq right-boundary-of-this-block this-column)
+           else return right-boundary-of-this-block
+           finally return right-boundary-of-this-block)))
+     ((equal side 'top)
+      (if (equal (text-blocks--horizontal-gap-p) nil)
+          (cl-loop
+           with start-line = (line-number-at-pos)
+           with top-boundary-of-this-row-of-blocks = start-line
+           with top-line = 1
+           for this-line from start-line downto top-line
+           if (equal
+               (text-blocks--horizontal-gap-p this-line)
+               nil)
+           do (setq top-boundary-of-this-row-of-blocks this-line)
+           else return top-boundary-of-this-row-of-blocks
+           finally return top-boundary-of-this-row-of-blocks)))
+     ((equal side 'bottom)
+      (if (equal (text-blocks--horizontal-gap-p) nil)
+          ;; Point is not on a horizontal gap
+          (cl-loop
+           with start-line = (line-number-at-pos)
+           with bottom-boundary-of-this-row-of-blocks = start-line
+           with bottom-line = (line-number-at-pos (point-max))
+           for this-line from start-line upto bottom-line
+           if (equal
+               (text-blocks--horizontal-gap-p this-line)
+               nil)
+           do (setq bottom-boundary-of-this-row-of-blocks this-line)
+           else return bottom-boundary-of-this-row-of-blocks
+           finally return bottom-boundary-of-this-row-of-blocks)))
+     (t
+      (error
+       (format
+        (concat
+         "text-blocks--block-boundaries-at-point: "
+         "Invalid argument '%s'.  "
+         "Valid arguments are: 'left, 'right, 'top, or 'bottom")
+        side))))))
+
 (defun text-blocks--narrow-between-lines (top bottom)
   "Narrow between the `TOP' and `BOTTOM' lines."
   (save-excursion
