@@ -56,31 +56,33 @@ be those of the row of blocks it is part of."
       nil
     (cond
      ((equal side 'left)
-      (if (equal (text-blocks--vertical-gap-p) nil)
-          (cl-loop
-           with start-column = (current-column)
-           with left-most-column = 0
-           with left-boundary-of-this-block = start-column
-           for this-column from start-column downto left-most-column
-           if (equal
-               (text-blocks--vertical-gap-column-p this-column)
-               nil)
-           do (setq left-boundary-of-this-block this-column)
-           else return left-boundary-of-this-block
-           finally return left-boundary-of-this-block)))
+      (if (text-blocks--vertical-gap-p)
+          nil
+        (cl-loop
+         with start-column = (current-column)
+         with left-most-column = 0
+         with left-boundary-of-this-block = start-column
+         for this-column from start-column downto left-most-column
+         if (equal
+             (text-blocks--vertical-gap-column-p this-column)
+             nil)
+         do (setq left-boundary-of-this-block this-column)
+         else return left-boundary-of-this-block
+         finally return left-boundary-of-this-block)))
      ((equal side 'right)
-      (if (equal (text-blocks--vertical-gap-p) nil)
-          (cl-loop
-           with start-column = (current-column)
-           with right-most-column = (text-blocks--get-buffer-width)
-           with right-boundary-of-this-block = start-column
-           for this-column from start-column upto right-most-column
-           if (equal
-               (text-blocks--vertical-gap-column-p this-column)
-               nil)
-           do (setq right-boundary-of-this-block this-column)
-           else return right-boundary-of-this-block
-           finally return right-boundary-of-this-block)))
+      (if (text-blocks--vertical-gap-p)
+          nil
+        (cl-loop
+         with start-column = (current-column)
+         with right-most-column = (text-blocks--get-buffer-width)
+         with right-boundary-of-this-block = start-column
+         for this-column from start-column upto right-most-column
+         if (equal
+             (text-blocks--vertical-gap-column-p this-column)
+             nil)
+         do (setq right-boundary-of-this-block this-column)
+         else return right-boundary-of-this-block
+         finally return right-boundary-of-this-block)))
      ((equal side 'top)
       (text-blocks--row-of-blocks-boundaries-at-point 'top))
      ((equal side 'bottom)
