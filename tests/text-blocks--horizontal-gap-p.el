@@ -165,9 +165,9 @@
                        "Expected a line or a position, but found neither")))))))))
          (pcase horizontal-gap-test-result
           ('t
-           (cond
-            ((equal ,expect 'horizontal-gap) (ert-pass))
-            ((equal ,expect 'not-horizontal-gap)
+           (pcase ,expect
+            ('horizontal-gap (ert-pass))
+            ('not-horizontal-gap
              (ert-fail
               (print
                (format
@@ -180,9 +180,9 @@
                   ,line)
                 ,data-file-id))))))
           ('nil
-           (cond
-            ((equal ,expect 'not-horizontal-gap) (ert-pass))
-            ((equal ,expect 'horizontal-gap)
+           (pcase ,expect
+            ('not-horizontal-gap (ert-pass))
+            ('horizontal-gap
              (ert-fail
               (print
                (format
