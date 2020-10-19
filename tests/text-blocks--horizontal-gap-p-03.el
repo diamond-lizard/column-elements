@@ -84,11 +84,11 @@
          (line (plist-get text-blocks--test-metadata-element 'line))
          (expect (plist-get text-blocks--test-metadata-element 'expect))
          (expect
-          (cond
-           ((equal (cadr expect) 'horizontal-gap) "horizontal-gap")
-           ((equal (cadr expect) 'not-horizontal-gap) "not-horizontal-gap")
-           ((equal (cadr expect) 'error) "error")
-           (t (error
+          (pcase expect
+           (`(,_ horizontal-gap) "horizontal-gap")
+           (`(,_ not-horizontal-gap) "not-horizontal-gap")
+           (`(,_ 'error) "error")
+           (_ (error
                (format
                 (concat
                  "text-blocks--create-test-name: "
