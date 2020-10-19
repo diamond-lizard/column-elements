@@ -107,58 +107,62 @@ the row of blocks at point."
       nil
     (cond
      ((equal side 'left)
-      (if (equal (text-blocks--vertical-gap-p) nil)
-          (cl-loop
-           with start-column = (current-column)
-           with left-most-column = 0
-           with left-boundary-of-this-block = start-column
-           for this-column from start-column downto left-most-column
-           if (equal
-               (text-blocks--vertical-gap-column-p this-column)
-               nil)
-           do (setq left-boundary-of-this-block this-column)
-           else return left-boundary-of-this-block
-           finally return left-boundary-of-this-block)))
+      (if (text-blocks--vertical-gap-p)
+          nil
+        (cl-loop
+         with start-column = (current-column)
+         with left-most-column = 0
+         with left-boundary-of-this-block = start-column
+         for this-column from start-column downto left-most-column
+         if (equal
+             (text-blocks--vertical-gap-column-p this-column)
+             nil)
+         do (setq left-boundary-of-this-block this-column)
+         else return left-boundary-of-this-block
+         finally return left-boundary-of-this-block)))
      ((equal side 'right)
-      (if (equal (text-blocks--vertical-gap-p) nil)
-          (cl-loop
-           with start-column = (current-column)
-           with right-most-column = (text-blocks--get-buffer-width)
-           with right-boundary-of-this-block = start-column
-           for this-column from start-column upto right-most-column
-           if (equal
-               (text-blocks--vertical-gap-column-p this-column)
-               nil)
-           do (setq right-boundary-of-this-block this-column)
-           else return right-boundary-of-this-block
-           finally return right-boundary-of-this-block)))
+      (if (text-blocks--vertical-gap-p)
+          nil
+        (cl-loop
+         with start-column = (current-column)
+         with right-most-column = (text-blocks--get-buffer-width)
+         with right-boundary-of-this-block = start-column
+         for this-column from start-column upto right-most-column
+         if (equal
+             (text-blocks--vertical-gap-column-p this-column)
+             nil)
+         do (setq right-boundary-of-this-block this-column)
+         else return right-boundary-of-this-block
+         finally return right-boundary-of-this-block)))
      ((equal side 'top)
-      (if (equal (text-blocks--horizontal-gap-p) nil)
-          (cl-loop
-           with start-line = (line-number-at-pos)
-           with top-boundary-of-this-row-of-blocks = start-line
-           with top-line = 1
-           for this-line from start-line downto top-line
-           if (equal
-               (text-blocks--horizontal-gap-p this-line)
-               nil)
-           do (setq top-boundary-of-this-row-of-blocks this-line)
-           else return top-boundary-of-this-row-of-blocks
-           finally return top-boundary-of-this-row-of-blocks)))
+      (if (text-blocks--horizontal-gap-p)
+          nil
+        (cl-loop
+         with start-line = (line-number-at-pos)
+         with top-boundary-of-this-row-of-blocks = start-line
+         with top-line = 1
+         for this-line from start-line downto top-line
+         if (equal
+             (text-blocks--horizontal-gap-p this-line)
+             nil)
+         do (setq top-boundary-of-this-row-of-blocks this-line)
+         else return top-boundary-of-this-row-of-blocks
+         finally return top-boundary-of-this-row-of-blocks)))
      ((equal side 'bottom)
-      (if (equal (text-blocks--horizontal-gap-p) nil)
-          ;; Point is not on a horizontal gap
-          (cl-loop
-           with start-line = (line-number-at-pos)
-           with bottom-boundary-of-this-row-of-blocks = start-line
-           with bottom-line = (line-number-at-pos (point-max))
-           for this-line from start-line upto bottom-line
-           if (equal
-               (text-blocks--horizontal-gap-p this-line)
-               nil)
-           do (setq bottom-boundary-of-this-row-of-blocks this-line)
-           else return bottom-boundary-of-this-row-of-blocks
-           finally return bottom-boundary-of-this-row-of-blocks)))
+      (if (text-blocks--horizontal-gap-p)
+          nil
+        ;; Point is not on a horizontal gap
+        (cl-loop
+         with start-line = (line-number-at-pos)
+         with bottom-boundary-of-this-row-of-blocks = start-line
+         with bottom-line = (line-number-at-pos (point-max))
+         for this-line from start-line upto bottom-line
+         if (equal
+             (text-blocks--horizontal-gap-p this-line)
+             nil)
+         do (setq bottom-boundary-of-this-row-of-blocks this-line)
+         else return bottom-boundary-of-this-row-of-blocks
+         finally return bottom-boundary-of-this-row-of-blocks)))
      (t
       (error
        (format
