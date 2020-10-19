@@ -21,7 +21,7 @@
 ;;
 
 (defun get-data-file-buffer-name (data-file-id)
-  (if (equal (type-of data-file-id) 'integer)
+  (if (integerp data-file-id)
       (symbol-value
        (intern
         (concat
