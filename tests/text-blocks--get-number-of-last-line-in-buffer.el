@@ -117,23 +117,18 @@
                     (should-error
                      (text-blocks--get-number-of-last-line-in-buffer))
                   (text-blocks--get-number-of-last-line-in-buffer)))))
-         (cond
+         (pcase test-result
           ;; Expected errors should pass
           ;;
           ;; On error, ERT's should-error returns a cons pair
           ;; containing 'error as the first element,
           ;; so if we are expecting an error, we check for that
           ((and
-            (equal
-             ,expect
-             'error)
-            (consp test-result)
-            (equal
-             (car test-result)
-             'error))
+            (guard (equal ,expect 'error))
+            `('error ,_))
            (ert-pass))
-          ((equal test-result ,expect) (ert-pass))
-          (t
+          (,expect (ert-pass))
+          (_
            (ert-fail
             (print
              (format
