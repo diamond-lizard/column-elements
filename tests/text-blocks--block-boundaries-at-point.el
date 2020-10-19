@@ -162,9 +162,7 @@
          (side (plist-get test-metadata-element 'side))
          (expect (plist-get test-metadata-element 'expect)))
     (cond
-     ((equal
-       (type-of data-file-id)
-       'integer)
+     ((integerp data-file-id)
       (intern
        (format
         "%s--%03d-file-%s-pos-%03d-side-%s-expect-%s"
@@ -174,9 +172,7 @@
         position
         side
         expect)))
-     ((equal
-       (type-of data-file-id)
-       'cons)
+     ((consp data-file-id)
       (if (equal (cadr data-file-id) 'empty)
           (intern
            (format
@@ -201,7 +197,7 @@
          (expect (plist-get test-metadata-element 'expect))
          (data-file-buffer-name (get-data-file-buffer-name data-file-id)))
     (if (and
-         (equal (type-of data-file-id) 'cons)
+         (consp data-file-id)
          (equal (cadr data-file-id) 'empty))
         `(lambda ()
            (let ((result
