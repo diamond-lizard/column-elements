@@ -60,26 +60,24 @@
          (expect (plist-get text-blocks--test-metadata-element 'expect))
          (expect
           (pcase expect
-           (`(,_ horizontal-gap) "horizontal-gap")
-           (`(,_ not-horizontal-gap) "not-horizontal-gap")
-           (`(,_ error) "error")
-           (_ (error
-               (format
+            (`(,_ horizontal-gap) "horizontal-gap")
+            (`(,_ not-horizontal-gap) "not-horizontal-gap")
+            (`(,_ error) "error")
+            (_ (error
                 (concat
                  "text-blocks--create-test-name: "
                  "Error: "
                  "unexpected 'expect' value '%s'")
-                expect)))))
+                expect))))
          (position-or-line-string
           (cond
            (position "pos")
            (line "line")
            (t (error
-               (format
-                (concat
-                 "text-blocks--create-test-name: "
-                 "Error: "
-                 "Could not find a position or line in test metadata")))))))
+               (concat
+                "text-blocks--create-test-name: "
+                "Error: "
+                "Could not find a position or line in test metadata"))))))
     (intern
      (format
       "%s--%03d-file-%s-%s-%03d-expect-%s"
