@@ -190,9 +190,7 @@
             (equal
              ,expect
              'error)
-            (equal
-             (type-of test-result)
-             'cons)
+            (consp test-result)
             (equal
              (car test-result)
              'error))
