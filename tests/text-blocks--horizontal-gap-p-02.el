@@ -136,8 +136,8 @@
                      (print
                       (format
                        "Expected a line or a position, but found neither")))))))))
-         (cond
-          ((equal horizontal-gap-test-result t)
+         (pcase horizontal-gap-test-result
+          ('t
            (cond
             ((equal ,expect 'horizontal-gap) (ert-pass))
             ((equal ,expect 'not-horizontal-gap)
@@ -152,7 +152,7 @@
                     ,position
                   ,line)
                 ,data-file-id))))))
-          ((equal horizontal-gap-test-result nil)
+          ('nil
            (cond
             ((equal ,expect 'not-horizontal-gap) (ert-pass))
             ((equal ,expect 'horizontal-gap)
@@ -173,16 +173,11 @@
           ;; containing 'error as the first element,
           ;; so if we are expecting an error, we check for that
           ((and
-            (equal
-             ,expect
-             'error)
-            (consp horizontal-gap-test-result)
-            (equal
-             (car horizontal-gap-test-result)
-             'error))
+            (guard (equal ,expect 'error))
+            `(error ,_))
            (ert-pass))
           ;; Everything else fails
-          ('otherwise
+          (_
            (ert-fail
             (print
              (format
