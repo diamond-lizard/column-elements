@@ -151,18 +151,18 @@
                 (text-blocks--vertical-gap-p))))
          (pcase result
           ('t
-           (cond
-            ((equal ,expect 'vertical-gap) (ert-pass))
-            ((equal ,expect 'not-vertical-gap)
+           (pcase ,expect
+            ('vertical-gap (ert-pass))
+            ('not-vertical-gap
              (ert-fail
               (print
                (format
                 "At position '%s' in file '%s' expected non-gap but got gap"
                 ,position ,data-file-id))))))
           ('nil
-           (cond
-            ((equal ,expect 'not-vertical-gap) (ert-pass))
-            ((equal ,expect 'vertical-gap)
+           (pcase ,expect
+            ('not-vertical-gap (ert-pass))
+            ('vertical-gap
              (ert-fail
               (print
                (format
