@@ -36,6 +36,7 @@ TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-column-p-02
 TESTS += text-blocks--vertical-gap-column-p-03
 TESTS += text-blocks--block-boundaries-at-point
+TESTS += text-blocks--block-boundaries-at-point-02
 
 EMACS_ERT_ARGS_1 := -batch -l ert -L . -l
 EMACS_ERT_ARGS_2 := -f ert-run-tests-batch-and-exit
@@ -53,6 +54,9 @@ compile: $(patsubst %.el,%.elc,$(ELISP_FILES))
 test: $(TESTS)
 
 text-blocks--block-boundaries-at-point: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--block-boundaries-at-point-02: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--get-buffer-width: compile
