@@ -82,32 +82,9 @@ be those of the row of blocks it is part of."
            else return right-boundary-of-this-block
            finally return right-boundary-of-this-block)))
      ((equal side 'top)
-      (if (equal (text-blocks--horizontal-gap-p) nil)
-          (cl-loop
-           with start-line = (line-number-at-pos)
-           with top-boundary-of-this-row-of-blocks = start-line
-           with top-line = 1
-           for this-line from start-line downto top-line
-           if (equal
-               (text-blocks--horizontal-gap-p this-line)
-               nil)
-           do (setq top-boundary-of-this-row-of-blocks this-line)
-           else return top-boundary-of-this-row-of-blocks
-           finally return top-boundary-of-this-row-of-blocks)))
+      (text-blocks--row-of-blocks-boundaries-at-point 'top))
      ((equal side 'bottom)
-      (if (equal (text-blocks--horizontal-gap-p) nil)
-          ;; Point is not on a horizontal gap
-          (cl-loop
-           with start-line = (line-number-at-pos)
-           with bottom-boundary-of-this-row-of-blocks = start-line
-           with bottom-line = (line-number-at-pos (point-max))
-           for this-line from start-line upto bottom-line
-           if (equal
-               (text-blocks--horizontal-gap-p this-line)
-               nil)
-           do (setq bottom-boundary-of-this-row-of-blocks this-line)
-           else return bottom-boundary-of-this-row-of-blocks
-           finally return bottom-boundary-of-this-row-of-blocks)))
+      (text-blocks--row-of-blocks-boundaries-at-point 'bottom))
      (t
       (error
        (format
