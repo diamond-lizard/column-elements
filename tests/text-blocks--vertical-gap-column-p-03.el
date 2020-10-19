@@ -207,23 +207,18 @@
                   (text-blocks--vertical-gap-column-p
                    ,column
                    ,line)))))
-         (cond
-          ((equal test-result ,expect) (ert-pass))
+         (pcase test-result
+          (,expect (ert-pass))
           ;; Expected errors should pass
           ;;
           ;; On error, ERT's should-error returns a cons pair
           ;; containing 'error as the first element,
           ;; so if we are expecting an error, we check for that
           ((and
-            (equal
-             ,expect
-             'error)
-            (consp test-result)
-            (equal
-             (car test-result)
-             'error))
+            (guard (equal ,expect 'error))
+            `('error ,_))
            (ert-pass))
-          ('otherwise
+          (_
            (ert-fail
             (print
              (format
