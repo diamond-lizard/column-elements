@@ -165,7 +165,7 @@
                (format
                 "At position '%s' in file '%s' expected non-gap but got gap"
                 ,position ,data-file-id))))))
-          (_
+          ('nil
            (pcase ,expect
             ('not-vertical-gap (ert-pass))
             ('vertical-gap
@@ -173,7 +173,13 @@
               (print
                (format
                 "At position '%s' in file '%s' expected gap but got not-gap"
-                ,position ,data-file-id)))))))))))
+                ,position ,data-file-id))))))
+          (_
+           (ert-fail
+            (print
+             (format
+              "Unexpected test result '%s'.  This should always be t or nil."
+              result)))))))))
 
 ;; These tests should all pass
 (cl-loop
