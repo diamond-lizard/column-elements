@@ -163,8 +163,8 @@
          (position (plist-get test-metadata-element 'position))
          (side (plist-get test-metadata-element 'side))
          (expect (plist-get test-metadata-element 'expect)))
-    (cond
-     ((integerp data-file-id)
+    (pcase data-file-id
+     ((pred integerp)
       (intern
        (format
         "%s--%03d-file-%s-pos-%03d-side-%s-expect-%s"
@@ -174,7 +174,7 @@
         position
         side
         expect)))
-     ((consp data-file-id)
+     ((pred consp)
       (if (equal (cadr data-file-id) 'empty)
           (intern
            (format
@@ -186,7 +186,7 @@
          (error
           "Error: Unexpected data-file-id %s"
           data-file-id)))
-     (t (error
+     (_ (error
           "Error: Unexpected type %s for data-file-id %s"
           (type-of data-file-id)
           data-file-id)))))
