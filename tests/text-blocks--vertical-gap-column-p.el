@@ -48,18 +48,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq text-blocks--test-metadata
-      '((test-id 03 data-file-id 001 position 001 column 000 line nil expect nil)
-        (test-id 04 data-file-id 001 position 006 column 000 line nil expect nil)
-        (test-id 05 data-file-id 001 position 007 column 000 line nil expect nil)
-        (test-id 06 data-file-id 001 position 008 column 000 line nil expect nil)
-        (test-id 07 data-file-id 001 position 009 column 000 line nil expect nil)
-        (test-id 08 data-file-id 001 position 015 column 000 line nil expect nil)
-        (test-id 09 data-file-id 001 position 001 column 005 line nil expect nil)
-        (test-id 10 data-file-id 001 position 006 column 005 line nil expect nil)
-        (test-id 11 data-file-id 001 position 007 column 005 line nil expect nil)
-        (test-id 12 data-file-id 001 position 008 column 005 line nil expect nil)
-        (test-id 13 data-file-id 001 position 009 column 005 line nil expect nil)
-        (test-id 14 data-file-id 001 position 015 column 005 line nil expect nil)
+      '((test-id 03 data-file-id 001 position 001 column 000 line nil expect 'nil)
+        (test-id 04 data-file-id 001 position 006 column 000 line nil expect 'nil)
+        (test-id 05 data-file-id 001 position 007 column 000 line nil expect 'nil)
+        (test-id 06 data-file-id 001 position 008 column 000 line nil expect 'nil)
+        (test-id 07 data-file-id 001 position 009 column 000 line nil expect 'nil)
+        (test-id 08 data-file-id 001 position 015 column 000 line nil expect 'nil)
+        (test-id 09 data-file-id 001 position 001 column 005 line nil expect 'nil)
+        (test-id 10 data-file-id 001 position 006 column 005 line nil expect 'nil)
+        (test-id 11 data-file-id 001 position 007 column 005 line nil expect 'nil)
+        (test-id 12 data-file-id 001 position 008 column 005 line nil expect 'nil)
+        (test-id 13 data-file-id 001 position 009 column 005 line nil expect 'nil)
+        (test-id 14 data-file-id 001 position 015 column 005 line nil expect 'nil)
         (test-id 15 data-file-id 001 position 001 column 006 line nil expect 't)
         (test-id 16 data-file-id 001 position 006 column 006 line nil expect 't)
         (test-id 17 data-file-id 001 position 007 column 006 line nil expect 't)
@@ -72,18 +72,18 @@
         (test-id 24 data-file-id 001 position 008 column 007 line nil expect 't)
         (test-id 25 data-file-id 001 position 009 column 007 line nil expect 't)
         (test-id 26 data-file-id 001 position 015 column 007 line nil expect 't)
-        (test-id 27 data-file-id 001 position 001 column 008 line nil expect nil)
-        (test-id 28 data-file-id 001 position 006 column 008 line nil expect nil)
-        (test-id 29 data-file-id 001 position 007 column 008 line nil expect nil)
-        (test-id 30 data-file-id 001 position 008 column 008 line nil expect nil)
-        (test-id 31 data-file-id 001 position 009 column 008 line nil expect nil)
-        (test-id 32 data-file-id 001 position 015 column 008 line nil expect nil)
-        (test-id 33 data-file-id 001 position 001 column 012 line nil expect nil)
-        (test-id 34 data-file-id 001 position 006 column 012 line nil expect nil)
-        (test-id 35 data-file-id 001 position 007 column 012 line nil expect nil)
-        (test-id 36 data-file-id 001 position 008 column 012 line nil expect nil)
-        (test-id 37 data-file-id 001 position 009 column 012 line nil expect nil)
-        (test-id 38 data-file-id 001 position 015 column 012 line nil expect nil)
+        (test-id 27 data-file-id 001 position 001 column 008 line nil expect 'nil)
+        (test-id 28 data-file-id 001 position 006 column 008 line nil expect 'nil)
+        (test-id 29 data-file-id 001 position 007 column 008 line nil expect 'nil)
+        (test-id 30 data-file-id 001 position 008 column 008 line nil expect 'nil)
+        (test-id 31 data-file-id 001 position 009 column 008 line nil expect 'nil)
+        (test-id 32 data-file-id 001 position 015 column 008 line nil expect 'nil)
+        (test-id 33 data-file-id 001 position 001 column 012 line nil expect 'nil)
+        (test-id 34 data-file-id 001 position 006 column 012 line nil expect 'nil)
+        (test-id 35 data-file-id 001 position 007 column 012 line nil expect 'nil)
+        (test-id 36 data-file-id 001 position 008 column 012 line nil expect 'nil)
+        (test-id 37 data-file-id 001 position 009 column 012 line nil expect 'nil)
+        (test-id 38 data-file-id 001 position 015 column 012 line nil expect 'nil)
         ))
 
 (setq text-blocks--test-name-prefix
@@ -132,11 +132,11 @@
          (line (plist-get text-blocks--test-metadata-element 'line))
          (expect (plist-get text-blocks--test-metadata-element 'expect))
          (expect
-          (cond
-           ((equal (cadr expect) nil) nil)
-           ((equal (cadr expect) t) t)
-           ((equal (cadr expect) 'error) "error")
-           (t (error
+          (pcase expect
+           (`(,_ nil) nil)
+           (`(,_ t) t)
+           (`(,_ error) "error")
+           (_ (error
                (format
                 (concat
                  "text-blocks--create-test-name: "
