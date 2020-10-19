@@ -178,9 +178,7 @@
             (equal
              ,expect
              'error)
-            (equal
-             (type-of horizontal-gap-test-result)
-             'cons)
+            (consp horizontal-gap-test-result)
             (equal
              (car horizontal-gap-test-result)
              'error))
