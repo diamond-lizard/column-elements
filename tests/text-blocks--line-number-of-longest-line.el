@@ -82,10 +82,10 @@
          (data-file-id (plist-get text-blocks--test-metadata-element 'data-file-id))
          (expect (plist-get text-blocks--test-metadata-element 'expect))
          (expect
-          (cond
-           ((numberp expect) expect)
-           ((equal (cadr expect) 'error) "error")
-           (t (error
+          (pcase expect
+           ((pred numberp) expect)
+           (`(,_ error) "error")
+           (_ (error
                (format
                 (concat
                  "text-blocks--create-test-name: "
