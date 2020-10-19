@@ -54,8 +54,8 @@ be those of the row of blocks it is part of."
       "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
   (if (equal (point-min) (point-max))
       nil
-    (cond
-     ((equal side 'left)
+    (pcase side
+     ('left
       (if (text-blocks--vertical-gap-p)
           nil
         ;; Point is not on a vertical gap
@@ -70,7 +70,7 @@ be those of the row of blocks it is part of."
          do (setq left-boundary-of-this-block this-column)
          else return left-boundary-of-this-block
          finally return left-boundary-of-this-block)))
-     ((equal side 'right)
+     ('right
       (if (text-blocks--vertical-gap-p)
           nil
         ;; Point is not on a vertical gap
@@ -85,11 +85,11 @@ be those of the row of blocks it is part of."
          do (setq right-boundary-of-this-block this-column)
          else return right-boundary-of-this-block
          finally return right-boundary-of-this-block)))
-     ((equal side 'top)
+     ('top
       (text-blocks--row-of-blocks-boundaries-at-point 'top))
-     ((equal side 'bottom)
+     ('bottom
       (text-blocks--row-of-blocks-boundaries-at-point 'bottom))
-     (t
+     (_
       (error
        (format
         (concat
@@ -109,8 +109,8 @@ the row of blocks at point."
       "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
   (if (equal (point-min) (point-max))
       nil
-    (cond
-     ((equal side 'left)
+    (pcase side
+     ('left
       (if (text-blocks--vertical-gap-p)
           nil
         ;; Point is not on a vertical gap
@@ -125,7 +125,7 @@ the row of blocks at point."
          do (setq left-boundary-of-this-block this-column)
          else return left-boundary-of-this-block
          finally return left-boundary-of-this-block)))
-     ((equal side 'right)
+     ('right
       (if (text-blocks--vertical-gap-p)
           nil
         ;; Point is not on a vertical gap
@@ -140,7 +140,7 @@ the row of blocks at point."
          do (setq right-boundary-of-this-block this-column)
          else return right-boundary-of-this-block
          finally return right-boundary-of-this-block)))
-     ((equal side 'top)
+     ('top
       (if (text-blocks--horizontal-gap-p)
           nil
         ;; Point is not on a horizontal gap
@@ -155,7 +155,7 @@ the row of blocks at point."
          do (setq top-boundary-of-this-row-of-blocks this-line)
          else return top-boundary-of-this-row-of-blocks
          finally return top-boundary-of-this-row-of-blocks)))
-     ((equal side 'bottom)
+     ('bottom
       (if (text-blocks--horizontal-gap-p)
           nil
         ;; Point is not on a horizontal gap
@@ -170,7 +170,7 @@ the row of blocks at point."
          do (setq bottom-boundary-of-this-row-of-blocks this-line)
          else return bottom-boundary-of-this-row-of-blocks
          finally return bottom-boundary-of-this-row-of-blocks)))
-     (t
+     (_
       (error
        (format
         (concat
