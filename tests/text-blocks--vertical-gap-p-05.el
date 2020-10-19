@@ -76,10 +76,10 @@
      expect)
   "Generate test names like foo-001, foo-002, etc.."
   (let ((expect
-         (cond
-          ((equal (cadr expect) 'vertical-gap) "vertical-gap")
-          ((equal (cadr expect) 'not-vertical-gap) "not-vertical-gap")
-          (t (error
+         (pcase expect
+          (`(,_ vertical-gap) "vertical-gap")
+          (`(,_ not-vertical-gap) "not-vertical-gap")
+          (_ (error
               (format
                (concat
                 "text-blocks--create-test-name: "
