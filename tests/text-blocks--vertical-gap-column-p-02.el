@@ -60,18 +60,18 @@
         (test-id 12 data-file-id 001 position 008 column 005 line nil expect nil)
         (test-id 13 data-file-id 001 position 009 column 005 line nil expect nil)
         (test-id 14 data-file-id 001 position 015 column 005 line nil expect nil)
-        (test-id 15 data-file-id 001 position 001 column 006 line nil expect 't)
-        (test-id 16 data-file-id 001 position 006 column 006 line nil expect 't)
-        (test-id 17 data-file-id 001 position 007 column 006 line nil expect 't)
-        (test-id 18 data-file-id 001 position 008 column 006 line nil expect 't)
-        (test-id 19 data-file-id 001 position 009 column 006 line nil expect 't)
-        (test-id 20 data-file-id 001 position 015 column 006 line nil expect 't)
-        (test-id 21 data-file-id 001 position 001 column 007 line nil expect 't)
-        (test-id 22 data-file-id 001 position 006 column 007 line nil expect 't)
-        (test-id 23 data-file-id 001 position 007 column 007 line nil expect 't)
-        (test-id 24 data-file-id 001 position 008 column 007 line nil expect 't)
-        (test-id 25 data-file-id 001 position 009 column 007 line nil expect 't)
-        (test-id 26 data-file-id 001 position 015 column 007 line nil expect 't)
+        (test-id 15 data-file-id 001 position 001 column 006 line nil expect t)
+        (test-id 16 data-file-id 001 position 006 column 006 line nil expect t)
+        (test-id 17 data-file-id 001 position 007 column 006 line nil expect t)
+        (test-id 18 data-file-id 001 position 008 column 006 line nil expect t)
+        (test-id 19 data-file-id 001 position 009 column 006 line nil expect t)
+        (test-id 20 data-file-id 001 position 015 column 006 line nil expect t)
+        (test-id 21 data-file-id 001 position 001 column 007 line nil expect t)
+        (test-id 22 data-file-id 001 position 006 column 007 line nil expect t)
+        (test-id 23 data-file-id 001 position 007 column 007 line nil expect t)
+        (test-id 24 data-file-id 001 position 008 column 007 line nil expect t)
+        (test-id 25 data-file-id 001 position 009 column 007 line nil expect t)
+        (test-id 26 data-file-id 001 position 015 column 007 line nil expect t)
         (test-id 27 data-file-id 001 position 001 column 008 line nil expect nil)
         (test-id 28 data-file-id 001 position 006 column 008 line nil expect nil)
         (test-id 29 data-file-id 001 position 007 column 008 line nil expect nil)
@@ -132,17 +132,17 @@
          (line (plist-get text-blocks--test-metadata-element 'line))
          (expect (plist-get text-blocks--test-metadata-element 'expect))
          (expect
-          (cond
-           ((equal (cadr expect) nil) nil)
-           ((equal (cadr expect) t) t)
-           ((equal (cadr expect) 'error) "error")
-           (t (error
-               (format
-                (concat
-                 "text-blocks--create-test-name: "
-                 "Error: "
-                 "unexpected 'expect' value '%s'")
-                expect))))))
+          (pcase expect
+            ('nil nil)
+            ('t t)
+            (`(,_ 'error) "error")
+            (_ (error
+                (format
+                 (concat
+                  "text-blocks--create-test-name: "
+                  "Error: "
+                  "unexpected 'expect' value '%s'")
+                 expect))))))
     (intern
      (format
       "%s--%03d-file-%s-position-%03d-col-%03d-line-%s-expect-%s"
