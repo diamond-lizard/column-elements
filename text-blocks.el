@@ -58,6 +58,7 @@ be those of the row of blocks it is part of."
      ((equal side 'left)
       (if (text-blocks--vertical-gap-p)
           nil
+        ;; Point is not on a vertical gap
         (cl-loop
          with start-column = (current-column)
          with left-most-column = 0
@@ -72,6 +73,7 @@ be those of the row of blocks it is part of."
      ((equal side 'right)
       (if (text-blocks--vertical-gap-p)
           nil
+        ;; Point is not on a vertical gap
         (cl-loop
          with start-column = (current-column)
          with right-most-column = (text-blocks--get-buffer-width)
@@ -111,6 +113,7 @@ the row of blocks at point."
      ((equal side 'left)
       (if (text-blocks--vertical-gap-p)
           nil
+        ;; Point is not on a vertical gap
         (cl-loop
          with start-column = (current-column)
          with left-most-column = 0
@@ -125,6 +128,7 @@ the row of blocks at point."
      ((equal side 'right)
       (if (text-blocks--vertical-gap-p)
           nil
+        ;; Point is not on a vertical gap
         (cl-loop
          with start-column = (current-column)
          with right-most-column = (text-blocks--get-buffer-width)
@@ -139,6 +143,7 @@ the row of blocks at point."
      ((equal side 'top)
       (if (text-blocks--horizontal-gap-p)
           nil
+        ;; Point is not on a horizontal gap
         (cl-loop
          with start-line = (line-number-at-pos)
          with top-boundary-of-this-row-of-blocks = start-line
