@@ -99,7 +99,7 @@ be those of the row of blocks it is part of."
         side))))))
 
 (defun text-blocks--row-of-blocks-boundaries-at-point (&optional side)
-  "Return the 'left, 'right, or 'both boundaries of
+  "Return the 'left, 'right, 'top, or 'bottom boundaries of
 the row of blocks at point."
   (when (equal side nil)
     (error
