@@ -29,8 +29,8 @@
 ;; What character vertical gaps are made of.
 (defvar text-blocks--vertical-gap-delimiter " ")
 
-;; What to use as a delimiter to determine block row boundaries.
-(defvar text-blocks--block-row-delimiter " ")
+;; What character horizontal gaps are made of.
+(defvar text-blocks--horizontal-gap-delimiter " ")
 
 ;; A horizontal gap must have at least this many lines
 (defvar text-blocks--min-lines-per-horiz-gap 1)
@@ -387,7 +387,7 @@ If whichever of these lines the function looks at is a horizontal gap
 line, then it returns t, otherwise nil.
 
 A horizontal gap line is a line that is either empty or contains
-no other characters than those in `text-blocks--block-row-delimiter'"
+no other characters than those in `text-blocks--horizontal-gap-delimiter'"
   (interactive)
   (let ((line-to-check
          (if (equal line-to-check nil)
@@ -413,7 +413,7 @@ no other characters than those in `text-blocks--block-row-delimiter'"
                (rx-to-string
                 `(seq
                   line-start
-                  (one-or-more ,text-blocks--block-row-delimiter)
+                  (one-or-more ,text-blocks--horizontal-gap-delimiter)
                   line-end)))
               t)
              ;; Not an empty line,
@@ -431,7 +431,7 @@ then it returns t, otherwise nil.
 
 A horizontal gap is made of at least text-blocks--min-lines-per-horiz-gap
 lines, each of which must be either empty or contain no other characters
-than those in `text-blocks--block-row-delimiter'"
+than those in `text-blocks--horizontal-gap-delimiter'"
   (interactive)
   (let ((line-to-check
          (if (equal line-to-check nil)

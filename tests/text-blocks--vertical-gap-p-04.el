@@ -43,8 +43,8 @@
 ;; What character vertical gaps are made of.
 (setq text-blocks--vertical-gap-delimiter "+")
 
-;; What to use as a delimiter to determine block row boundaries.
-(setq text-blocks--block-row-delimiter " ")
+;; What character horizontal gaps are made of.
+(setq text-blocks--horizontal-gap-delimiter " ")
 
 ;; A horizontal gap must have at least this many lines
 (setq text-blocks--min-lines-per-horiz-gap 1)
