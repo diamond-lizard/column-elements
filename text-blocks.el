@@ -72,6 +72,7 @@ the boundaries of a block"
       "No arguments given.  "
       "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
   (if (equal (point-min) (point-max))
+      ;; Empty buffer
       nil
     (pcase side
      ('left
