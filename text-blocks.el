@@ -71,52 +71,50 @@ the boundaries of a block"
       "text-blocks--block-boundaries-at-point: "
       "No arguments given.  "
       "This function must be called with either: 'left, 'right, 'top, or 'bottom")))
-  (if (equal (point-min) (point-max))
-      ;; Empty buffer
-      nil
+  (cond
+   ((equal (point-min) (point-max))
+    ;; Empty buffer
+    nil)
+   ((text-blocks--vertical-gap-p) nil)
+   ((text-blocks--horizontal-gap-p) nil)
+   (t
     (pcase side
-     ('left
-      (if (text-blocks--vertical-gap-p)
-          nil
-        ;; Point is not on a vertical gap
-        (cl-loop
-         with start-column = (current-column)
-         with left-most-column = 0
-         with left-boundary-of-this-block = start-column
-         for this-column from start-column downto left-most-column
-         if (equal
-             (text-blocks--vertical-gap-column-p this-column)
-             nil)
-         do (setq left-boundary-of-this-block this-column)
-         else return left-boundary-of-this-block
-         finally return left-boundary-of-this-block)))
-     ('right
-      (if (text-blocks--vertical-gap-p)
-          nil
-        ;; Point is not on a vertical gap
-        (cl-loop
-         with start-column = (current-column)
-         with right-most-column = (text-blocks--get-buffer-width)
-         with right-boundary-of-this-block = start-column
-         for this-column from start-column upto right-most-column
-         if (equal
-             (text-blocks--vertical-gap-column-p this-column)
-             nil)
-         do (setq right-boundary-of-this-block this-column)
-         else return right-boundary-of-this-block
-         finally return right-boundary-of-this-block)))
-     ('top
-      (text-blocks--row-of-blocks-boundaries-at-point 'top))
-     ('bottom
-      (text-blocks--row-of-blocks-boundaries-at-point 'bottom))
-     (_
-      (error
-       (format
-        (concat
-         "text-blocks--block-boundaries-at-point: "
-         "Invalid argument '%s'.  "
-         "Valid arguments are: 'left, 'right, 'top, or 'bottom")
-        side))))))
+      ('left
+       (cl-loop
+        with start-column = (current-column)
+        with left-most-column = 0
+        with left-boundary-of-this-block = start-column
+        for this-column from start-column downto left-most-column
+        if (equal
+            (text-blocks--vertical-gap-column-p this-column)
+            nil)
+        do (setq left-boundary-of-this-block this-column)
+        else return left-boundary-of-this-block
+        finally return left-boundary-of-this-block))
+      ('right
+       (cl-loop
+        with start-column = (current-column)
+        with right-most-column = (text-blocks--get-buffer-width)
+        with right-boundary-of-this-block = start-column
+        for this-column from start-column upto right-most-column
+        if (equal
+            (text-blocks--vertical-gap-column-p this-column)
+            nil)
+        do (setq right-boundary-of-this-block this-column)
+        else return right-boundary-of-this-block
+        finally return right-boundary-of-this-block))
+      ('top
+       (text-blocks--row-of-blocks-boundaries-at-point 'top))
+      ('bottom
+       (text-blocks--row-of-blocks-boundaries-at-point 'bottom))
+      (_
+       (error
+        (format
+         (concat
+          "text-blocks--block-boundaries-at-point: "
+          "Invalid argument '%s'.  "
+          "Valid arguments are: 'left, 'right, 'top, or 'bottom")
+         side)))))))
 
 (defun text-blocks--row-of-blocks-boundaries-at-point (&optional side)
   "Return the 'left, 'right, 'top, or 'bottom boundaries of
