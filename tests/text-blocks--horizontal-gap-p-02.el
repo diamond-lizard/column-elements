@@ -21,8 +21,8 @@
 ;;
 ;; Some global settings that these tests assume
 
-;; What to use as a delimiter to determine block boundaries.
-(setq text-blocks--block-delimiter " ")
+;; What character vertical gaps are made of.
+(setq text-blocks--vertical-gap-delimiter " ")
 
 ;; What to use as a delimiter to determine block row boundaries.
 (setq text-blocks--block-row-delimiter " ")

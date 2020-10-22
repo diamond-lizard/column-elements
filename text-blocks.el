@@ -26,8 +26,8 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-;; What to use as a delimiter to determine block boundaries.
-(defvar text-blocks--block-delimiter " ")
+;; What character vertical gaps are made of.
+(defvar text-blocks--vertical-gap-delimiter " ")
 
 ;; What to use as a delimiter to determine block row boundaries.
 (defvar text-blocks--block-row-delimiter " ")
@@ -371,7 +371,7 @@ this function will return nil."
                                      `(seq
                                        line-start
                                        (= ,leading-cols (not "\n"))
-                                       (not ,text-blocks--block-delimiter)))
+                                       (not ,text-blocks--vertical-gap-delimiter)))
                                     nil
                                     t))))))
               (text-blocks--search-for-consecutive-non-nils
