@@ -44,6 +44,22 @@
   "Return the 'left, 'right, 'top, or 'bottom boundaries of
 the block at point.
 
+The left boundary of the block at point is the left-most column
+between the top and bottom boundaries of this block which
+contains any non-vertical-gap-delimiter character, before the
+vertical gap that separates this block from the one to its left.
+If this is the left-most block, then it is the left-most column
+between the top and bottom boundaries of this block
+which contains any non-vertical-gap-delimiter character.
+
+The right boundary of the block at point is the right-most column
+between the top and bottom boundaries of this block which
+contains any non-vertical-gap-delimiter character, before the
+vertical gap that separates this block from the one to its right.
+If this is the right-most block, then it is the right-most column
+between the top and bottom boundaries of this block
+which contains any non-vertical-gap-delimiter character.
+
 Note: The top and bottom boundaries of a block will always
 be those of the row of blocks it is part of."
   (when (equal side nil)
