@@ -20,9 +20,6 @@
 (require 'text-blocks)
 (require 'text-blocks--test-common)
 
-;; For cl-case:
-(require 'cl-macs)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Some global settings that these tests assume
