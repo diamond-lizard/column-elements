@@ -63,8 +63,8 @@ which contains any non-vertical-gap-delimiter character.
 Note: The top and bottom boundaries of a block will always
 be those of the row of blocks it is part of.
 
-If point is on a horizontal or vertical gap, this function
-will return nil"
+This function returns nil when point is not within
+the boundaries of a block"
   (when (equal side nil)
     (error
      (concat
