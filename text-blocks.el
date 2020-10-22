@@ -100,7 +100,27 @@ be those of the row of blocks it is part of."
 
 (defun text-blocks--row-of-blocks-boundaries-at-point (&optional side)
   "Return the 'left, 'right, 'top, or 'bottom boundaries of
-the row of blocks at point."
+the row of blocks at point.
+
+The top boundary of the row of blocks at point is the top-most
+line containing any non-horizontal-gap delimiter that's right
+before the horizontal gap separating this block from the one
+above it, or (if this is the top-most row of blocks) the top-most
+line containing any non-horizontal-gap delimiter.
+
+The bottom boundary of the row of blocks at point is the
+bottom-most line containing any non-horizontal-gap delimiter
+that's right before the horizontal gap separating this block from
+the one below it, or (if this is the bottom-most row of blocks)
+the bottom-most line containing any non-horizontal-gap delimiter.
+
+The left boundary of the row of blocks at point is the left-most
+column between the top and bottom boundaries of that row of
+blocks which contains any non-vertical-gap delimiter.
+
+The right boundary of the row of blocks at point is the
+right-most column between the top and bottom boundaries of that
+row of blocks which contains any non-vertical-gap delimiter."
   (when (equal side nil)
     (error
      (concat
