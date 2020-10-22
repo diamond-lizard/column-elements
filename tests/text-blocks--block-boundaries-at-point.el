@@ -20,7 +20,7 @@
 (require 'text-blocks)
 (require 'text-blocks--test-common)
 
-;; For cl-case:
+;; For cl-loop:
 (require 'cl-macs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

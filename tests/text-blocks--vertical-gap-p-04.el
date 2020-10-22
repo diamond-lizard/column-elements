@@ -17,7 +17,7 @@
 
 (require 'text-blocks)
 
-;; For cl-case:
+;; For cl-loop:
 (require 'cl-macs)
 
 (ert-deftest text-blocks--001-verical-gap-p--is-bound ()
