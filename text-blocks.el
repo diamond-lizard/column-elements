@@ -139,7 +139,10 @@ blocks which contains any non-vertical-gap delimiter.
 
 The right boundary of the row of blocks at point is the
 right-most column between the top and bottom boundaries of that
-row of blocks which contains any non-vertical-gap delimiter."
+row of blocks which contains any non-vertical-gap delimiter.
+
+This function returns nil when point is not within the boundaries
+of a row of blocks"
   (when (equal side nil)
     (error
      (concat
