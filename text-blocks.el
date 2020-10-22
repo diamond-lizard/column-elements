@@ -41,7 +41,7 @@
 (require 'cl-macs)
 
 (defun text-blocks--block-boundaries-at-point (&optional side)
-  "Return the 'left, 'right, or 'both boundaries of
+  "Return the 'left, 'right, 'top, or 'bottom boundaries of
 the block at point.
 
 Note: The top and bottom boundaries of a block will always
