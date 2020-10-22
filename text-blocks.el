@@ -373,9 +373,9 @@ this function will return nil."
                                        text-blocks--min-cols-per-vert-gap)
                                     1))
                  (top-boundary
-                  (text-blocks--block-boundaries-at-point 'top))
+                  (text-blocks--row-of-blocks-boundaries-at-point 'top))
                  (bottom-boundary
-                  (text-blocks--block-boundaries-at-point 'bottom)))
+                  (text-blocks--row-of-blocks-boundaries-at-point 'bottom)))
             (text-blocks--narrow-between-lines
              top-boundary
              bottom-boundary)
