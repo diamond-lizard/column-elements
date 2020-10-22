@@ -297,9 +297,9 @@ this function will return nil.
             (if (text-blocks--horizontal-gap-line-p)
                 nil
               (let ((top-boundary
-                     (text-blocks--block-boundaries-at-point 'top))
+                     (text-blocks--row-of-blocks-boundaries-at-point 'top))
                     (bottom-boundary
-                     (text-blocks--block-boundaries-at-point 'bottom)))
+                     (text-blocks--row-of-blocks-boundaries-at-point 'bottom)))
                 (goto-char (point-min))
                 (forward-line (- top-boundary 1))
                 (let ((start-of-region (line-beginning-position)))
