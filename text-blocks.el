@@ -29,17 +29,25 @@
   "Manipulate blocks of text."
   :group 'convenience)
 
-;; What character vertical gaps are made of.
-(defvar text-blocks--vertical-gap-delimiter " ")
 
-;; What character horizontal gaps are made of.
-(defvar text-blocks--horizontal-gap-delimiter " ")
+(defcustom text-blocks--vertical-gap-delimiter " "
+  "What character vertical gaps are made of."
+  :type 'string)
 
-;; A horizontal gap must have at least this many lines
-(defvar text-blocks--min-lines-per-horiz-gap 1)
 
-;; A vertical gap must have at least this many columns
-(defvar text-blocks--min-cols-per-vert-gap 2)
+(defcustom text-blocks--horizontal-gap-delimiter " "
+  "What character horizontal gaps are made of."
+  :type 'string)
+
+
+(defcustom text-blocks--min-lines-per-horiz-gap 1
+  "A horizontal gap must have at least this many lines"
+  :type 'integer)
+
+
+(defcustom text-blocks--min-cols-per-vert-gap 2
+  "A vertical gap must have at least this many columns"
+  :type 'integer)
 
 (require 'cl-macs)
 
