@@ -25,6 +25,9 @@
 ;; You should have received a copy of the GNU Affero General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(defgroup text-blocks nil
+  "Manipulate blocks of text."
+  :group 'convenience)
 
 ;; What character vertical gaps are made of.
 (defvar text-blocks--vertical-gap-delimiter " ")
