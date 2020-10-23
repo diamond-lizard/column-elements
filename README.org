@@ -374,6 +374,7 @@ With point anywhere on "two" or "four", the table below shows what the function 
 With point anywhere else in the example buffer, this function will return nil.
 ** Assumptions and limitations
 *** All blocks are assumed to be left-justified
+*** Testing has only been done on ASCII characters
 ** LICENSE
 Copyright (C) 2020 - Sergey Goldgaber
 
