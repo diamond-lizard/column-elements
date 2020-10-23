@@ -298,7 +298,10 @@ this function will return nil.
          "text-blocks--vertical-gap-column-p: Error: COLUMN < 0")
       (let* ((line
               (if line
+                  ;; Check given line
                   line
+                ;; Not given a line to check as an argument
+                ;; so check the line at point
                 (line-number-at-pos))))
         (save-excursion
           (save-restriction
@@ -347,8 +350,11 @@ that if the desired position is on a horizontal gap,
 this function will return nil."
   (interactive)
   (let* ((position
+          ;; Not given a position to check as an argument
+          ;; so check the position at point
           (if (equal position nil)
               (point)
+            ;; Check the given position
             position)))
     (when (or
            (< position (point-min))
@@ -443,7 +449,10 @@ no other characters than those in `text-blocks--horizontal-gap-delimiter'"
   (interactive)
   (let ((line-to-check
          (if (equal line-to-check nil)
+             ;; Not given a line to check as an argument
+             ;; so check the line at point
              (line-number-at-pos)
+           ;; Check the given line
            line-to-check)))
     (save-excursion
       (save-restriction
@@ -487,7 +496,10 @@ than those in `text-blocks--horizontal-gap-delimiter'"
   (interactive)
   (let ((line-to-check
          (if (equal line-to-check nil)
+             ;; Not given a line to check as an argument
+             ;; so check the line at point
              (line-number-at-pos)
+           ;; Check the given line
            line-to-check)))
     (if (text-blocks--horizontal-gap-line-p line-to-check)
         ;; line-to-check is a horizontal gap line
