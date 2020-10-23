@@ -35,6 +35,7 @@ TESTS += text-blocks--vertical-gap-p-06
 TESTS += text-blocks--vertical-gap-column-p
 TESTS += text-blocks--vertical-gap-column-p-02
 TESTS += text-blocks--vertical-gap-column-p-03
+TESTS += text-blocks--row-of-blocks-boundaries-at-point-01
 TESTS += text-blocks--block-boundaries-at-point
 TESTS += text-blocks--block-boundaries-at-point-02
 
@@ -75,6 +76,9 @@ text-blocks--horizontal-gap-p-03: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--line-number-of-longest-line: compile
+	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
+
+text-blocks--row-of-blocks-boundaries-at-point-01: compile
 	$(EMACS) $(EMACS_ERT_ARGS_1) $(TEST_DIR)/$@.el $(EMACS_ERT_ARGS_2)
 
 text-blocks--search-for-consecutive-non-nils: compile
