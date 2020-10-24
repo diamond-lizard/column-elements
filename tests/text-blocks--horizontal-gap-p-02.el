@@ -15,7 +15,10 @@
 ;; You should have received a copy of the GNU Affero General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(add-to-list 'load-path "tests")
+
 (require 'text-blocks)
+(require 'text-blocks--test-common)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -89,13 +92,6 @@
           position
         line)
       expect))))
-
-(defun get-data-file-buffer-name (data-file-id)
-  (symbol-value
-   (intern
-    (concat
-     text-blocks--test-buffer-name-prefix
-     (number-to-string data-file-id)))))
 
 ;; Automated generation of test bodies
 (defun text-blocks--get-test-body
@@ -213,7 +209,7 @@
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
-(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
+(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data")
 
 (if (file-exists-p text-blocks--filename-005)
     (setq text-blocks--original-data-005

@@ -15,7 +15,10 @@
 ;; You should have received a copy of the GNU Affero General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(add-to-list 'load-path "tests")
+
 (require 'text-blocks)
+(require 'text-blocks--test-common)
 
 ;; For cl-loop:
 (require 'cl-macs)
@@ -32,7 +35,7 @@
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
-(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
+(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -94,13 +97,6 @@
       data-file-id
       position
       expect))))
-
-(defun get-data-file-buffer-name (data-file-id)
-  (symbol-value
-   (intern
-    (concat
-     text-blocks--test-buffer-name-prefix
-     (number-to-string data-file-id)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

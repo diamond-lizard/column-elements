@@ -116,7 +116,7 @@
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
-(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
+(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data")
 
 (setq text-blocks--filename-001 "tests/data/text-blocks-test-001")
 (setq text-blocks--filename-002 "tests/data/text-blocks-test-002")

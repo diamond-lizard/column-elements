@@ -88,7 +88,7 @@
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
-(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
+(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

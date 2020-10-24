@@ -24,9 +24,9 @@
   (if (integerp data-file-id)
       (symbol-value
        (intern
-        (concat
+        (format "%s-%03d"
          text-blocks--test-buffer-name-prefix
-         (number-to-string data-file-id))))
+         data-file-id)))
     nil))
 
 ;;
