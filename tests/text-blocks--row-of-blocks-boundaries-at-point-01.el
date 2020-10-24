@@ -113,17 +113,32 @@
         (test-id 52 data-file-id 'empty position nil side 'right  expect nil)
         (test-id 53 data-file-id 'empty position nil side 'top    expect nil)
         (test-id 54 data-file-id 'empty position nil side 'bottom expect nil)
+        (test-id 55 data-file-id 011    position 001 side 'left   expect nil)
+        (test-id 56 data-file-id 011    position 001 side 'right  expect nil)
+        (test-id 57 data-file-id 011    position 002 side 'left   expect 1)
+        (test-id 58 data-file-id 011    position 002 side 'right  expect 13)
+        (test-id 59 data-file-id 011    position 014 side 'left   expect 1)
+        (test-id 60 data-file-id 011    position 014 side 'right  expect 13)
+        (test-id 61 data-file-id 011    position 015 side 'left   expect nil)
+        (test-id 62 data-file-id 011    position 015 side 'right  expect nil)
+        (test-id 63 data-file-id 011    position 017 side 'left   expect nil)
+        (test-id 64 data-file-id 011    position 017 side 'right  expect nil)
+        (test-id 65 data-file-id 011    position 018 side 'left   expect 1)
+        (test-id 66 data-file-id 011    position 018 side 'right  expect 13)
+        (test-id 67 data-file-id 011    position 034 side 'left   expect 0)
+        (test-id 68 data-file-id 011    position 034 side 'left   expect 14)
         ))
 
 ;; * TODO Test with one-character buffers
 
 (setq text-blocks--test-name-prefix
       "text-blocks")
-(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data-00")
+(setq text-blocks--test-buffer-name-prefix "text-blocks--original-data")
 
 (setq text-blocks--filename-001 "tests/data/text-blocks-test-001")
 (setq text-blocks--filename-002 "tests/data/text-blocks-test-002")
 (setq text-blocks--filename-004 "tests/data/text-blocks-test-004")
+(setq text-blocks--filename-011 "tests/data/text-blocks-test-011")
 
 ;; Read in test file 001, if it exists.
 (if (file-exists-p text-blocks--filename-001)
@@ -146,6 +161,14 @@
     (setq text-blocks--original-data-004
           (find-file-read-only text-blocks--filename-004))
   (error "File '%s' does not exist" text-blocks--filename-004))
+
+(setq default-directory (expand-file-name "../.."))
+
+;; Read in test file 011, if it exists.
+(if (file-exists-p text-blocks--filename-011)
+    (setq text-blocks--original-data-011
+          (find-file-read-only text-blocks--filename-011))
+  (error "File '%s' does not exist" text-blocks--filename-011))
 
 ;; END - Test data
 ;;
